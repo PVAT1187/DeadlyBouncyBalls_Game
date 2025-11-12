@@ -1,19 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <iostream>
+#include "GameState.h"
+#include "Player.h"
+#include "Ball.h"
 
 using namespace sf;
 using namespace std;
 
-const int RECTANGLE_WIDTH = 50;
-const int RECTANGLE_HEIGHT = 25;
-
-enum class GameState { Playing, GameOver };
-
 int main()
 {
-    VideoMode desktopMode = VideoMode::getDesktopMode();
+    
 
     RenderWindow window(VideoMode(desktopMode),
         "Deadly Bouncy Balls", Style::None);
@@ -21,21 +18,11 @@ int main()
     window.setMouseCursorVisible(false);
     window.setVerticalSyncEnabled(true);
 
-    Font defaultFont;
+    Font defaultFont("C:/Users/pvat2/source/Personal Projects/DeadlyBouncyBalls/assets/fonts/arial.ttf");
 
-    RectangleShape rectangle(Vector2f
-        (RECTANGLE_WIDTH, RECTANGLE_HEIGHT));
-    rectangle.setOrigin(rectangle.getSize() / 2.f);
-    rectangle.setFillColor(Color::Red);
-    rectangle.setPosition(static_cast<Vector2f>
-        (window.getSize()) / 2.f);
+	Player player(window);
 
-    CircleShape circle(20.f);
-	float radius = circle.getRadius();
-	circle.setFillColor(Color::Blue);
-    circle.setPosition(static_cast<Vector2f>
-		(window.getSize()) / 4.f);
-	Vector2f circleVelocityVector(200.f, 150.f);
+    Ball ball(window);
 
 	Clock clock;
 
@@ -51,76 +38,43 @@ int main()
                 event->getIf<Event::MouseButtonPressed>()->button
                 == Mouse::Button::Left)
             {
-                rectangle.rotate(degrees(90));
+                player.rotate(degrees(90));
             }
         }
 
-        Vector2i mousePosition = Mouse::getPosition(window);
-        Vector2f worldRectCenter = rectangle.getPosition();
-		Vector2f rectangleHalfSize = rectangle.getSize() / 2.f;
-
-        Vector2i worldCenterPixels = window.
-            mapCoordsToPixel(worldRectCenter);
-
-        Vector2f difference = static_cast<Vector2f>
-            (mousePosition - worldCenterPixels);
-
-        rectangle.move(difference * 0.7f);
-
-        Mouse::setPosition(worldCenterPixels, window);
-
-		float deltaTime = clock.restart().asSeconds();
-		circle.move(circleVelocityVector * deltaTime);
-
-		Vector2f circlePosition = circle.getPosition(); // center position
-        float circleLeftEdge = circlePosition.x - radius;
-        float circleRightEdge = circlePosition.x + radius;
-        float circleTopEdge = circlePosition.y - radius;
-        float circleBottomEdge = circlePosition.y + radius;
-
-        if (circleLeftEdge <= 0 || 
-            circleRightEdge >= window.getSize().x)
+        window.clear();
+        if (currentGameState == GameState::Playing)
         {
-			circleVelocityVector.x = -circleVelocityVector.x;
-        }
-        if (circleTopEdge <= 0 || 
-            circleBottomEdge >= window.getSize().y)
-        {
-			circleVelocityVector.y = -circleVelocityVector.y;
-        }
+            player.update(window);
 
-		Vector2f closetPoint;
-		closetPoint.x = clamp(circlePosition.x, 
-            worldRectCenter.x - rectangleHalfSize.x,
-			worldRectCenter.x + rectangleHalfSize.x);
-        closetPoint.y = clamp(circlePosition.y, 
-			worldRectCenter.y - rectangleHalfSize.y,
-			worldRectCenter.y + rectangleHalfSize.y);
+            float deltaTime = clock.restart().asSeconds();
+			ball.update(deltaTime, window);
 
-		Vector2f differenceVector = circlePosition - closetPoint;
-        float distanceSquared = 
-            differenceVector.x * differenceVector.x +
-			differenceVector.y * differenceVector.y;
-
-		const float EPSILON = 0.0001f;
-        if ((distanceSquared - radius * radius) < EPSILON)
-        {
-            currentGameState = GameState::GameOver;
+            if (ball.isCollidingWithPlayer(player))
+            {
+                currentGameState = GameState::GameOver;
+            }
         }
+        
+		player.draw(window);
+		ball.draw(window);
 
         if (currentGameState == GameState::GameOver)
         {
-			cout << "Game Over!" << endl;
-            Text gameOverText(defaultFont, "GAME OVER", 30);
-			gameOverText.setFillColor(Color::White);
+            window.setMouseCursorVisible(true);
+            
+            Text gameOverText(defaultFont, "GAME OVER", 60);
+            gameOverText.setFillColor(Color::White);
+
+			FloatRect textBounds = gameOverText.getLocalBounds();
+            gameOverText.setOrigin(
+                Vector2f(textBounds.size.x, textBounds.size.y) / 2.f);
             gameOverText.setPosition(
-				static_cast<Vector2f>(window.getSize()) / 2.f);
-			window.draw(gameOverText);
+                static_cast<Vector2f>(window.getSize()) / 2.f);
+
+            window.draw(gameOverText);
         }
 
-        window.clear();
-        window.draw(rectangle);
-		window.draw(circle);
         window.display();
     }
 }
