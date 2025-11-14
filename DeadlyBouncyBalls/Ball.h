@@ -3,8 +3,6 @@
 
 #include "Player.h"
 
-#include <SFML/Graphics.hpp>
-
 const float INITIAL_BALL_RADIUS = 10.f;
 
 class Ball

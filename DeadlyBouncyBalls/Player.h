@@ -11,6 +11,7 @@ class Player
 	public:
 		Player(const sf::RenderWindow& window);
 
+		void rotate(float angle);
 		void update(const sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window) const;
 

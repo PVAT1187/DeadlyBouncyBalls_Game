@@ -4,12 +4,6 @@
 #include "Player.h"
 #include "Ball.h"
 
-#include <SFML/Graphics.hpp>
-
-enum class GameState { Playing, GameOver };
-
-const VideoMode DESKTOP_MODE = VideoMode::getDesktopMode();
-
 class Game
 {
 	public:
@@ -20,7 +14,14 @@ class Game
 		sf::RenderWindow window;
 		Player player;
 		Ball ball;
-		GameState currentGameState;
+
+		bool isGameOver;
+		sf::Font font;
+		sf::Text gameOverText;
+
+		void processEvents();
+		void update(float deltaTime);
+		void render();
 };
 
 #endif // !GAME_H

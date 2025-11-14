@@ -12,6 +12,11 @@ Player::Player(const RenderWindow& window)
         (window.getSize()) / 2.f);
 }
 
+void Player::rotate(float angle)
+{
+    rectangle.rotate(degrees(angle));
+}
+
 void Player::update(const RenderWindow& window)
 {
     Vector2i mousePosition = Mouse::getPosition(window);
