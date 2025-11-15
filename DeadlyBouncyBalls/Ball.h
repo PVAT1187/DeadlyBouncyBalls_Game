@@ -3,8 +3,6 @@
 
 #include "Player.h"
 
-const float INITIAL_BALL_RADIUS = 10.f;
-
 class Ball
 {
 	public:

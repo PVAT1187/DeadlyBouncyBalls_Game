@@ -2,14 +2,17 @@
 
 using namespace sf;
 
+const int INITIAL_RECTANGLE_WIDTH = 50;
+const int INITIAL_RECTANGLE_HEIGHT = 25;
+
 Player::Player(const RenderWindow& window)
 {
     rectangle.setSize(Vector2f(INITIAL_RECTANGLE_WIDTH, 
         INITIAL_RECTANGLE_HEIGHT));
     rectangle.setOrigin(rectangle.getSize() / 2.f);
     rectangle.setFillColor(Color::Red);
-    rectangle.setPosition(static_cast<Vector2f>
-        (window.getSize()) / 2.f);
+    rectangle.setPosition(
+        static_cast<Vector2f>(window.getSize()) / 2.f);
 }
 
 void Player::rotate(float angle)

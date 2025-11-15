@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Screen.h"
 #include "Player.h"
 #include "Ball.h"
 
@@ -8,20 +9,16 @@ class Game
 {
 	public:
 		Game();
+
 		void run();
+
+		void switchToGamePlayScreen();
+		void switchToGameOverScreen(float finalSurvivalTime);
 
 	private:
 		sf::RenderWindow window;
-		Player player;
-		Ball ball;
 
-		bool isGameOver;
-		sf::Font font;
-		sf::Text gameOverText;
-
-		void processEvents();
-		void update(float deltaTime);
-		void render();
+		std::unique_ptr<Screen> currentScreen;
 };
 
 #endif // !GAME_H

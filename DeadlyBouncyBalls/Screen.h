@@ -1,0 +1,17 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
+class Screen
+{
+	public:
+		virtual void handleEvent(const sf::Event& event) = 0;
+		virtual void update(float deltaTime) = 0;
+		virtual void render(sf::RenderWindow& window) = 0;
+
+		virtual ~Screen() = default;
+};
+
+#endif // !SCREEN_H

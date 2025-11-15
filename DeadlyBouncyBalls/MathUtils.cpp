@@ -6,18 +6,21 @@ using namespace std;
 void MathUtils::bounceCircleOffWindow(Vector2f& position, 
     Vector2f& velocity, float radius, const Vector2u& windowSize)
 {
+	const float windowWidth = static_cast<float>(windowSize.x);
+	const float windowHeight = static_cast<float>(windowSize.y);
+    
     float circleLeftEdge = position.x - radius;
     float circleRightEdge = position.x + radius;
     float circleTopEdge = position.y - radius;
     float circleBottomEdge = position.y + radius;
 
     if (circleLeftEdge <= 0 ||
-        circleRightEdge >= windowSize.x)
+        circleRightEdge >= windowWidth)
     {
         velocity.x = -velocity.x;
     }
     if (circleTopEdge <= 0 ||
-        circleBottomEdge >= windowSize.y)
+        circleBottomEdge >= windowHeight)
     {
         velocity.y = -velocity.y;
     }

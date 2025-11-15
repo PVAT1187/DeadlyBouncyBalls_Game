@@ -3,9 +3,6 @@
 
 #include <sfml/Graphics.hpp>
 
-const int INITIAL_RECTANGLE_WIDTH = 50;
-const int INITIAL_RECTANGLE_HEIGHT = 25;
-
 class Player
 {
 	public:

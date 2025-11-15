@@ -142,6 +142,8 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Ball.h" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverScreen.cpp" />
+    <ClCompile Include="GamePlayScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="MathUtils.h" />
@@ -149,7 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOverScreen.h" />
+    <ClInclude Include="GamePlayScreen.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Screen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
