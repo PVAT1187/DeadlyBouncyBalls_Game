@@ -1,6 +1,9 @@
 #include "Game.h"
 #include "GamePlayScreen.h"
 #include "GameOverScreen.h"
+#include "GameStartScreen.h"
+
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -11,7 +14,8 @@ Game::Game() :
 	window(VideoMode(DESKTOP_MODE), "Deadly Bouncy Balls",
 		Style::None)
 {
-	switchToGamePlayScreen();
+	initFont();
+	switchToGameStartScreen();
 }
 
 void Game::run()
@@ -27,7 +31,7 @@ void Game::run()
 			if (event->is<Event::Closed>())
 				window.close();
 
-			currentScreen->handleEvent(event);
+			currentScreen->handleEvent(*event);
 		}
 
 		currentScreen->update(deltaTime);
@@ -48,3 +52,16 @@ void Game::switchToGameOverScreen(float finalSurvivalTime)
 	currentScreen = make_unique<GameOverScreen>(*this, window,
 		finalSurvivalTime);
 }
+
+void Game::switchToGameStartScreen()
+{
+	currentScreen = make_unique<GameStartScreen>(*this, window);
+}
+
+void Game::initFont()
+{
+	if (!font.openFromFile("C:/Users/pvat2/source/Personal Projects/DeadlyBouncyBalls/assets/fonts/arial.ttf"))
+	{
+		cerr << "Failed to load font!" << endl;
+	}
+}	

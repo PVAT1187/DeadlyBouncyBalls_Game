@@ -6,18 +6,17 @@
 using namespace sf;
 using namespace std;
 
-const VideoMode& DESKTOP_MODE = VideoMode::getDesktopMode();
-
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
+	Screen(game),
 	game(game),
 	window(window),
 	player(window),
 	ball(window),
-	font(),
 	survivalClock(),
-	survivalTimeText(Text(font, "", 25))
+	survivalTimeText(Text(game.getFont(), "", 25))
 {
-	initFont();
+	window.setMouseCursorVisible(false);
+	
 	initSurvivalTimeText();
 
 	survivalClock.restart();
@@ -54,17 +53,8 @@ void GamePlayScreen::render(RenderWindow& window)
 	window.draw(survivalTimeText);
 }
 
-void GamePlayScreen::initFont()
-{
-	if (!font.openFromFile("C:/Users/pvat2/source/Personal Projects/DeadlyBouncyBalls/assets/fonts/arial.ttf"))
-	{
-		cerr << "Failed to load font!" << endl;
-	}
-}
-
 void GamePlayScreen::initSurvivalTimeText()
 {
-	survivalTimeText.setFont(font);
 	survivalTimeText.setFillColor(Color::White);
 
 	FloatRect survivalTimeTextBounds = survivalTimeText.getLocalBounds();

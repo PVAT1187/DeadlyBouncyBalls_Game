@@ -14,11 +14,17 @@ class Game
 
 		void switchToGamePlayScreen();
 		void switchToGameOverScreen(float finalSurvivalTime);
+		void switchToGameStartScreen();
+
+		sf::Font& getFont() { return font; }
 
 	private:
 		sf::RenderWindow window;
+		sf::Font font;
 
 		std::unique_ptr<Screen> currentScreen;
+
+		void initFont();
 };
 
 #endif // !GAME_H

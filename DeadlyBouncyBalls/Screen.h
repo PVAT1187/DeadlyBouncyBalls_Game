@@ -1,6 +1,8 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+class Game;
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -12,6 +14,11 @@ class Screen
 		virtual void render(sf::RenderWindow& window) = 0;
 
 		virtual ~Screen() = default;
+
+	protected:
+		Game& game;
+
+		Screen(Game& game) : game(game) {}
 };
 
 #endif // !SCREEN_H

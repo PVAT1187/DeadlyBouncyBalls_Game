@@ -8,44 +8,36 @@ using namespace std;
 
 GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
 	float finalSurvivalTime) :
+	Screen(game),
 	game(game),
 	window(window),
-	font(),
-	gameOverText(Text(font, "GAME OVER", 60)),
-	finalSurvivalTimeText(Text(font, "", 25))
+	gameOverText(Text(game.getFont(), "GAME OVER", 100)),
+	finalSurvivalTimeText(Text(game.getFont(), "", 25))
 {
-	initFont();
+	window.setMouseCursorVisible(true);
+	
 	initGameOverText();
 	initFinalSurvivalTimeText(finalSurvivalTime);
 }
 
-void GameOverScreen::handleEvent(const sf::Event& event)
+void GameOverScreen::handleEvent(const Event& event)
 {
 	if (event.is<Event::MouseButtonPressed>())
 	{
-		game.switchToGamePlayScreen();
+		game.switchToGameStartScreen();
 	}
 }
 
 void GameOverScreen::update(float deltaTime) {}
 
-void GameOverScreen::render(sf::RenderWindow& window)
+void GameOverScreen::render(RenderWindow& window)
 {
 	window.draw(gameOverText);
 	window.draw(finalSurvivalTimeText);
 }
 
-void GameOverScreen::initFont()
-{
-	if (!font.openFromFile("C:/Users/pvat2/source/Personal Projects/DeadlyBouncyBalls/assets/fonts/arial.ttf"))
-	{
-		cerr << "Failed to load font!" << endl;
-	}
-}
-
 void GameOverScreen::initGameOverText()
 {
-	gameOverText.setFont(font);
 	gameOverText.setFillColor(Color::White);
 
 	FloatRect gameOverTextBounds = gameOverText.getLocalBounds();
@@ -56,9 +48,8 @@ void GameOverScreen::initGameOverText()
 
 void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 {
-	finalSurvivalTimeText.setString("Final Survival Time: " +
+	finalSurvivalTimeText.setString("Survived: " + 
 		to_string(finalSurvivalTime) + "s");
-	finalSurvivalTimeText.setFont(font);
 	finalSurvivalTimeText.setFillColor(Color::White);
 
 	Vector2f centerPosition = static_cast<Vector2f>
@@ -66,5 +57,5 @@ void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 	FloatRect survivalTimeTextBounds = finalSurvivalTimeText.getLocalBounds();
 	finalSurvivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
 	finalSurvivalTimeText.setPosition(Vector2f(
-		centerPosition.x, centerPosition.y + 70.f));
+		centerPosition.x, centerPosition.y + 100.f));
 }

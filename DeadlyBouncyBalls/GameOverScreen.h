@@ -19,14 +19,11 @@ class GameOverScreen : public Screen
 		Game& game;
 		sf::RenderWindow& window;
 
-		sf::Font font;
 		sf::Text gameOverText;
 		sf::Text finalSurvivalTimeText;
 
-		void initFont();
 		void initGameOverText();
 		void initFinalSurvivalTimeText(float finalSurvivalTime);
 };
 
 #endif // !GAME_OVER_SCREEN_H
-

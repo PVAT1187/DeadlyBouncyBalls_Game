@@ -23,12 +23,9 @@ class GamePlayScreen : public Screen
 		Player player;
 		Ball ball;
 
-		sf::Font font;
-
 		sf::Clock survivalClock;
 		sf::Text survivalTimeText;
 
-		void initFont();
 		void initSurvivalTimeText();
 };
 
