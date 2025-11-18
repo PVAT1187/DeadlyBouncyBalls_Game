@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Ball.h"
 
+#include <vector>
+
 class Game;
 
 class GamePlayScreen : public Screen
@@ -21,12 +23,15 @@ class GamePlayScreen : public Screen
 		sf::RenderWindow& window; 
 
 		Player player;
-		Ball ball;
+		std::vector<Ball> balls;
 
 		sf::Clock survivalClock;
 		sf::Text survivalTimeText;
 
 		void initSurvivalTimeText();
+
+		void spawnBall(float radius, sf::Vector2f position, 
+			sf::Vector2f velocity);
 };
 
 #endif // !GAME_PLAY_SCREEN_H

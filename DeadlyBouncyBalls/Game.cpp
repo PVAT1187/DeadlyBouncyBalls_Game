@@ -42,20 +42,20 @@ void Game::run()
 	}
 }
 
+void Game::switchToGameStartScreen()
+{
+	currentScreen = make_unique<GameStartScreen>(*this, window);
+}
+
 void Game::switchToGamePlayScreen()
 {
 	currentScreen = make_unique<GamePlayScreen>(*this, window);
 }
 
-void Game::switchToGameOverScreen(float finalSurvivalTime)
+void Game::switchToGameOverScreen(float survivalTime)
 {
 	currentScreen = make_unique<GameOverScreen>(*this, window,
-		finalSurvivalTime);
-}
-
-void Game::switchToGameStartScreen()
-{
-	currentScreen = make_unique<GameStartScreen>(*this, window);
+		survivalTime);
 }
 
 void Game::initFont()
@@ -64,4 +64,9 @@ void Game::initFont()
 	{
 		cerr << "Failed to load font!" << endl;
 	}
-}	
+}
+
+Font& Game::getFont() 
+{ 
+	return font; 
+}

@@ -5,6 +5,14 @@
 #include "Player.h"
 #include "Ball.h"
 
+enum class ScreenType
+{
+	None,
+	GameStart,
+	GamePlay,
+	GameOver
+};
+
 class Game
 {
 	public:
@@ -12,11 +20,11 @@ class Game
 
 		void run();
 
-		void switchToGamePlayScreen();
-		void switchToGameOverScreen(float finalSurvivalTime);
 		void switchToGameStartScreen();
+		void switchToGamePlayScreen();
+		void switchToGameOverScreen(float survivalTime);
 
-		sf::Font& getFont() { return font; }
+		sf::Font& getFont();
 
 	private:
 		sf::RenderWindow window;

@@ -24,7 +24,7 @@ void GameOverScreen::handleEvent(const Event& event)
 {
 	if (event.is<Event::MouseButtonPressed>())
 	{
-		game.switchToGameStartScreen();
+		game.switchToGamePlayScreen();
 	}
 }
 

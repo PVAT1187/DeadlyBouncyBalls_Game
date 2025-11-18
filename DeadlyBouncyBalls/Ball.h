@@ -6,7 +6,7 @@
 class Ball
 {
 	public:
-		Ball(const sf::RenderWindow& window);
+		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
 
 		void update(float deltaTime, 
 			const sf::RenderWindow& window);
@@ -20,4 +20,4 @@ class Ball
 		sf::Vector2f velocity;
 };
 
-#endif // !BALLS_H
+#endif // !BALL_H

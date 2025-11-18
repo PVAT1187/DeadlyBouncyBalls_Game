@@ -4,17 +4,13 @@
 using namespace sf;
 using namespace MathUtils;
 
-const float INITIAL_BALL_RADIUS = 20.f;
-
-Ball::Ball(const RenderWindow& window)
+Ball::Ball(float radius, Vector2f position, Vector2f velocity)
 {
-	ball.setRadius(INITIAL_BALL_RADIUS);
+	ball.setRadius(radius);
 	ball.setFillColor(Color::Blue);
-	ball.setOrigin(Vector2f(INITIAL_BALL_RADIUS, 
-		INITIAL_BALL_RADIUS));
-	ball.setPosition(static_cast<Vector2f>
-		(window.getSize()) / 4.f);
-	velocity = Vector2f(150.f, 200.f);
+	ball.setOrigin(Vector2f(radius, radius));
+	ball.setPosition(position);
+	this->velocity = velocity;
 }
 
 void Ball::update(float deltaTime, const RenderWindow& window)

@@ -11,13 +11,15 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	game(game),
 	window(window),
 	player(window),
-	ball(window),
 	survivalClock(),
 	survivalTimeText(Text(game.getFont(), "", 25))
 {
 	window.setMouseCursorVisible(false);
 	
 	initSurvivalTimeText();
+
+	spawnBall(30.f, { 200.f, 200.f }, { 150.f, 100.f });
+	spawnBall(50.f, { 500.f, 300.f }, { -120.f, 160.f });
 
 	survivalClock.restart();
 }
@@ -37,19 +39,28 @@ void GamePlayScreen::update(float deltaTime)
 	survivalTimeText.setString("Survival Time: " +
 		to_string(survivalTime) + "s");
 
-	ball.update(deltaTime, window);
 	player.update(window);
 	
-	if (ball.isCollidingWithPlayer(player))
+	for (auto& ball : balls)
 	{
-		game.switchToGameOverScreen(survivalTime);
+		ball.update(deltaTime, window);
+
+		if (ball.isCollidingWithPlayer(player))
+		{
+			game.switchToGameOverScreen(survivalTime);
+		}
 	}
 }
 
 void GamePlayScreen::render(RenderWindow& window)
 {
 	player.draw(window);
-	ball.draw(window);
+	
+	for (const auto& ball : balls)
+	{
+		ball.draw(window);
+	}
+
 	window.draw(survivalTimeText);
 }
 
@@ -60,4 +71,11 @@ void GamePlayScreen::initSurvivalTimeText()
 	FloatRect survivalTimeTextBounds = survivalTimeText.getLocalBounds();
 	survivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
 	survivalTimeText.setPosition(Vector2f(0, 0));
+}
+
+void GamePlayScreen::spawnBall(float radius, Vector2f position,
+	Vector2f velocity)
+{
+	Ball ball(radius, position, velocity);
+	balls.push_back(ball);
 }
