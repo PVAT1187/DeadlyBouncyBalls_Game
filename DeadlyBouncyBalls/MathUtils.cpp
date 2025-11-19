@@ -48,3 +48,16 @@ bool MathUtils::isCircleCollidingWithRectangle(
 
     return (distanceSquared <= circleRadius * circleRadius);
 }
+
+bool MathUtils::isCircleCollidingWithCircle(const Vector2f& positionA,
+    float radiusA, const Vector2f& positionB, float radiusB)
+{
+	Vector2f difference = positionA - positionB;
+    
+    float distanceSquared =
+        difference.x * difference.x +
+        difference.y * difference.y;
+    float radiusSum = radiusA + radiusB;
+
+	return (distanceSquared <= radiusSum * radiusSum);
+}

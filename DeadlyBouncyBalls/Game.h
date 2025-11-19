@@ -5,14 +5,6 @@
 #include "Player.h"
 #include "Ball.h"
 
-enum class ScreenType
-{
-	None,
-	GameStart,
-	GamePlay,
-	GameOver
-};
-
 class Game
 {
 	public:

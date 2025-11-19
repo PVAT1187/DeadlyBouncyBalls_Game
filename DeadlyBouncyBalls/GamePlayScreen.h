@@ -32,6 +32,8 @@ class GamePlayScreen : public Screen
 
 		void spawnBall(float radius, sf::Vector2f position, 
 			sf::Vector2f velocity);
+
+		void resolveBallCollisions(Ball& ballA, Ball& ballB);
 };
 
 #endif // !GAME_PLAY_SCREEN_H

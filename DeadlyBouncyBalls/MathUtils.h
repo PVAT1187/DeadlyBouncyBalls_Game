@@ -10,6 +10,9 @@ namespace MathUtils
 
 	bool isCircleCollidingWithRectangle(const sf::Vector2f& circlePosition,
 		float circleRadius, const sf::RectangleShape& rectangle);
+
+	bool isCircleCollidingWithCircle(const sf::Vector2f& positionA,
+		float radiusA, const sf::Vector2f& positionB, float radiusB);
 };
 
 #endif // !MATH_UTILS_H
