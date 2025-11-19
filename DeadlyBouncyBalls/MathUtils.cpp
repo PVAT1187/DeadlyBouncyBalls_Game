@@ -3,6 +3,24 @@
 using namespace sf;
 using namespace std;
 
+Vector2f MathUtils::computeNormal(const Vector2f& difference,
+    float distance)
+{
+	return difference / distance;
+}
+
+float MathUtils::dotProduct(const Vector2f& vectorA, 
+    const Vector2f& vectorB)
+{
+    return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
+}
+
+Vector2f MathUtils::computeVector(const Vector2f& tangent, float dpTangent,
+    const Vector2f& normal, float dpNormal)
+{
+	return tangent * dpTangent + normal * dpNormal;
+}
+
 void MathUtils::bounceCircleOffWindow(Vector2f& position, 
     Vector2f& velocity, float radius, const Vector2u& windowSize)
 {

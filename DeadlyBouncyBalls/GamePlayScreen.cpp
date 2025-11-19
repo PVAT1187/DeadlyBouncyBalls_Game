@@ -1,10 +1,12 @@
 #include "GamePlayScreen.h"
 #include "Game.h"
+#include "MathUtils.h"
 
 #include <iostream>
 
 using namespace sf;
 using namespace std;
+using namespace MathUtils;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game),
@@ -18,8 +20,8 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	
 	initSurvivalTimeText();
 
-	spawnBall(50.f, { 200.f, 200.f }, { 150.f, 100.f });
-	spawnBall(50.f, { 400.f, 300.f }, { -120.f, 160.f });
+	spawnBall(30.f, { 200.f, 200.f }, { 150.f, 100.f });
+	spawnBall(40.f, { 400.f, 300.f }, { -120.f, 160.f });
 	spawnBall(50.f, { 800.f, 400.f }, { 200.f, -140.f });
 
 	survivalClock.restart();
@@ -108,11 +110,10 @@ void GamePlayScreen::resolveBallCollisions(Ball& ballA, Ball& ballB)
 	Vector2f velocityA = ballA.getVelocity();
 	Vector2f velocityB = ballB.getVelocity();
 
-	Vector2f deltaPosition = positionB - positionA;
-	float distance = sqrt(deltaPosition.x * deltaPosition.x +
-		deltaPosition.y * deltaPosition.y);
+	Vector2f difference = positionB - positionA;
+	float distance = sqrt(dotProduct(difference, difference));
 	
-	Vector2f normal = deltaPosition / distance;
+	Vector2f normal = computeNormal(difference, distance);
 
 	float overlap = 0.5f * (radiusA + radiusB - distance);
 
@@ -121,14 +122,16 @@ void GamePlayScreen::resolveBallCollisions(Ball& ballA, Ball& ballB)
 	
 	Vector2f tangent(-normal.y, normal.x);
 
-	float dpTanA = velocityA.x * tangent.x + velocityA.y * tangent.y;
-	float dpTanB = velocityB.x * tangent.x + velocityB.y * tangent.y;
+	float dpTanA = dotProduct(velocityA, tangent);
+	float dpTanB = dotProduct(velocityB, tangent);
 
-	float dpNorA = velocityA.x * normal.x + velocityA.y * normal.y;
-	float dpNorB = velocityB.x * normal.x + velocityB.y * normal.y;
+	float dpNorA = dotProduct(velocityA, normal);
+	float dpNorB = dotProduct(velocityB, normal);
 
-	Vector2f newVelocityA = tangent * dpTanA + normal * dpNorB;
-	Vector2f newVelocityB = tangent * dpTanB + normal * dpNorA;
+	Vector2f newVelocityA = computeVector(tangent, dpTanA,
+		normal, dpNorB);
+	Vector2f newVelocityB = computeVector(tangent, dpTanB,
+		normal, dpNorA);
 
 	ballA.setVelocity(newVelocityA);
 	ballB.setVelocity(newVelocityB);

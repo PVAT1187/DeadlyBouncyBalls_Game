@@ -41,7 +41,7 @@ void Ball::setPosition(const Vector2f& newPosition)
 void Ball::update(float deltaTime, const RenderWindow& window)
 {
 	Vector2f position = ball.getPosition();
-	position += velocity * deltaTime * 3.f;
+	position += velocity * deltaTime * 5.f;
 
 	bounceCircleOffWindow(position, velocity, 
 		ball.getRadius(), window.getSize());
