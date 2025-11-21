@@ -1,12 +1,12 @@
 #include "GamePlayScreen.h"
 #include "Game.h"
-#include "MathUtils.h"
+#include "PhysicsUtils.h"
 
 #include <iostream>
 
 using namespace sf;
 using namespace std;
-using namespace MathUtils;
+using namespace PhysicsUtils;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game),
@@ -49,17 +49,7 @@ void GamePlayScreen::update(float deltaTime)
 		ball.update(deltaTime, window);
 	}
 
-	size_t size = balls.size();
-	for (size_t i = 0; i < size; ++i)
-	{
-		for (size_t j = i + 1; j < size; ++j)
-		{
-			if (balls[i].isCollidingWithBall(balls[j]))
-			{
-				resolveBallCollisions(balls[i], balls[j]);
-			}
-		}
-	}
+	resolveBallCollisions();
 
 	for (auto& ball : balls)
 	{
@@ -99,40 +89,14 @@ void GamePlayScreen::spawnBall(float radius, Vector2f position,
 	balls.push_back(ball);
 }
 
-void GamePlayScreen::resolveBallCollisions(Ball& ballA, Ball& ballB)
+void GamePlayScreen::resolveBallCollisions()
 {
-	float radiusA = ballA.getRadius();
-	float radiusB = ballB.getRadius();
-	
-	Vector2f positionA = ballA.getPosition();
-	Vector2f positionB = ballB.getPosition();
-
-	Vector2f velocityA = ballA.getVelocity();
-	Vector2f velocityB = ballB.getVelocity();
-
-	Vector2f difference = positionB - positionA;
-	float distance = sqrt(dotProduct(difference, difference));
-	
-	Vector2f normal = computeNormal(difference, distance);
-
-	float overlap = 0.5f * (radiusA + radiusB - distance);
-
-	ballA.setPosition(positionA - overlap * normal);
-	ballB.setPosition(positionB + overlap * normal);
-	
-	Vector2f tangent(-normal.y, normal.x);
-
-	float dpTanA = dotProduct(velocityA, tangent);
-	float dpTanB = dotProduct(velocityB, tangent);
-
-	float dpNorA = dotProduct(velocityA, normal);
-	float dpNorB = dotProduct(velocityB, normal);
-
-	Vector2f newVelocityA = computeVector(tangent, dpTanA,
-		normal, dpNorB);
-	Vector2f newVelocityB = computeVector(tangent, dpTanB,
-		normal, dpNorA);
-
-	ballA.setVelocity(newVelocityA);
-	ballB.setVelocity(newVelocityB);
+	size_t size = balls.size();
+	for (size_t i = 0; i < size; ++i)
+	{
+		for (size_t j = i + 1; j < size; ++j)
+		{
+			resolveBallCollisions();
+		}
+	}
 }

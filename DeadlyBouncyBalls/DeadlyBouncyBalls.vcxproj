@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Ball.h" />
+    <ClCompile Include="PhysicsUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="GamePlayScreen.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PhysicsUtils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="GamePlayScreen.h" />

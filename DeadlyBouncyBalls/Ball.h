@@ -9,8 +9,8 @@ class Ball
 		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
 
 		float getRadius() const;
-		sf::Vector2f getPosition() const;
-		sf::Vector2f getVelocity() const;
+		sf::Vector2f& getPosition() const;
+		sf::Vector2f& getVelocity() const;
 
 		void setVelocity(const sf::Vector2f& newVelocity);
 		void setPosition(const sf::Vector2f& newPosition);
@@ -19,10 +19,10 @@ class Ball
 		void draw(sf::RenderWindow& window) const;
 
 		bool isCollidingWithPlayer(const Player& player) const;
-		bool isCollidingWithBall(const Ball& otherBall) const;
 
 	private:
 		sf::CircleShape ball;
+		sf::Vector2f position;
 		sf::Vector2f velocity;
 };
 

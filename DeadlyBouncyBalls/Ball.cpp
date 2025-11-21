@@ -1,8 +1,8 @@
 #include "Ball.h"
-#include "MathUtils.h"
+#include "PhysicsUtils.h"
 
 using namespace sf;
-using namespace MathUtils;
+using namespace PhysicsUtils;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity)
 {
@@ -10,6 +10,7 @@ Ball::Ball(float radius, Vector2f position, Vector2f velocity)
 	ball.setFillColor(Color::Blue);
 	ball.setOrigin(Vector2f(radius, radius));
 	ball.setPosition(position);
+	this->position = position;
 	this->velocity = velocity;
 }
 
@@ -18,12 +19,12 @@ float Ball::getRadius() const
 	return ball.getRadius();
 }
 
-Vector2f Ball::getPosition() const
+Vector2f& Ball::getPosition() const
 {
-	return ball.getPosition();
+	return position;
 }
 
-Vector2f Ball::getVelocity() const
+Vector2f& Ball::getVelocity() const
 {
 	return velocity;
 }
@@ -35,6 +36,7 @@ void Ball::setVelocity(const Vector2f& newVelocity)
 
 void Ball::setPosition(const Vector2f& newPosition)
 {
+	position = newPosition;
 	ball.setPosition(newPosition);
 }
 
@@ -56,13 +58,6 @@ void Ball::draw(RenderWindow& window) const
 
 bool Ball::isCollidingWithPlayer(const Player& player) const
 {
-	return MathUtils::isCircleCollidingWithRectangle(ball.getPosition(),
+	return isCircleCollidingWithRectangle(ball.getPosition(),
 		ball.getRadius(), player.getRectangle());
-}
-
-bool Ball::isCollidingWithBall(const Ball& otherBall) const
-{
-	return MathUtils::isCircleCollidingWithCircle(
-		ball.getPosition(), ball.getRadius(),
-		otherBall.ball.getPosition(), otherBall.ball.getRadius());
 }
