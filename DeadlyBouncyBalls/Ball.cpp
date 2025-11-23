@@ -13,11 +13,17 @@ Ball::Ball(float radius, Vector2f position, Vector2f velocity)
 
 	this->position = position;
 	this->velocity = velocity;
+	mass = radius * radius * radius;
 }
 
 float Ball::getRadius() const
 {
 	return ball.getRadius();
+}
+
+float Ball::getMass() const
+{
+	return mass;
 }
 
 Vector2f& Ball::getPosition() 

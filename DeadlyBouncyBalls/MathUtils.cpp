@@ -8,7 +8,7 @@ float MathUtils::computeDotProduct(const Vector2f& vectorA,
     return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
 }
 
-Vector2f MathUtils::computeDifferenceVector(const Vector2f& vectorA,
+Vector2f MathUtils::computeDifference(const Vector2f& vectorA,
 	const Vector2f& vectorB)
 {
 	return vectorA - vectorB;
@@ -17,7 +17,7 @@ Vector2f MathUtils::computeDifferenceVector(const Vector2f& vectorA,
 float MathUtils::computeDistanceSquared(const Vector2f& vectorA,
 	const Vector2f& vectorB)
 {
-	Vector2f difference = computeDifferenceVector(vectorA, vectorB);
+	Vector2f difference = computeDifference(vectorA, vectorB);
 	return computeDotProduct(difference, difference);
 }
 
@@ -43,7 +43,7 @@ float MathUtils::clamp(float value, float min, float max)
 Vector2f MathUtils::computeNormal(const Vector2f& vectorA,
 	const Vector2f& vectorB)
 {
-	Vector2f difference = computeDifferenceVector(vectorA, vectorB);
+	Vector2f difference = computeDifference(vectorA, vectorB);
 	float distance = computeDistance(vectorA, vectorB);
 	return difference / distance;
 }

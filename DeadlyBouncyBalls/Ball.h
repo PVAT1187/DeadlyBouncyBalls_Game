@@ -9,6 +9,7 @@ class Ball
 		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
 
 		float getRadius() const;
+		float getMass() const;
 		sf::Vector2f& getPosition();
 		sf::Vector2f& getVelocity();
 
@@ -20,6 +21,7 @@ class Ball
 	private:
 		sf::CircleShape ball;
 
+		float mass;
 		sf::Vector2f position;
 		sf::Vector2f velocity;
 };

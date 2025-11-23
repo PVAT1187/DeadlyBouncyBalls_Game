@@ -8,7 +8,7 @@ namespace MathUtils
 	float computeDotProduct(const sf::Vector2f& vectorA, 
 		const sf::Vector2f& vectorB);
 
-	sf::Vector2f computeDifferenceVector(const sf::Vector2f& vectorA,
+	sf::Vector2f computeDifference(const sf::Vector2f& vectorA,
 		const sf::Vector2f& vectorB);
 	float computeDistanceSquared(const sf::Vector2f& vectorA,
 		const sf::Vector2f& vectorB);

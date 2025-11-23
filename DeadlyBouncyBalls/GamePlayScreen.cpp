@@ -98,12 +98,14 @@ void GamePlayScreen::resolveBallCollisions()
 		{
 			resolveCircleCollisions(
 				balls[i].getPosition(),
-				balls[i].getVelocity(), 
+				balls[i].getVelocity(),
 				balls[i].getRadius(),
+				balls[i].getMass(),
 
 				balls[j].getPosition(),
 				balls[j].getVelocity(),
-				balls[j].getRadius());
+				balls[j].getRadius(),
+				balls[j].getMass());
 		}
 	}
 }

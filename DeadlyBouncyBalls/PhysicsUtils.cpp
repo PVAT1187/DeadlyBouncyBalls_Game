@@ -74,7 +74,8 @@ void PhysicsUtils::resolveStaticCircleCollision(
 }
 
 void PhysicsUtils::resolveDynamicCircleCollision(Vector2f& velocityA, 
-    Vector2f& velocityB, const sf::Vector2f& normal)
+    float massA, Vector2f& velocityB, float massB,
+    const sf::Vector2f& normal)
 {
     Vector2f tangent(-normal.y, normal.x);
 
@@ -84,19 +85,22 @@ void PhysicsUtils::resolveDynamicCircleCollision(Vector2f& velocityA,
     float dpNorA = computeDotProduct(velocityA, normal);
     float dpNorB = computeDotProduct(velocityB, normal);
 
-    velocityA = computeVector(tangent, dpTanA, normal, dpNorB);
-    velocityB = computeVector(tangent, dpTanB, normal, dpNorA);
+    float momentumA = (dpNorA * (massA - massB) + 2.f * massB * dpNorB) / (massA + massB);
+    float momentumB = (dpNorB * (massB - massA) + 2.f * massA * dpNorA) / (massA + massB);
+
+    velocityA = computeVector(tangent, dpTanA, normal, momentumA);
+    velocityB = computeVector(tangent, dpTanB, normal, momentumB);
 }
 
 void PhysicsUtils::resolveCircleCollisions(Vector2f& positionA,
-    Vector2f& velocityA, float radiusA, Vector2f& positionB,
-    Vector2f& velocityB, float radiusB)
+    Vector2f& velocityA, float radiusA, float massA,
+    Vector2f& positionB, Vector2f& velocityB, float radiusB, float massB)
 {
     if (isCircleCollidingWithCircle(positionA, radiusA, positionB, radiusB))
     {
         resolveStaticCircleCollision(positionA, radiusA, positionB, radiusB);
 
         Vector2f normal = computeNormal(positionA, positionB);
-        resolveDynamicCircleCollision(velocityA, velocityB, normal);
+        resolveDynamicCircleCollision(velocityA, massA, velocityB, massB, normal);
     }
 }

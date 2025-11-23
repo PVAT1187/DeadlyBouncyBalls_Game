@@ -14,11 +14,13 @@ namespace PhysicsUtils
 
 	void resolveStaticCircleCollision(sf::Vector2f& positionA,
 		float radiusA, sf::Vector2f& positionB, float radiusB);
-	void resolveDynamicCircleCollision(sf::Vector2f& velocityA,
-		sf::Vector2f& velocityB, const sf::Vector2f& normal);
+	void resolveDynamicCircleCollision(sf::Vector2f& velocityA, 
+		float massA, sf::Vector2f& velocityB, float massB,
+		const sf::Vector2f& normal);
 	void resolveCircleCollisions(sf::Vector2f& positionA, 
-		sf::Vector2f& velocityA, float radiusA, sf::Vector2f& positionB,
-		sf::Vector2f& velocityB, float radiusB);
+		sf::Vector2f& velocityA, float radiusA, float massA,
+		sf::Vector2f& positionB, sf::Vector2f& velocityB, 
+		float radiusB, float massB);
 }
 
 #endif // !PHYSICS_UTILS_H
