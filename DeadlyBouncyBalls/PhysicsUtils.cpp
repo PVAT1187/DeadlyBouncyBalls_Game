@@ -1,6 +1,8 @@
 #include "PhysicsUtils.h"
 #include "MathUtils.h"
 
+#include <iostream>
+
 using namespace sf;
 using namespace MathUtils;
 
@@ -65,7 +67,7 @@ void PhysicsUtils::resolveStaticCircleCollision(
     float distance = computeDistance(positionA, positionB);
     Vector2f normal = computeNormal(positionA, positionB);
 
-    float overlap = 0.5f * (radiusA + radiusB - distance);
+    float overlap = 0.5f * (distance - radiusA - radiusB);
 
     positionA -= overlap * normal;
     positionB += overlap * normal;
@@ -86,17 +88,15 @@ void PhysicsUtils::resolveDynamicCircleCollision(Vector2f& velocityA,
     velocityB = computeVector(tangent, dpTanB, normal, dpNorA);
 }
 
-bool PhysicsUtils::resovleCircleCollision(Vector2f& positionA,
+void PhysicsUtils::resolveCircleCollisions(Vector2f& positionA,
     Vector2f& velocityA, float radiusA, Vector2f& positionB,
     Vector2f& velocityB, float radiusB)
 {
-    if (!isCircleCollidingWithCircle(positionA, radiusA, positionB, radiusB))
-        return false;
-    
-    resolveStaticCircleCollision(positionA, radiusA, positionB, radiusB);
+    if (isCircleCollidingWithCircle(positionA, radiusA, positionB, radiusB))
+    {
+        resolveStaticCircleCollision(positionA, radiusA, positionB, radiusB);
 
-    Vector2f normal = computeNormal(positionA, positionB);
-    resolveDynamicCircleCollision(velocityA, velocityB, normal);
-
-    return true;
+        Vector2f normal = computeNormal(positionA, positionB);
+        resolveDynamicCircleCollision(velocityA, velocityB, normal);
+    }
 }

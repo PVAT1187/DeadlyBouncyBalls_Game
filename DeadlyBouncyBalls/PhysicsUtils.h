@@ -16,7 +16,7 @@ namespace PhysicsUtils
 		float radiusA, sf::Vector2f& positionB, float radiusB);
 	void resolveDynamicCircleCollision(sf::Vector2f& velocityA,
 		sf::Vector2f& velocityB, const sf::Vector2f& normal);
-	bool resovleCircleCollision(sf::Vector2f& positionA, 
+	void resolveCircleCollisions(sf::Vector2f& positionA, 
 		sf::Vector2f& velocityA, float radiusA, sf::Vector2f& positionB,
 		sf::Vector2f& velocityB, float radiusB);
 }

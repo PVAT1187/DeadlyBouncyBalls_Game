@@ -9,11 +9,8 @@ class Ball
 		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
 
 		float getRadius() const;
-		sf::Vector2f& getPosition() const;
-		sf::Vector2f& getVelocity() const;
-
-		void setVelocity(const sf::Vector2f& newVelocity);
-		void setPosition(const sf::Vector2f& newPosition);
+		sf::Vector2f& getPosition();
+		sf::Vector2f& getVelocity();
 
 		void update(float deltaTime, const sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window) const;
@@ -22,6 +19,7 @@ class Ball
 
 	private:
 		sf::CircleShape ball;
+
 		sf::Vector2f position;
 		sf::Vector2f velocity;
 };

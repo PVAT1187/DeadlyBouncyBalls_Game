@@ -96,7 +96,14 @@ void GamePlayScreen::resolveBallCollisions()
 	{
 		for (size_t j = i + 1; j < size; ++j)
 		{
-			resolveBallCollisions();
+			resolveCircleCollisions(
+				balls[i].getPosition(),
+				balls[i].getVelocity(), 
+				balls[i].getRadius(),
+
+				balls[j].getPosition(),
+				balls[j].getVelocity(),
+				balls[j].getRadius());
 		}
 	}
 }
