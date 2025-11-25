@@ -9,6 +9,7 @@ class Player
 		Player(const sf::RenderWindow& window);
 
 		void rotate(float angle);
+		void grow(const sf::Vector2f& factor);
 		void update(const sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window) const;
 

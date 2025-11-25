@@ -3,12 +3,15 @@
 
 using namespace sf;
 
+const int GAME_TITLE_TEXT_SIZE = 100;
+const int GAME_INSTRUCTION_TEXT_SIZE = 25;
+
 GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
 	Screen(game),
 	game(game),
 	window(window),
-	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", 100)),
-	gameInstructionText(Text(game.getFont(), "", 25))
+	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", GAME_TITLE_TEXT_SIZE)),
+	gameInstructionText(Text(game.getFont(), "", GAME_INSTRUCTION_TEXT_SIZE))
 {
 	initGameTilteText();
 	initGameInstructionText();

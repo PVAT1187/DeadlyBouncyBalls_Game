@@ -21,6 +21,7 @@ namespace MathUtils
 
 	float randomFloat(float min, float max);
 	sf::Vector2f randomDirection();
+	sf::Color randomColor();
 
 };
 

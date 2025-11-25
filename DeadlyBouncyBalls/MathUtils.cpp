@@ -5,6 +5,12 @@
 using namespace sf;
 using namespace std;
 
+const float MIN_DIRECTION = -1.f;
+const float MAX_DIRECTION = 1.f;
+
+const uint8_t COLOR_MAX = 255;
+const uint8_t FULL_OPACITY = 255;
+
 float MathUtils::computeClamp(float value, float min, float max)
 {
 	return clamp(value, min, max);
@@ -66,12 +72,24 @@ float MathUtils::randomFloat(float min, float max)
 
 Vector2f MathUtils::randomDirection()
 {
-	float x = randomFloat(-1.f, 1.f);
-	float y = randomFloat(-1.f, 1.f);
-	float length = sqrt(x * x + y * y);
+	float x = 0.f;
+	float y = 0.f;
+		
+	do
+	{
+		x = randomFloat(MIN_DIRECTION, MAX_DIRECTION);
+		y = randomFloat(MIN_DIRECTION, MAX_DIRECTION);
+	} 
+	while (x == 0.f && y == 0.f);
 
-	if (length == 0.f)
-		return { 1.f, 0.f };
+	return normalize({ x, y });
+}
 
-	return { x / length, y / length };
+Color MathUtils::randomColor()
+{
+	return Color(
+		static_cast<uint8_t>(rand() % COLOR_MAX + 1),
+		static_cast<uint8_t>(rand() % COLOR_MAX + 1),
+		static_cast<uint8_t>(rand() % COLOR_MAX + 1),
+		FULL_OPACITY);
 }

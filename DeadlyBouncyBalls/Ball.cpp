@@ -1,13 +1,15 @@
 #include "Ball.h"
+#include "MathUtils.h"
 #include "PhysicsUtils.h"
 
 using namespace sf;
+using namespace MathUtils;
 using namespace PhysicsUtils;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity)
 {
 	ball.setRadius(radius);
-	ball.setFillColor(Color::Blue);
+	ball.setFillColor(randomColor());
 	ball.setOrigin(Vector2f(radius, radius));
 	ball.setPosition(position);
 
@@ -48,7 +50,7 @@ Vector2f Ball::getPosition() const
 
 void Ball::update(float deltaTime, const RenderWindow& window)
 {
-	position += velocity * deltaTime * 5.f;
+	position += velocity * deltaTime;
 
 	bounceCircleOffWindow(position, velocity, 
 		ball.getRadius(), window.getSize());

@@ -5,6 +5,8 @@ using namespace sf;
 const int INITIAL_RECTANGLE_WIDTH = 50;
 const int INITIAL_RECTANGLE_HEIGHT = 25;
 
+const float FOLLOW_SMOOTHING = 0.7f;
+
 Player::Player(const RenderWindow& window)
 {
     rectangle.setSize(Vector2f(INITIAL_RECTANGLE_WIDTH, 
@@ -20,6 +22,14 @@ void Player::rotate(float angle)
     rectangle.rotate(degrees(angle));
 }
 
+void Player::grow(const Vector2f& factor)
+{
+    Vector2f oldSize = rectangle.getSize();
+    rectangle.setSize(oldSize + factor);
+
+    rectangle.setOrigin(rectangle.getSize() / 2.f);
+}
+
 void Player::update(const RenderWindow& window)
 {
     Vector2i mousePosition = Mouse::getPosition(window);
@@ -32,7 +42,7 @@ void Player::update(const RenderWindow& window)
     Vector2f difference = static_cast<Vector2f>
         (mousePosition - worldCenterPixels);
 
-    rectangle.move(difference * 0.7f);
+    rectangle.move(difference * FOLLOW_SMOOTHING);
 
     Mouse::setPosition(worldCenterPixels, window);
 }

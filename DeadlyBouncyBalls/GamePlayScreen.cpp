@@ -6,6 +6,13 @@
 using namespace sf;
 using namespace std;
 
+const float AMOUNT_RECTANGLE_WIDTH_INCREASED_BY = 5.f;
+const float AMOUNT_RECTANGLE_HEIGHT_INCREASED_BY = 2.f;
+
+const int SURVIVAL_TIME_TEXT_SIZE = 25;
+
+const float DEGREE = 90.f;
+
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game),
 	game(game),
@@ -13,7 +20,7 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	player(window),
 	ballManager(window),
 	survivalClock(),
-	survivalTimeText(Text(game.getFont(), "", 25))
+	survivalTimeText(Text(game.getFont(), "", SURVIVAL_TIME_TEXT_SIZE))
 {
 	window.setMouseCursorVisible(false);
 	initSurvivalTimeText();
@@ -25,7 +32,7 @@ void GamePlayScreen::handleEvent(const Event& event)
 	if (event.is<Event::MouseButtonPressed>() &&
 		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
 	{
-		player.rotate(90.f);
+		player.rotate(DEGREE);
 	}
 }
 
@@ -38,6 +45,13 @@ void GamePlayScreen::update(float deltaTime)
 	player.update(window);
 
 	ballManager.update(deltaTime, window);
+
+	if (ballManager.isSplit())
+	{
+		player.grow({ AMOUNT_RECTANGLE_WIDTH_INCREASED_BY, 
+			AMOUNT_RECTANGLE_HEIGHT_INCREASED_BY });
+	}
+
 	if (ballManager.isGameOver(player))
 	{
 		game.switchToGameOverScreen(survivalTime);

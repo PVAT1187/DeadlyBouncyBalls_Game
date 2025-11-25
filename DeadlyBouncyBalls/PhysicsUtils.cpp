@@ -6,6 +6,8 @@
 using namespace sf;
 using namespace MathUtils;
 
+const float COLLISION_SEPARATION_RATIO = 0.5f;
+
 void PhysicsUtils::bounceCircleOffWindow(Vector2f& position,
     Vector2f& velocity, float radius, const Vector2u& windowSize)
 {
@@ -17,17 +19,26 @@ void PhysicsUtils::bounceCircleOffWindow(Vector2f& position,
     float circleTopEdge = position.y - radius;
     float circleBottomEdge = position.y + radius;
 
-    if (circleLeftEdge <= 0 ||
-        circleRightEdge >= windowWidth)
+    if (circleLeftEdge <= 0)
     {
         velocity.x = -velocity.x;
-        position.x += velocity.x * 0.01f;
+        position.x = radius;
     }
-    if (circleTopEdge <= 0 ||
-        circleBottomEdge >= windowHeight)
+    else if (circleRightEdge >= windowWidth)
+    {
+        velocity.x = -velocity.x;
+        position.x = windowWidth - radius;
+    }
+    
+    if (circleTopEdge <= 0)
     {
         velocity.y = -velocity.y;
-        position.y += velocity.y * 0.01f;
+        position.y = radius;
+    }
+    else if (circleBottomEdge >= windowHeight)
+    {
+        velocity.y = -velocity.y;
+        position.y = windowHeight - radius;
     }
 }
 
@@ -67,7 +78,8 @@ void PhysicsUtils::resolveStaticCircleCollision(
     float distance = computeDistance(positionA, positionB);
     Vector2f normal = computeNormal(positionA, positionB);
 
-    float overlap = 0.5f * (distance - radiusA - radiusB);
+    float overlap = COLLISION_SEPARATION_RATIO * 
+        (distance - radiusA - radiusB);
 
     positionA -= overlap * normal;
     positionB += overlap * normal;

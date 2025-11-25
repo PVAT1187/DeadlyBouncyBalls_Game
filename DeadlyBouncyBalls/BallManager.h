@@ -14,11 +14,13 @@ class BallManager
 		void update(float deltaTime, const sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
 
+		bool isSplit() const;
 		bool isGameOver(const Player& player);
 
 	private:
 		std::vector<Ball> balls;
 		float splittingTimer;
+		bool split;
 
 		void resolveBallCollisions();
 		void splitBall();
