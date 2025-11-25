@@ -39,10 +39,10 @@ bool PhysicsUtils::isCircleCollidingWithRectangle(
     Vector2f rectangleHalfSize = rectangle.getSize() / 2.f;
 
     Vector2f closestPoint;
-    closestPoint.x = clamp(circlePosition.x,
+    closestPoint.x = computeClamp(circlePosition.x,
         rectangleCenter.x - rectangleHalfSize.x,
         rectangleCenter.x + rectangleHalfSize.x);
-    closestPoint.y = clamp(circlePosition.y,
+    closestPoint.y = computeClamp(circlePosition.y,
         rectangleCenter.y - rectangleHalfSize.y,
         rectangleCenter.y + rectangleHalfSize.y);
 

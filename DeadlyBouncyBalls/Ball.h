@@ -10,6 +10,8 @@ class Ball
 
 		float getRadius() const;
 		float getMass() const;
+		sf::Vector2f getPosition() const;
+		sf::Vector2f getVelocity() const;
 		sf::Vector2f& getPosition();
 		sf::Vector2f& getVelocity();
 

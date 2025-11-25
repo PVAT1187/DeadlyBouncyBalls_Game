@@ -26,14 +26,24 @@ float Ball::getMass() const
 	return mass;
 }
 
+Vector2f& Ball::getVelocity() 
+{
+	return velocity;
+}
+
+Vector2f Ball::getVelocity() const
+{
+	return velocity;
+}
+
 Vector2f& Ball::getPosition() 
 {
 	return position;
 }
 
-Vector2f& Ball::getVelocity() 
+Vector2f Ball::getPosition() const
 {
-	return velocity;
+	return position;
 }
 
 void Ball::update(float deltaTime, const RenderWindow& window)
