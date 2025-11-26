@@ -18,7 +18,10 @@ class BallManager
 
 	private:
 		std::vector<Ball> balls;
+
+		float currentSplitTime;
 		float splittingTimer;
+		bool blinkTriggered;
 
 		void resolveBallCollisions();
 		void splitBall();

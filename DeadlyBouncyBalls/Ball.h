@@ -18,6 +18,8 @@ class Ball
 		void update(float deltaTime, const sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window) const;
 
+		void startBlink(float duration);
+
 		bool isCollidingWithPlayer(const Player& player) const;
 
 	private:
@@ -26,6 +28,10 @@ class Ball
 		float mass;
 		sf::Vector2f position;
 		sf::Vector2f velocity;
+
+		bool isFlashing;
+		float flashTimer;
+		sf::Color color;
 };
 
 #endif // !BALL_H

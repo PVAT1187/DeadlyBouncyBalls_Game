@@ -6,7 +6,10 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-Ball::Ball(float radius, Vector2f position, Vector2f velocity)
+const float BLINKING_SPEED = 10.f;
+
+Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
+	isFlashing(false), flashTimer(0.f)
 {
 	ball.setRadius(radius);
 	ball.setFillColor(randomColor());
@@ -16,6 +19,7 @@ Ball::Ball(float radius, Vector2f position, Vector2f velocity)
 	this->position = position;
 	this->velocity = velocity;
 	mass = radius * radius * radius;
+	color = ball.getFillColor();
 }
 
 float Ball::getRadius() const
@@ -56,11 +60,32 @@ void Ball::update(float deltaTime, const RenderWindow& window)
 		ball.getRadius(), window.getSize());
 
 	ball.setPosition(position);
+
+	if (isFlashing)
+	{
+		flashTimer -= deltaTime;
+		
+		bool whiteState = static_cast<int>(flashTimer * BLINKING_SPEED) % 2 == 0;
+
+		ball.setFillColor(whiteState ? Color::White : color);
+
+		if (flashTimer <= 0.f)
+		{
+			isFlashing = false;
+			ball.setFillColor(color);
+		}
+	}
 }
 
 void Ball::draw(RenderWindow& window) const
 {
 	window.draw(ball);
+}
+
+void Ball::startBlink(float duration)
+{
+	isFlashing = true;
+	flashTimer = duration;
 }
 
 bool Ball::isCollidingWithPlayer(const Player& player) const

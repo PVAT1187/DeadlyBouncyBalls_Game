@@ -13,11 +13,14 @@ const float	MIN_SPEED = 500.f;
 const float MAX_SPEED = 1000.f;
 
 const float AMOUNT_RADIUS_DECREASED_BY = 10.f;
+const float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
+const float INITIAL_SPLITTING_TIME = 5.f;
+const float SPLIT_TIME_MULTIPLIER = 2.f;
+const float	BLINKING_DURATION = 0.5f;
 
-const float SPLITTING_TIME = 5.f;
-
-BallManager::BallManager(const RenderWindow& window) 
-	: splittingTimer(0.f)
+BallManager::BallManager(const RenderWindow& window) :
+	splittingTimer(0.f), blinkTriggered(false), 
+	currentSplitTime(INITIAL_SPLITTING_TIME)
 {
 	for (int i = 0; i < 2; ++i)
 	{
@@ -45,10 +48,21 @@ void BallManager::update(float deltaTime, const sf::RenderWindow& window)
 	resolveBallCollisions();
 
 	splittingTimer += deltaTime;
-	if (splittingTimer >= SPLITTING_TIME)
+
+	if (!blinkTriggered &&
+		splittingTimer >= currentSplitTime - BLINKING_DURATION)
+	{
+		for (auto& ball : balls)
+			ball.startBlink(BLINKING_DURATION);
+
+		blinkTriggered = true;
+	}
+
+	if (splittingTimer >= currentSplitTime)
 	{
 		splitBall();
-		splittingTimer = 0.f;
+		currentSplitTime *= SPLIT_TIME_MULTIPLIER;
+		blinkTriggered = false;
 	}
 }
 
@@ -98,7 +112,7 @@ void BallManager::splitBall()
 	vector<Ball> newBalls;
 	newBalls.reserve(balls.size());
 
-	for (const auto& ball : balls)
+	for (auto& ball : balls)
 	{
 		float newRadius = ball.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
 
@@ -110,7 +124,8 @@ void BallManager::splitBall()
 		Vector2f position = ball.getPosition();
 		
 		Vector2f parentDirection = normalize(ball.getVelocity());
-		Vector2f newDirection = normalize(parentDirection + randomDirection() * 0.5f);
+		Vector2f newDirection = normalize(parentDirection + randomDirection() 
+			* DIRECTION_RANDOMNESS_FACTOR);
 		
 		float newSpeed = randomFloat(MIN_SPEED, MAX_SPEED) * (MAX_RADIUS / newRadius);
 		
