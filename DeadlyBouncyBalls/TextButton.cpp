@@ -7,6 +7,10 @@ const float HOVER_SCALE = 1.2f;
 
 const float SMOOTH_SCALING_MULTIPLIER = 0.2f;
 
+const unsigned int TextButton::BUTTON_SIZE = 50;
+const float TextButton::TITLE_BUTTON_SPACING = 200.f;
+const float TextButton::BUTTON_SPACING = 80.f;
+
 TextButton::TextButton(const String& textString, const Font& font,
 	unsigned int size, const Vector2f& position) :
 	text(Text(font, textString, size)),

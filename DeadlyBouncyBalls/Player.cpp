@@ -6,15 +6,15 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-const float INITIAL_RECTANGLE_WIDTH = 60.f;
-const float INITIAL_RECTANGLE_HEIGHT = 30.f;
+const float RECTANGLE_WIDTH = 60.f;
+const float RECTANGLE_HEIGHT = 30.f;
 
 const float FOLLOW_SMOOTHING = 0.7f;
 
 Player::Player(const RenderWindow& window)
 {
-    rectangle.setSize(Vector2f(INITIAL_RECTANGLE_WIDTH, 
-        INITIAL_RECTANGLE_HEIGHT));
+    rectangle.setSize(Vector2f(RECTANGLE_WIDTH,
+        RECTANGLE_HEIGHT));
     rectangle.setOrigin(rectangle.getSize() / 2.f);
     rectangle.setFillColor(Color::Red);
     rectangle.setPosition(

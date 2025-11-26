@@ -6,8 +6,6 @@
 using namespace sf;
 using namespace std;
 
-const unsigned int SURVIVAL_TIME_TEXT_SIZE = 25;
-
 const float DEGREE = 90.f;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
@@ -17,7 +15,7 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	player(window),
 	ballManager(window),
 	survivalClock(),
-	survivalTimeText(Text(game.getFont(), "", SURVIVAL_TIME_TEXT_SIZE))
+	survivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE))
 {
 	window.setMouseCursorVisible(false);
 	initSurvivalTimeText();

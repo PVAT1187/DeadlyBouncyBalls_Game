@@ -2,6 +2,7 @@
 #define GAME_OVER_SCREEN_H
 
 #include "Screen.h"
+#include "TextButton.h"
 
 class Game;
 
@@ -22,8 +23,12 @@ class GameOverScreen : public Screen
 		sf::Text gameOverText;
 		sf::Text finalSurvivalTimeText;
 
+		TextButton playAgainButton;
+		TextButton mainMenuButton;
+
 		void initGameOverText();
 		void initFinalSurvivalTimeText(float finalSurvivalTime);
+		void updateButtonPosition();
 };
 
 #endif // !GAME_OVER_SCREEN_H

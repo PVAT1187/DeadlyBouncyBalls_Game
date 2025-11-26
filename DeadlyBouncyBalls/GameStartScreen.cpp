@@ -3,18 +3,13 @@
 
 using namespace sf;
 
-const unsigned int GAME_TITLE_TEXT_SIZE = 100;
-const unsigned int BUTTON_SIZE = 50;
-const float TITLE_BUTTON_SPACING = 150.f;
-const float BUTTON_SPACING = 80.f;
-
 GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
 	Screen(game),
 	game(game),
 	window(window),
-	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", GAME_TITLE_TEXT_SIZE)),
-	playButton("PLAY", game.getFont(), BUTTON_SIZE, { 0, 0 }),
-	quitButton("QUIT", game.getFont(), BUTTON_SIZE, { 0, 0 })
+	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", Screen::TITLE_TEXT_SIZE)),
+	playButton("PLAY", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
+	quitButton("QUIT", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
 {
 	initGameTilteText();
 	updateButtonPositon();
@@ -57,8 +52,8 @@ void GameStartScreen::initGameTilteText()
 
 void GameStartScreen::updateButtonPositon()
 {
-	float startY = gameTitleText.getPosition().y + TITLE_BUTTON_SPACING;
+	float startY = gameTitleText.getPosition().y + TextButton::TITLE_BUTTON_SPACING;
 
 	playButton.setPosition({ window.getSize().x / 2.f, startY });
-	quitButton.setPosition({ window.getSize().x / 2.f, startY + BUTTON_SPACING });
+	quitButton.setPosition({ window.getSize().x / 2.f, startY + TextButton::BUTTON_SPACING });
 }

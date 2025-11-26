@@ -6,39 +6,48 @@
 using namespace sf;
 using namespace std;
 
-const unsigned int GAME_OVER_TEXT_SIZE = 100;
-const unsigned int FINAL_SURVIVAL_TIME_TEXT_SIZE = 25;
-
-const float AMOUNT_Y_COORDINATE_INCREASED_BY = 100.f;
+const float TEXT_SPACING = 125.f;
 
 GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
 	float finalSurvivalTime) :
 	Screen(game),
 	game(game),
 	window(window),
-	gameOverText(Text(game.getFont(), "GAME OVER", GAME_OVER_TEXT_SIZE)),
-	finalSurvivalTimeText(Text(game.getFont(), "", FINAL_SURVIVAL_TIME_TEXT_SIZE))
+	gameOverText(Text(game.getFont(), "GAME OVER", Screen::TITLE_TEXT_SIZE)),
+	finalSurvivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE)),
+	playAgainButton("PLAY AGAIN", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
 {
 	window.setMouseCursorVisible(true);
 	
 	initGameOverText();
 	initFinalSurvivalTimeText(finalSurvivalTime);
+	updateButtonPosition();
 }
 
-void GameOverScreen::handleEvent(const Event& event)
+void GameOverScreen::handleEvent(const Event& event) {}
+
+void GameOverScreen::update(float deltaTime) 
 {
-	if (event.is<Event::MouseButtonPressed>())
+	playAgainButton.update(window);
+	mainMenuButton.update(window);
+
+	if (playAgainButton.isClicked(window))
 	{
 		game.switchToGamePlayScreen();
 	}
+	else if (mainMenuButton.isClicked(window))
+	{
+		game.switchToGameStartScreen();
+	}
 }
-
-void GameOverScreen::update(float deltaTime) {}
 
 void GameOverScreen::render(RenderWindow& window)
 {
 	window.draw(gameOverText);
 	window.draw(finalSurvivalTimeText);
+	playAgainButton.draw(window);
+	mainMenuButton.draw(window);
 }
 
 void GameOverScreen::initGameOverText()
@@ -62,5 +71,13 @@ void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 	FloatRect survivalTimeTextBounds = finalSurvivalTimeText.getLocalBounds();
 	finalSurvivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
 	finalSurvivalTimeText.setPosition(Vector2f(
-		centerPosition.x, centerPosition.y + AMOUNT_Y_COORDINATE_INCREASED_BY));
+		centerPosition.x, centerPosition.y + TEXT_SPACING));
+}
+
+void GameOverScreen::updateButtonPosition()
+{
+	float startY = gameOverText.getPosition().y + TextButton::TITLE_BUTTON_SPACING;
+
+	playAgainButton.setPosition({ window.getSize().x / 2.f, startY });
+	mainMenuButton.setPosition({ window.getSize().x / 2.f, startY + TextButton::BUTTON_SPACING });
 }

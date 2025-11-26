@@ -14,6 +14,9 @@ class Screen
 
 		virtual ~Screen() = default;
 
+		static const unsigned int TITLE_TEXT_SIZE = 100;
+		static const unsigned int BODY_TEXT_SIZE = 25;
+
 	protected:
 		Game& game;
 
