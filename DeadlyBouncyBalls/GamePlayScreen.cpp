@@ -6,9 +6,6 @@
 using namespace sf;
 using namespace std;
 
-const float AMOUNT_RECTANGLE_WIDTH_INCREASED_BY = 5.f;
-const float AMOUNT_RECTANGLE_HEIGHT_INCREASED_BY = 2.f;
-
 const int SURVIVAL_TIME_TEXT_SIZE = 25;
 
 const float DEGREE = 90.f;
@@ -43,14 +40,7 @@ void GamePlayScreen::update(float deltaTime)
 		to_string(survivalTime) + "s");
 
 	player.update(window);
-
 	ballManager.update(deltaTime, window);
-
-	if (ballManager.isSplit())
-	{
-		player.grow({ AMOUNT_RECTANGLE_WIDTH_INCREASED_BY, 
-			AMOUNT_RECTANGLE_HEIGHT_INCREASED_BY });
-	}
 
 	if (ballManager.isGameOver(player))
 	{

@@ -8,6 +8,15 @@ using namespace MathUtils;
 
 const float COLLISION_SEPARATION_RATIO = 0.5f;
 
+void PhysicsUtils::clampRectangleToWindow(Vector2f& position,
+    const Vector2f& size, const Vector2u& windowSize)
+{
+    position.x = computeClamp(position.x,
+        size.x, windowSize.x - size.x);
+    position.y = computeClamp(position.y,
+        size.y, windowSize.y - size.y);
+}
+
 void PhysicsUtils::bounceCircleOffWindow(Vector2f& position,
     Vector2f& velocity, float radius, const Vector2u& windowSize)
 {

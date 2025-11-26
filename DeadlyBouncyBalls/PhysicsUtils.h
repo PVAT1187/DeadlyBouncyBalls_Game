@@ -5,6 +5,8 @@
 
 namespace PhysicsUtils
 {
+	void clampRectangleToWindow(sf::Vector2f& position, 
+		const sf::Vector2f& size, const sf::Vector2u& windowSize);
 	void bounceCircleOffWindow(sf::Vector2f& position, sf::Vector2f& velocity,
 		float radius, const sf::Vector2u& windowSize);
 	bool isCircleCollidingWithRectangle(const sf::Vector2f& circlePosition,

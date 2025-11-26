@@ -1,9 +1,13 @@
 #include "Player.h"
+#include "MathUtils.h"
+#include "PhysicsUtils.h"
 
 using namespace sf;
+using namespace MathUtils;
+using namespace PhysicsUtils;
 
-const int INITIAL_RECTANGLE_WIDTH = 50;
-const int INITIAL_RECTANGLE_HEIGHT = 25;
+const int INITIAL_RECTANGLE_WIDTH = 60;
+const int INITIAL_RECTANGLE_HEIGHT = 30;
 
 const float FOLLOW_SMOOTHING = 0.7f;
 
@@ -22,29 +26,24 @@ void Player::rotate(float angle)
     rectangle.rotate(degrees(angle));
 }
 
-void Player::grow(const Vector2f& factor)
-{
-    Vector2f oldSize = rectangle.getSize();
-    rectangle.setSize(oldSize + factor);
-
-    rectangle.setOrigin(rectangle.getSize() / 2.f);
-}
-
 void Player::update(const RenderWindow& window)
 {
     Vector2i mousePosition = Mouse::getPosition(window);
     Vector2f worldRectCenter = rectangle.getPosition();
-    Vector2f rectangleHalfSize = rectangle.getSize() / 2.f;
-
-    Vector2i worldCenterPixels = window.
-        mapCoordsToPixel(worldRectCenter);
+    Vector2i worldCenterPixels = window.mapCoordsToPixel(worldRectCenter);
 
     Vector2f difference = static_cast<Vector2f>
         (mousePosition - worldCenterPixels);
 
     rectangle.move(difference * FOLLOW_SMOOTHING);
-
     Mouse::setPosition(worldCenterPixels, window);
+
+    Vector2f rectangleHalfSize = rectangle.getSize() / 2.f;
+    worldRectCenter = rectangle.getPosition();
+
+    clampRectangleToWindow(worldRectCenter, rectangleHalfSize, window.getSize());
+
+    rectangle.setPosition(worldRectCenter);
 }
 
 void Player::draw(RenderWindow& window) const
