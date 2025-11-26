@@ -2,6 +2,7 @@
 #define	GAME_START_SCREEN
 
 #include "Screen.h"
+#include "TextButton.h"
 
 class Game;
 
@@ -19,10 +20,12 @@ class GameStartScreen : public Screen
 		sf::RenderWindow& window;
 
 		sf::Text gameTitleText;
-		sf::Text gameInstructionText;
+
+		TextButton playButton;
+		TextButton quitButton;
 
 		void initGameTilteText();
-		void initGameInstructionText();
+		void updateButtonPositon();
 };
 
 #endif // !GAME_START_SCREEN

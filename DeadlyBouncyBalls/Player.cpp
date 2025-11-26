@@ -6,8 +6,8 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-const int INITIAL_RECTANGLE_WIDTH = 60;
-const int INITIAL_RECTANGLE_HEIGHT = 30;
+const float INITIAL_RECTANGLE_WIDTH = 60.f;
+const float INITIAL_RECTANGLE_HEIGHT = 30.f;
 
 const float FOLLOW_SMOOTHING = 0.7f;
 

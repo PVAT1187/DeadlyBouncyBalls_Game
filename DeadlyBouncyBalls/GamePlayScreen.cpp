@@ -6,7 +6,7 @@
 using namespace sf;
 using namespace std;
 
-const int SURVIVAL_TIME_TEXT_SIZE = 25;
+const unsigned int SURVIVAL_TIME_TEXT_SIZE = 25;
 
 const float DEGREE = 90.f;
 

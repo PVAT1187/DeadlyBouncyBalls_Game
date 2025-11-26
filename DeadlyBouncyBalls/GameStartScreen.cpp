@@ -3,34 +3,45 @@
 
 using namespace sf;
 
-const int GAME_TITLE_TEXT_SIZE = 100;
-const int GAME_INSTRUCTION_TEXT_SIZE = 25;
+const unsigned int GAME_TITLE_TEXT_SIZE = 100;
+const unsigned int BUTTON_SIZE = 50;
+const float TITLE_BUTTON_SPACING = 150.f;
+const float BUTTON_SPACING = 80.f;
 
 GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
 	Screen(game),
 	game(game),
 	window(window),
 	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", GAME_TITLE_TEXT_SIZE)),
-	gameInstructionText(Text(game.getFont(), "", GAME_INSTRUCTION_TEXT_SIZE))
+	playButton("PLAY", game.getFont(), BUTTON_SIZE, { 0, 0 }),
+	quitButton("QUIT", game.getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initGameTilteText();
-	initGameInstructionText();
+	updateButtonPositon();
 }
 
-void GameStartScreen::handleEvent(const Event& event)
+void GameStartScreen::handleEvent(const Event& event) {}
+
+void GameStartScreen::update(float deltaTime) 
 {
-	if (event.is<Event::MouseButtonPressed>())
+	playButton.update(window);
+	quitButton.update(window);
+
+	if (playButton.isClicked(window))
 	{
 		game.switchToGamePlayScreen();
 	}
+	else if (quitButton.isClicked(window))
+	{
+		window.close();
+	}
 }
-
-void GameStartScreen::update(float deltaTime) {}
 
 void GameStartScreen::render(RenderWindow& window)
 {
 	window.draw(gameTitleText);
-	window.draw(gameInstructionText);
+	playButton.draw(window);
+	quitButton.draw(window);
 }
 
 void GameStartScreen::initGameTilteText()
@@ -43,7 +54,11 @@ void GameStartScreen::initGameTilteText()
 		static_cast<Vector2f>(window.getSize()) / 2.f);
 }
 
-void GameStartScreen::initGameInstructionText()
+
+void GameStartScreen::updateButtonPositon()
 {
-	
+	float startY = gameTitleText.getPosition().y + TITLE_BUTTON_SPACING;
+
+	playButton.setPosition({ window.getSize().x / 2.f, startY });
+	quitButton.setPosition({ window.getSize().x / 2.f, startY + BUTTON_SPACING });
 }

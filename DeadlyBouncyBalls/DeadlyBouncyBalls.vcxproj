@@ -151,6 +151,7 @@
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="MathUtils.h" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TextButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BallManager.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="GameStartScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="TextButton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

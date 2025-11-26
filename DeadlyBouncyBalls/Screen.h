@@ -4,7 +4,6 @@
 class Game;
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 
 class Screen
 {

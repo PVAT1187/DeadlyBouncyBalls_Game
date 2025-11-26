@@ -6,8 +6,8 @@
 using namespace sf;
 using namespace std;
 
-const int GAME_OVER_TEXT_SIZE = 100;
-const int FINAL_SURVIVAL_TIME_TEXT_SIZE = 25;
+const unsigned int GAME_OVER_TEXT_SIZE = 100;
+const unsigned int FINAL_SURVIVAL_TIME_TEXT_SIZE = 25;
 
 const float AMOUNT_Y_COORDINATE_INCREASED_BY = 100.f;
 
