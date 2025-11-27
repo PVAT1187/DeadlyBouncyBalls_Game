@@ -14,7 +14,6 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	ballManager(window),
 	paused(false),
 	survivalClock(),
-	pausedDuration(Time::Zero),
 	survivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE))
 {
 	this->window.setMouseCursorVisible(false);
@@ -31,20 +30,7 @@ void GamePlayScreen::handleEvent(const Event& event)
 		event.getIf<Event::KeyPressed>()->code == Keyboard::Key::Escape)
 	{
 		paused = !paused;
-
-		if (paused)
-		{
-			window.setMouseCursorVisible(true);
-			pauseOverlay->activate();
-			pausedAt = survivalClock.getElapsedTime();
-		}
-		else
-		{
-			window.setMouseCursorVisible(false);
-			pauseOverlay->deactivate();
-			pausedDuration += survivalClock.getElapsedTime() - pausedAt;
-		}
-
+		window.setMouseCursorVisible(paused);
 		return;
 	}
 
@@ -64,9 +50,12 @@ void GamePlayScreen::handleEvent(const Event& event)
 void GamePlayScreen::update(float deltaTime)
 {	
 	if (paused)
+	{
+		pauseOverlay->update();
 		return;
+	}
 	
-	float survivalTime = (survivalClock.getElapsedTime() - pausedDuration).asSeconds();
+	float survivalTime = survivalClock.getElapsedTime().asSeconds();
 	survivalTimeText.setString("Survival Time: " +
 		to_string(survivalTime) + "s");
 

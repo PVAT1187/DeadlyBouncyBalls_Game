@@ -1,7 +1,7 @@
 #include "Game.h"
+#include "GameStartScreen.h"
 #include "GamePlayScreen.h"
 #include "GameOverScreen.h"
-#include "GameStartScreen.h"
 
 #include <iostream>
 

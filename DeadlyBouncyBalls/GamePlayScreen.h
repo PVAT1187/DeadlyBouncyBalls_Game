@@ -25,8 +25,6 @@ class GamePlayScreen : public Screen
 		sf::Text survivalTimeText;
 
 		bool paused;
-		sf::Time pausedAt;
-		sf::Time pausedDuration;
 		std::unique_ptr<PauseMenuOverlay> pauseOverlay;
 
 		void initSurvivalTimeText();

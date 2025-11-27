@@ -8,7 +8,6 @@ using namespace UIUtils;
 
 PauseMenuOverlay::PauseMenuOverlay(Game& game, RenderWindow& window) : 
 	Overlay(game, window),
-	active(false),
 	pauseMenuTitle(Text(game.getFont(), "GAME PAUSED", Screen::TITLE_TEXT_SIZE)),
 	resumeButton("RESUME", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
 	mainMenuButton("MAIN MENU", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
@@ -18,42 +17,27 @@ PauseMenuOverlay::PauseMenuOverlay(Game& game, RenderWindow& window) :
 	updateButtonPosition();
 }
 
-void PauseMenuOverlay::activate()
-{
-	active = true;
-}
-
-void PauseMenuOverlay::deactivate()
-{
-	active = false;
-}
-
-bool PauseMenuOverlay::isActive() const
-{
-	return active;
-}
-
 void PauseMenuOverlay::handleEvent(const Event& event) 
 {
-	if (!active)
-		return;
-
-	resumeButton.update(window);
-	mainMenuButton.update(window);
-
-	if (resumeButton.isClicked(window))
+	if (event.is<Event::MouseButtonPressed>() &&
+		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
 	{
-		deactivate();
-		game.switchToGamePlayScreen();
-	}
-	else if (mainMenuButton.isClicked(window))
-	{
-		deactivate();
-		game.switchToGameStartScreen();
+		if (resumeButton.isClicked(window))
+		{
+			game.switchToGamePlayScreen();
+		}
+		else if (mainMenuButton.isClicked(window))
+		{
+			game.switchToGameStartScreen();
+		}
 	}
 }
 
-void PauseMenuOverlay::update(float deltaTime) {}
+void PauseMenuOverlay::update() 
+{
+	resumeButton.update(window);
+	mainMenuButton.update(window);
+}
 
 void PauseMenuOverlay::render(RenderWindow& window)
 {

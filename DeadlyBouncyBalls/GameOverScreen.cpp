@@ -25,21 +25,26 @@ GameOverScreen::GameOverScreen(Game& game, RenderWindow& window,
 	updateButtonPosition();
 }
 
-void GameOverScreen::handleEvent(const Event& event) {}
+void GameOverScreen::handleEvent(const Event& event) 
+{
+	if (event.is<Event::MouseButtonPressed>() &&
+		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
+	{
+		if (playAgainButton.isClicked(window))
+		{
+			game.switchToGamePlayScreen();
+		}
+		else if (mainMenuButton.isClicked(window))
+		{
+			game.switchToGameStartScreen();
+		}
+	}
+}
 
 void GameOverScreen::update(float deltaTime) 
 {
 	playAgainButton.update(window);
-	mainMenuButton.update(window);
-
-	if (playAgainButton.isClicked(window))
-	{
-		game.switchToGamePlayScreen();
-	}
-	else if (mainMenuButton.isClicked(window))
-	{
-		game.switchToGameStartScreen();
-	}
+	mainMenuButton.update(window);	
 }
 
 void GameOverScreen::render(RenderWindow& window)

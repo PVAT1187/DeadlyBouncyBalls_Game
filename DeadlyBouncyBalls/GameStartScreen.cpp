@@ -16,21 +16,26 @@ GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
 	updateButtonPositon();
 }
 
-void GameStartScreen::handleEvent(const Event& event) {}
+void GameStartScreen::handleEvent(const Event& event) 
+{
+	if (event.is<Event::MouseButtonPressed>() &&
+		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
+	{
+		if (playButton.isClicked(window))
+		{
+			game.switchToGamePlayScreen();
+		}
+		else if (quitButton.isClicked(window))
+		{
+			window.close();
+		}
+	}
+}
 
 void GameStartScreen::update(float deltaTime) 
 {
 	playButton.update(window);
 	quitButton.update(window);
-
-	if (playButton.isClicked(window))
-	{
-		game.switchToGamePlayScreen();
-	}
-	else if (quitButton.isClicked(window))
-	{
-		window.close();
-	}
 }
 
 void GameStartScreen::render(RenderWindow& window)
