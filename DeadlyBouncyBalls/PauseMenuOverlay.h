@@ -4,18 +4,22 @@
 #include "Overlay.h"
 #include "TextButton.h"
 
+class GamePlayScreen;
+
 #include <SFML/Graphics.hpp>
 
 class PauseMenuOverlay : public Overlay
 {
 	public:
-		PauseMenuOverlay(Game& game, sf::RenderWindow& window);
+		PauseMenuOverlay(GamePlayScreen& gamePlayScreen, Game& game, sf::RenderWindow& window);
 		
 		void handleEvent(const sf::Event& event) override;
 		void update() override;
 		void render(sf::RenderWindow& window) override;
 	
 	private:
+		GamePlayScreen& gamePlayScreen;
+
 		sf::Text pauseMenuTitle;
 
 		TextButton resumeButton;

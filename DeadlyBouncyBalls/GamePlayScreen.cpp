@@ -21,7 +21,7 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	
 	survivalClock.restart();
 
-	pauseOverlay = make_unique<PauseMenuOverlay>(game, window);
+	pauseOverlay = make_unique<PauseMenuOverlay>(*this, game, window);
 }
 
 void GamePlayScreen::handleEvent(const Event& event)
@@ -77,6 +77,12 @@ void GamePlayScreen::render(RenderWindow& window)
 
 	if (paused)
 		pauseOverlay->render(window);
+}
+
+void GamePlayScreen::unpause()
+{
+	paused = false;
+	window.setMouseCursorVisible(false);
 }
 
 void GamePlayScreen::initSurvivalTimeText()

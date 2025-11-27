@@ -17,6 +17,8 @@ class GamePlayScreen : public Screen
 		void update(float deltaTime) override;
 		void render(sf::RenderWindow& window) override;
 
+		void unpause();
+
 	private:
 		Player player;
 		BallManager ballManager;
