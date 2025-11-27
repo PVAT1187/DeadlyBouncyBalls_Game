@@ -1,7 +1,7 @@
 #ifndef TEXT_BUTTON_H
 #define TEXT_BUTTON_H
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 class TextButton
 {

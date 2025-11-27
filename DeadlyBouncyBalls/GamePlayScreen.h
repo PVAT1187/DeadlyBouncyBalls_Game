@@ -4,10 +4,9 @@
 #include "Screen.h"
 #include "Player.h"
 #include "BallManager.h"
+#include "PauseMenuOverlay.h"
 
 #include <vector>
-
-class Game;
 
 class GamePlayScreen : public Screen
 {
@@ -19,14 +18,16 @@ class GamePlayScreen : public Screen
 		void render(sf::RenderWindow& window) override;
 
 	private:
-		Game& game;
-		sf::RenderWindow& window; 
-
 		Player player;
 		BallManager ballManager;
 
 		sf::Clock survivalClock;
 		sf::Text survivalTimeText;
+
+		bool paused;
+		sf::Time pausedAt;
+		sf::Time pausedDuration;
+		std::unique_ptr<PauseMenuOverlay> pauseOverlay;
 
 		void initSurvivalTimeText();
 };

@@ -1,9 +1,12 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-class Game;
+#include "TextButton.h"
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+
+class Game;
 
 class Screen
 {
@@ -19,8 +22,10 @@ class Screen
 
 	protected:
 		Game& game;
+		sf::RenderWindow& window;
 
-		Screen(Game& game) : game(game) {}
+		Screen(Game& game, sf::RenderWindow& window) : 
+			game(game), window(window) {}
 };
 
 #endif // !SCREEN_H

@@ -1,10 +1,8 @@
-#ifndef GAME_START_SCREEN
-#define	GAME_START_SCREEN
+#ifndef GAME_START_SCREEN_H
+#define	GAME_START_SCREEN_H
 
 #include "Screen.h"
 #include "TextButton.h"
-
-class Game;
 
 class GameStartScreen : public Screen
 {
@@ -16,9 +14,6 @@ class GameStartScreen : public Screen
 		void render(sf::RenderWindow& window) override;
 
 	private:
-		Game& game;
-		sf::RenderWindow& window;
-
 		sf::Text gameTitleText;
 
 		TextButton playButton;
@@ -28,4 +23,4 @@ class GameStartScreen : public Screen
 		void updateButtonPositon();
 };
 
-#endif // !GAME_START_SCREEN
+#endif // !GAME_START_SCREEN_H

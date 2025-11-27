@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <sfml/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class Player
 {

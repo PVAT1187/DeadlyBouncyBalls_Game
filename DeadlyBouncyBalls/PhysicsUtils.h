@@ -1,7 +1,7 @@
 #ifndef PHYSICS_UTILS_H
 #define PHYSICS_UTILS_H
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace PhysicsUtils
 {

@@ -142,6 +142,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Ball.h" />
     <ClCompile Include="BallManager.cpp" />
+    <ClCompile Include="PauseMenuOverlay.cpp" />
     <ClCompile Include="PhysicsUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOverScreen.cpp" />
@@ -152,9 +153,13 @@
     <ClCompile Include="MathUtils.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TextButton.cpp" />
+    <ClCompile Include="UIUtils.cpp" />
+    <ClCompile Include="UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BallManager.h" />
+    <ClInclude Include="Overlay.h" />
+    <ClInclude Include="PauseMenuOverlay.h" />
     <ClInclude Include="PhysicsUtils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameOverScreen.h" />

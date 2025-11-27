@@ -1,9 +1,9 @@
 #ifndef BALL_MANAGER_H
 #define BALL_MANAGER_H
 
-#include "SFML/Graphics.hpp"
 #include "Ball.h"
 
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 class BallManager

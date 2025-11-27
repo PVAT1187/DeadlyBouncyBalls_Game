@@ -4,8 +4,6 @@
 #include "Screen.h"
 #include "TextButton.h"
 
-class Game;
-
 class GameOverScreen : public Screen
 {
 	public:
@@ -17,9 +15,6 @@ class GameOverScreen : public Screen
 		void render(sf::RenderWindow& window) override;
 
 	private:
-		Game& game;
-		sf::RenderWindow& window;
-
 		sf::Text gameOverText;
 		sf::Text finalSurvivalTimeText;
 

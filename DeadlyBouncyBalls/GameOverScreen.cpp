@@ -1,24 +1,24 @@
 #include "GameOverScreen.h"
+#include "UIUtils.h"
 #include "Game.h"
 
 #include <iostream>
 
 using namespace sf;
 using namespace std;
+using namespace UIUtils;
 
 const float TEXT_SPACING = 125.f;
 
 GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
 	float finalSurvivalTime) :
-	Screen(game),
-	game(game),
-	window(window),
+	Screen(game, window),
 	gameOverText(Text(game.getFont(), "GAME OVER", Screen::TITLE_TEXT_SIZE)),
 	finalSurvivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE)),
 	playAgainButton("PLAY AGAIN", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
 	mainMenuButton("MAIN MENU", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
 {
-	window.setMouseCursorVisible(true);
+	this->window.setMouseCursorVisible(true);
 	
 	initGameOverText();
 	initFinalSurvivalTimeText(finalSurvivalTime);
@@ -52,12 +52,7 @@ void GameOverScreen::render(RenderWindow& window)
 
 void GameOverScreen::initGameOverText()
 {
-	gameOverText.setFillColor(Color::White);
-
-	FloatRect gameOverTextBounds = gameOverText.getLocalBounds();
-	gameOverText.setOrigin(gameOverTextBounds.size / 2.f);
-	gameOverText.setPosition(
-		static_cast<Vector2f>(window.getSize()) / 2.f);
+	colorAndCenterText(gameOverText, window);
 }
 
 void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
@@ -76,8 +71,6 @@ void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 
 void GameOverScreen::updateButtonPosition()
 {
-	float startY = gameOverText.getPosition().y + TextButton::TITLE_BUTTON_SPACING;
-
-	playAgainButton.setPosition({ window.getSize().x / 2.f, startY });
-	mainMenuButton.setPosition({ window.getSize().x / 2.f, startY + TextButton::BUTTON_SPACING });
-}
+	vector<TextButton*> buttons = { &playAgainButton, &mainMenuButton };
+	positionButtons(gameOverText, buttons, window);
+} 

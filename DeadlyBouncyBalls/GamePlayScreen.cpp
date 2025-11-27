@@ -9,21 +9,51 @@ using namespace std;
 const float DEGREE = 90.f;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
-	Screen(game),
-	game(game),
-	window(window),
+	Screen(game, window),
 	player(window),
 	ballManager(window),
+	paused(false),
 	survivalClock(),
+	pausedDuration(Time::Zero),
 	survivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE))
 {
-	window.setMouseCursorVisible(false);
+	this->window.setMouseCursorVisible(false);
 	initSurvivalTimeText();
+	
 	survivalClock.restart();
+
+	pauseOverlay = make_unique<PauseMenuOverlay>(game, window);
 }
 
 void GamePlayScreen::handleEvent(const Event& event)
 {
+	if (event.is<Event::KeyPressed>() &&
+		event.getIf<Event::KeyPressed>()->code == Keyboard::Key::Escape)
+	{
+		paused = !paused;
+
+		if (paused)
+		{
+			window.setMouseCursorVisible(true);
+			pauseOverlay->activate();
+			pausedAt = survivalClock.getElapsedTime();
+		}
+		else
+		{
+			window.setMouseCursorVisible(false);
+			pauseOverlay->deactivate();
+			pausedDuration += survivalClock.getElapsedTime() - pausedAt;
+		}
+
+		return;
+	}
+
+	if (paused)
+	{
+		pauseOverlay->handleEvent(event);
+		return;
+	}
+	
 	if (event.is<Event::MouseButtonPressed>() &&
 		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
 	{
@@ -32,8 +62,11 @@ void GamePlayScreen::handleEvent(const Event& event)
 }
 
 void GamePlayScreen::update(float deltaTime)
-{
-	float survivalTime = survivalClock.getElapsedTime().asSeconds();
+{	
+	if (paused)
+		return;
+	
+	float survivalTime = (survivalClock.getElapsedTime() - pausedDuration).asSeconds();
 	survivalTimeText.setString("Survival Time: " +
 		to_string(survivalTime) + "s");
 
@@ -52,6 +85,9 @@ void GamePlayScreen::render(RenderWindow& window)
 	player.draw(window);
 	ballManager.draw(window);
 	window.draw(survivalTimeText);
+
+	if (paused)
+		pauseOverlay->render(window);
 }
 
 void GamePlayScreen::initSurvivalTimeText()

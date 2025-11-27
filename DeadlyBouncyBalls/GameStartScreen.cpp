@@ -1,12 +1,13 @@
 #include "GameStartScreen.h"
+#include "UIUtils.h"
 #include "Game.h"
 
 using namespace sf;
+using namespace std;
+using namespace UIUtils;
 
 GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
-	Screen(game),
-	game(game),
-	window(window),
+	Screen(game, window),
 	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", Screen::TITLE_TEXT_SIZE)),
 	playButton("PLAY", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
 	quitButton("QUIT", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
@@ -41,19 +42,12 @@ void GameStartScreen::render(RenderWindow& window)
 
 void GameStartScreen::initGameTilteText()
 {
-	gameTitleText.setFillColor(Color::White);
-
-	FloatRect gameTitleTextBounds = gameTitleText.getLocalBounds();
-	gameTitleText.setOrigin(gameTitleTextBounds.size / 2.f);
-	gameTitleText.setPosition(
-		static_cast<Vector2f>(window.getSize()) / 2.f);
+	colorAndCenterText(gameTitleText, window);
 }
 
 
 void GameStartScreen::updateButtonPositon()
 {
-	float startY = gameTitleText.getPosition().y + TextButton::TITLE_BUTTON_SPACING;
-
-	playButton.setPosition({ window.getSize().x / 2.f, startY });
-	quitButton.setPosition({ window.getSize().x / 2.f, startY + TextButton::BUTTON_SPACING });
+	vector<TextButton*> buttons = {&playButton, &quitButton};
+	positionButtons(gameTitleText, buttons, window);
 }
