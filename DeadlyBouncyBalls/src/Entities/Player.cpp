@@ -7,7 +7,7 @@ using namespace MathUtils;
 using namespace PhysicsUtils;
 
 constexpr float RECTANGLE_WIDTH = 50.f;
-constexpr float RECTANGLE_HEIGHT = 50.f;
+constexpr float RECTANGLE_HEIGHT = 40.f;
 
 constexpr float FOLLOW_SMOOTHING = 0.7f;
 

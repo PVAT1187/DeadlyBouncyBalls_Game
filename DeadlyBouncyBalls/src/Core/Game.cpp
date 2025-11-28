@@ -67,7 +67,7 @@ void Game::switchToGameOverScreen(float survivalTime)
 
 void Game::initFont()
 {
-	if (!font.openFromFile("C:/Users/pvat2/source/Personal Projects/DeadlyBouncyBalls/assets/fonts/arial.ttf"))
+	if (!font.openFromFile("assets/fonts/arial.ttf"))
 	{
 		cerr << "Failed to load font!" << endl;
 	}

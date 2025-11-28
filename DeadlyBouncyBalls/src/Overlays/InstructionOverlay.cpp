@@ -51,7 +51,7 @@ void InstructionOverlay::initInstructionOverlayTitle()
 
 void InstructionOverlay::initInstructionText()
 {
-	instructions.setString("Dodge the balls and Survive as long as possible\n");
+	instructions.setString("Dodge the balls and try to survive as long as possible\n");
 	centerBodyText(instructions, window, Screen::TEXT_SPACING);
 }
 
