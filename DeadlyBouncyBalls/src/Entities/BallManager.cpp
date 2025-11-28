@@ -7,6 +7,8 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
+constexpr int INITIAL_NUMBER_OF_BALL = 2;
+
 constexpr float MIN_RADIUS = 10.f;
 constexpr float MAX_RADIUS = 50.f;
 constexpr float	MIN_SPEED = 500.f;
@@ -22,38 +24,44 @@ BallManager::BallManager(const RenderWindow& window) :
 	splittingTimer(0.f), blinkTriggered(false), 
 	currentSplitTime(INITIAL_SPLITTING_TIME)
 {
-	for (int i = 0; i < 2; ++i)
+	const Vector2u& windowSize = window.getSize();
+	
+	for (int i = 0; i < INITIAL_NUMBER_OF_BALL; ++i)
 	{
 		float radius = MAX_RADIUS;
 		
-		Vector2f position(randomFloat(radius, window.getSize().x - radius),
-			randomFloat(radius, window.getSize().y - radius));
+		Vector2f position(randomFloat(radius, windowSize.x - radius),
+			randomFloat(radius, windowSize.y - radius));
 
 		float speed = randomFloat(MIN_SPEED, MAX_SPEED);
 		Vector2f direction = randomDirection();
 		Vector2f velocity = direction * speed;
 
-		Ball ball(radius, position, velocity);
-		balls.push_back(ball);
+		balls.emplace_back(radius, position, velocity);
 	}
 }
 
 void BallManager::update(float deltaTime, const sf::RenderWindow& window)
 {
+	const Vector2u& windowSize = window.getSize();
+	
 	for (auto& ball : balls)
 	{
-		ball.update(deltaTime, window);
+		ball.update(deltaTime, windowSize);
 	}
 
 	resolveBallCollisions();
 
 	splittingTimer += deltaTime;
 
+	float splitTimeMinusBlinkDuration = currentSplitTime - BLINKING_DURATION;
 	if (!blinkTriggered &&
-		splittingTimer >= currentSplitTime - BLINKING_DURATION)
+		splittingTimer >= splitTimeMinusBlinkDuration)
 	{
 		for (auto& ball : balls)
+		{
 			ball.startBlink(BLINKING_DURATION);
+		}
 
 		blinkTriggered = true;
 	}
@@ -79,9 +87,7 @@ bool BallManager::isGameOver(const Player& player)
 	for (auto& ball : balls)
 	{
 		if (ball.isCollidingWithPlayer(player))
-		{
 			return true;
-		}
 	}
 	return false;
 }
@@ -117,9 +123,7 @@ void BallManager::splitBall()
 		float newRadius = ball.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
 
 		if (newRadius < MIN_RADIUS)
-		{
 			continue;
-		}
 
 		Vector2f position = ball.getPosition();
 		
@@ -131,8 +135,7 @@ void BallManager::splitBall()
 		
 		Vector2f newVelocity = newDirection * newSpeed;
 
-		Ball newBall(newRadius, position, newVelocity);
-		newBalls.push_back(newBall);
+		newBalls.emplace_back(newRadius, position, newVelocity);
 	}
 
 	for (auto& newBall : newBalls)

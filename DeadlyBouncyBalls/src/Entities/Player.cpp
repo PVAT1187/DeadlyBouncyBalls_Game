@@ -33,10 +33,11 @@ void Player::update(const RenderWindow& window)
     rectangle.move(difference * FOLLOW_SMOOTHING);
     Mouse::setPosition(worldCenterPixels, window);
 
+    const Vector2u& windowSize = window.getSize();
     Vector2f rectangleHalfSize = rectangle.getSize() / 2.f;
     worldRectCenter = rectangle.getPosition();
 
-    clampRectangleToWindow(worldRectCenter, rectangleHalfSize, window.getSize());
+    clampRectangleToWindow(worldRectCenter, rectangleHalfSize, windowSize);
 
     rectangle.setPosition(worldRectCenter);
 }

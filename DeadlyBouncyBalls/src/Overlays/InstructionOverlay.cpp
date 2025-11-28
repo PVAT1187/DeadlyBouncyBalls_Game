@@ -1,4 +1,5 @@
 #include "Overlays/InstructionOverlay.h"
+#include "Screens/GamePlayScreen.h"
 #include "UI/UIUtils.h"
 #include "Core/Game.h"
 
@@ -25,7 +26,7 @@ void InstructionOverlay::handleEvent(const Event& event)
 	{
 		if (continueButton.isClicked(window))
 		{
-			game.switchToGamePlayScreen();
+			game.switchScreen<GamePlayScreen>(window);
 		}
 	}
 }

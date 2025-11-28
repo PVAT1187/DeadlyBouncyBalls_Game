@@ -19,8 +19,8 @@ class GameStartScreen : public Screen
 		TextButton playButton;
 		TextButton quitButton;
 
-		void initGameTilteText();
-		void updateButtonPositon();
+		void initGameTitleText();
+		void updateButtonPosition();
 };
 
 #endif // !GAME_START_SCREEN_H

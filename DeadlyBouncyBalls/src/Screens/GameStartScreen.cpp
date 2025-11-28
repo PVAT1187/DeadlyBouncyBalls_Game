@@ -1,4 +1,5 @@
 #include "Screens/GameStartScreen.h"
+#include "Screens/GameDemoScreen.h"
 #include "UI/UIUtils.h"
 #include "Core/Game.h"
 
@@ -12,8 +13,8 @@ GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
 	playButton("PLAY", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
 	quitButton("QUIT", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
 {
-	initGameTilteText();
-	updateButtonPositon();
+	initGameTitleText();
+	updateButtonPosition();
 }
 
 void GameStartScreen::handleEvent(const Event& event) 
@@ -23,7 +24,7 @@ void GameStartScreen::handleEvent(const Event& event)
 	{
 		if (playButton.isClicked(window))
 		{
-			game.switchToGameDemoScreen();
+			game.switchScreen<GameDemoScreen>(window);
 		}
 		else if (quitButton.isClicked(window))
 		{
@@ -45,13 +46,13 @@ void GameStartScreen::render(RenderWindow& window)
 	quitButton.draw(window);
 }
 
-void GameStartScreen::initGameTilteText()
+void GameStartScreen::initGameTitleText()
 {
 	centerTitleText(gameTitleText, window);
 }
 
 
-void GameStartScreen::updateButtonPositon()
+void GameStartScreen::updateButtonPosition()
 {
 	vector<TextButton*> buttons = {&playButton, &quitButton};
 	positionButtons(gameTitleText, buttons, window);

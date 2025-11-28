@@ -1,6 +1,7 @@
 #include "Math/MathUtils.h"
 
 #include <random>
+#include <algorithm>
 
 using namespace sf;
 using namespace std;
@@ -8,12 +9,18 @@ using namespace std;
 constexpr float MIN_DIRECTION = -1.f;
 constexpr float MAX_DIRECTION = 1.f;
 
-constexpr uint8_t COLOR_MAX = 255;
+constexpr int COLOR_MIN = 1;
+constexpr int COLOR_MAX = 255;
 constexpr uint8_t FULL_OPACITY = 255;
 
 float MathUtils::computeClamp(float value, float min, float max)
 {
 	return clamp(value, min, max);
+}
+
+float MathUtils::computeMass(float radius)
+{
+	return radius * radius * radius;
 }
 
 float MathUtils::computeDotProduct(const Vector2f& vectorA, 
@@ -87,9 +94,12 @@ Vector2f MathUtils::randomDirection()
 
 Color MathUtils::randomColor()
 {
-	return Color(
-		static_cast<uint8_t>(rand() % COLOR_MAX + 1),
-		static_cast<uint8_t>(rand() % COLOR_MAX + 1),
-		static_cast<uint8_t>(rand() % COLOR_MAX + 1),
-		FULL_OPACITY);
+	static mt19937 randomNumberGenerator(random_device{}());
+	uniform_int_distribution<int> dist(COLOR_MIN, COLOR_MAX);
+	return sf::Color(
+		static_cast<uint8_t>(dist(randomNumberGenerator)),
+		static_cast<uint8_t>(dist(randomNumberGenerator)),
+		static_cast<uint8_t>(dist(randomNumberGenerator)),
+		FULL_OPACITY
+	);
 }

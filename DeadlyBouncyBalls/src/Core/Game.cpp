@@ -16,8 +16,7 @@ Game::Game() :
 		Style::None)
 {
 	initFont();
-	initTextColor();
-	switchToGameStartScreen();
+	switchScreen<GameStartScreen>(window);
 }
 
 void Game::run()
@@ -44,46 +43,13 @@ void Game::run()
 	}
 }
 
-void Game::switchToGameStartScreen()
-{
-	currentScreen = make_unique<GameStartScreen>(*this, window);
-}
-
-void Game::switchToGameDemoScreen()
-{
-	currentScreen = std::make_unique<GameDemoScreen>(*this, window);
-}
-
-void Game::switchToGamePlayScreen()
-{
-	currentScreen = make_unique<GamePlayScreen>(*this, window);
-}
-
-void Game::switchToGameOverScreen(float survivalTime)
-{
-	currentScreen = make_unique<GameOverScreen>(*this, window,
-		survivalTime);
-}
-
 void Game::initFont()
 {
 	if (!font.openFromFile("assets/fonts/arial.ttf"))
-	{
-		cerr << "Failed to load font!" << endl;
-	}
-}
-
-void Game::initTextColor()
-{
-	textColor = Color::White;
+		throw runtime_error("Failed to load font!");
 }
 
 const Font& Game::getFont() const
 { 
 	return font; 
-}
-
-const Color& Game::getTextColor() const
-{
-	return textColor;
 }

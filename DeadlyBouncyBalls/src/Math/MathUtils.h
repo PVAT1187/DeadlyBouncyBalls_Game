@@ -6,12 +6,16 @@
 namespace MathUtils
 {
 	float computeClamp(float value, float min, float max);
+	float computeMass(float radius);
+
 	float computeDotProduct(const sf::Vector2f& vectorA, 
 		const sf::Vector2f& vectorB);
+
 	float computeDistanceSquared(const sf::Vector2f& vectorA,
 		const sf::Vector2f& vectorB);
 	float computeDistance(const sf::Vector2f& vectorA,
 		const sf::Vector2f& vectorB);
+
 	sf::Vector2f computeNormal(const sf::Vector2f& vectorA,
 		const sf::Vector2f& vectorB);
 	sf::Vector2f computeVector(const sf::Vector2f& tangent, float dpTangent, 

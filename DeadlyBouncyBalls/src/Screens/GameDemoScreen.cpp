@@ -22,7 +22,7 @@ void GameDemoScreen::handleEvent(const Event& event)
 
 void GameDemoScreen::update(float deltaTime)
 {
-	if (instructionShown)
+	if (instructionShown && instructionOverlay)
 	{
 		instructionOverlay->update();
 	}

@@ -12,25 +12,21 @@ class Game
 
 		void run();
 
-		void switchToGameStartScreen();
-		void switchToGameDemoScreen();
-		void switchToGamePlayScreen();
-		void switchToGameOverScreen(float survivalTime);
+		template<typename ScreenType, typename... Arguments>
+		void switchScreen(Arguments&&... arguments);
 
 		const sf::Font& getFont() const;
-		const sf::Color& getTextColor() const;
 
 	private:
 		sf::RenderWindow window;
 
 		sf::Font font;
-		sf::Color textColor;
 
 		std::unique_ptr<Screen> currentScreen;
 
 		void initFont();
-		void initTextColor();
 };
 
+#include "Core/Game.inl"
 #endif // !GAME_H
 

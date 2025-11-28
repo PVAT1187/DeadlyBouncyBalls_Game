@@ -85,6 +85,10 @@ void PhysicsUtils::resolveStaticCircleCollision(
     Vector2f& positionB, float radiusB)
 {
     float distance = computeDistance(positionA, positionB);
+
+    if (distance == 0.f)
+        distance = 0.01f;
+
     Vector2f normal = computeNormal(positionA, positionB);
 
     float overlap = COLLISION_SEPARATION_RATIO * 

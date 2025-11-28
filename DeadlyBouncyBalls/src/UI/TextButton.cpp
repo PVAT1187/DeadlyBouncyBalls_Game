@@ -43,7 +43,8 @@ void TextButton::update(const RenderWindow& window)
 	float targetScale = isHovered ? HOVER_SCALE : NORMAL_SCALE;
 	float currentScale = text.getScale().x;
 	float scaleStep = (targetScale - currentScale) * SMOOTH_SCALING_MULTIPLIER;
-	text.setScale(Vector2f(currentScale + scaleStep, currentScale + scaleStep));
+	float newScale = currentScale + scaleStep;
+	text.setScale(Vector2f(newScale, newScale));
 }
 
 void TextButton::draw(RenderWindow& window)

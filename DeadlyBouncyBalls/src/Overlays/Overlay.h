@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+constexpr uint8_t DIM_ALPHA = 150;
+
 class Game;
 
 class Overlay
@@ -26,7 +28,7 @@ class Overlay
 		void initDimBackground()
 		{
 			dimBackground.setSize(static_cast<sf::Vector2f>(window.getSize()));
-			dimBackground.setFillColor(sf::Color(0, 0, 0, 150));
+			dimBackground.setFillColor(sf::Color(0, 0, 0, DIM_ALPHA));
 		}
 };
 

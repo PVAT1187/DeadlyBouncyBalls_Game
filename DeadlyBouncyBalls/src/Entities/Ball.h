@@ -10,12 +10,14 @@ class Ball
 
 		float getRadius() const;
 		float getMass() const;
-		sf::Vector2f getPosition() const;
-		sf::Vector2f getVelocity() const;
+
+		const sf::Vector2f getPosition() const;
 		sf::Vector2f& getPosition();
+
+		const sf::Vector2f getVelocity() const;
 		sf::Vector2f& getVelocity();
 
-		void update(float deltaTime, const sf::RenderWindow& window);
+		void update(float deltaTime, const sf::Vector2u& windowSize);
 		void draw(sf::RenderWindow& window) const;
 
 		void startBlink(float duration);

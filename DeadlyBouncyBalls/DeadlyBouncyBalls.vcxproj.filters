@@ -117,4 +117,9 @@
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Game.inl">
+      <Filter>Core</Filter>
+    </None>
+  </ItemGroup>
 </Project>

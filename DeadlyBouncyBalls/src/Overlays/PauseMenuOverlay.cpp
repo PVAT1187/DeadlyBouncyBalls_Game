@@ -1,6 +1,7 @@
 #include "Overlays/PauseMenuOverlay.h"
-#include "UI/UIUtils.h"
 #include "Screens/GamePlayScreen.h"
+#include "Screens/GameStartScreen.h"
+#include "UI/UIUtils.h"
 #include "Core/Game.h"
 
 using namespace sf;
@@ -30,7 +31,7 @@ void PauseMenuOverlay::handleEvent(const Event& event)
 		}
 		else if (mainMenuButton.isClicked(window))
 		{
-			game.switchToGameStartScreen();
+			game.switchScreen<GameStartScreen>(window);
 		}
 	}
 }

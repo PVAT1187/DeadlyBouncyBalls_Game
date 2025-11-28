@@ -1,3 +1,5 @@
+#include "Screens/GameStartScreen.h"
+#include "Screens/GamePlayScreen.h"
 #include "Screens/GameOverScreen.h"
 #include "UI/UIUtils.h"
 #include "Core/Game.h"
@@ -30,11 +32,11 @@ void GameOverScreen::handleEvent(const Event& event)
 	{
 		if (playAgainButton.isClicked(window))
 		{
-			game.switchToGamePlayScreen();
+			game.switchScreen<GamePlayScreen>(window);
 		}
 		else if (mainMenuButton.isClicked(window))
 		{
-			game.switchToGameStartScreen();
+			game.switchScreen<GameStartScreen>(window);
 		}
 	}
 }

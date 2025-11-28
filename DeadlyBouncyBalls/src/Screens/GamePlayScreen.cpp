@@ -1,4 +1,5 @@
 #include "Screens/GamePlayScreen.h"
+#include "Screens/GameOverScreen.h"
 #include "Core/Game.h"
 
 #include <iostream>
@@ -56,7 +57,7 @@ void GamePlayScreen::update(float deltaTime)
 
 	if (ballManager.isGameOver(player))
 	{
-		game.switchToGameOverScreen(survivalTime);
+		game.switchScreen<GameOverScreen>(window, survivalTime);
 		return;
 	}
 }

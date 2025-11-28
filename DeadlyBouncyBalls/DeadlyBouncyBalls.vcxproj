@@ -53,6 +53,9 @@
     <ClInclude Include="src\UI\TextButton.h" />
     <ClInclude Include="src\UI\UIUtils.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Game.inl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

@@ -9,6 +9,7 @@ using namespace PhysicsUtils;
 constexpr float BLINKING_SPEED = 10.f;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
+	position(position), velocity(velocity), 
 	isFlashing(false), flashTimer(0.f)
 {
 	ball.setRadius(radius);
@@ -16,9 +17,7 @@ Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 	ball.setOrigin(Vector2f(radius, radius));
 	ball.setPosition(position);
 
-	this->position = position;
-	this->velocity = velocity;
-	mass = radius * radius * radius;
+	mass = computeMass(radius);
 	color = ball.getFillColor();
 }
 
@@ -32,14 +31,19 @@ float Ball::getMass() const
 	return mass;
 }
 
+const Vector2f Ball::getVelocity() const
+{
+	return velocity;
+}
+
 Vector2f& Ball::getVelocity() 
 {
 	return velocity;
 }
 
-Vector2f Ball::getVelocity() const
+const Vector2f Ball::getPosition() const
 {
-	return velocity;
+	return position;
 }
 
 Vector2f& Ball::getPosition() 
@@ -47,33 +51,28 @@ Vector2f& Ball::getPosition()
 	return position;
 }
 
-Vector2f Ball::getPosition() const
-{
-	return position;
-}
-
-void Ball::update(float deltaTime, const RenderWindow& window)
+void Ball::update(float deltaTime, const Vector2u& windowSize)
 {
 	position += velocity * deltaTime;
 
 	bounceCircleOffWindow(position, velocity, 
-		ball.getRadius(), window.getSize());
+		ball.getRadius(), windowSize);
 
 	ball.setPosition(position);
 
-	if (isFlashing)
+	if (!isFlashing)
+		return;
+
+	flashTimer -= deltaTime;
+
+	int whiteState = static_cast<int>(flashTimer * BLINKING_SPEED);
+
+	ball.setFillColor((whiteState & 1) == 0 ? Color::White : color);
+
+	if (flashTimer <= 0.f)
 	{
-		flashTimer -= deltaTime;
-		
-		bool whiteState = static_cast<int>(flashTimer * BLINKING_SPEED) % 2 == 0;
-
-		ball.setFillColor(whiteState ? Color::White : color);
-
-		if (flashTimer <= 0.f)
-		{
-			isFlashing = false;
-			ball.setFillColor(color);
-		}
+		isFlashing = false;
+		ball.setFillColor(color);
 	}
 }
 
@@ -90,6 +89,7 @@ void Ball::startBlink(float duration)
 
 bool Ball::isCollidingWithPlayer(const Player& player) const
 {
-	return isCircleCollidingWithRectangle(ball.getPosition(),
-		ball.getRadius(), player.getRectangle());
+	const RectangleShape& rectangle = player.getRectangle();
+	return isCircleCollidingWithRectangle(position,
+		ball.getRadius(), rectangle);
 }
