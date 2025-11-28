@@ -1,8 +1,8 @@
 #ifndef INSTRUCTION_OVERLAY_H
 #define	INSTRUCTION_OVERLAY_H
 
-#include "Overlay.h"
-#include "TextButton.h"
+#include "Overlays/Overlay.h"
+#include "UI/TextButton.h"
 
 class InstructionOverlay : public Overlay
 {

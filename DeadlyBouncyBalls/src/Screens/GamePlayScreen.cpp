@@ -1,5 +1,5 @@
-#include "GamePlayScreen.h"
-#include "Game.h"
+#include "Screens/GamePlayScreen.h"
+#include "Core/Game.h"
 
 #include <iostream>
 

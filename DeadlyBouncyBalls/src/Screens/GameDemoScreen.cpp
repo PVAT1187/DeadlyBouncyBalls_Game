@@ -1,4 +1,4 @@
-#include "GameDemoScreen.h"
+#include "Screens/GameDemoScreen.h"
 
 using namespace sf;
 using namespace std;

@@ -1,8 +1,8 @@
-#include "Game.h"
-#include "GameStartScreen.h"
-#include "GameDemoScreen.h"
-#include "GamePlayScreen.h"
-#include "GameOverScreen.h"
+#include "Core/Game.h"
+#include "Screens/GameStartScreen.h"
+#include "Screens/GameDemoScreen.h"
+#include "Screens/GamePlayScreen.h"
+#include "Screens/GameOverScreen.h"
 
 #include <iostream>
 

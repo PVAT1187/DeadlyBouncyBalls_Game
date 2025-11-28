@@ -1,8 +1,8 @@
 #ifndef PAUSE_MENU_OVERLAY_H
 #define PAUSE_MENU_OVERLAY_H
 
-#include "Overlay.h"
-#include "TextButton.h"
+#include "Overlays/Overlay.h"
+#include "UI/TextButton.h"
 
 class GamePlayScreen;
 

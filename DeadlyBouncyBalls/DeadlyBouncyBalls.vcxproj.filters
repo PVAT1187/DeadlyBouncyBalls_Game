@@ -13,102 +13,120 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{de24c14d-98a6-40b1-9947-b2ecdbbf00f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{30a3024e-ecb0-4fdd-8511-477ef1363f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{7e642652-24f2-40dd-aa31-229393b2e829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overlays">
+      <UniqueIdentifier>{431c0cf4-a4b5-4f9c-8806-b33254f62f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{41988e1a-49cf-45ec-b1a9-71a6880c859d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{32de6cf6-db3a-4d7e-959e-8a0244790b1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Core\Game.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="src\Core\main.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Entities\Ball.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Entities\BallManager.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="MathUtils.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="src\Entities\Player.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="MathUtils.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Math\MathUtils.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Math\PhysicsUtils.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlayScreen.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Overlays\InstructionOverlay.cpp">
+      <Filter>Overlays</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverScreen.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Overlays\PauseMenuOverlay.cpp">
+      <Filter>Overlays</Filter>
     </ClCompile>
-    <ClCompile Include="GameStartScreen.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Screens\GameDemoScreen.cpp">
+      <Filter>Screens</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsUtils.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Screens\GameOverScreen.cpp">
+      <Filter>Screens</Filter>
     </ClCompile>
-    <ClCompile Include="BallManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Screens\GamePlayScreen.cpp">
+      <Filter>Screens</Filter>
     </ClCompile>
-    <ClCompile Include="TextButton.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Screens\GameStartScreen.cpp">
+      <Filter>Screens</Filter>
     </ClCompile>
-    <ClCompile Include="PauseMenuOverlay.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\UI\TextButton.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UIUtils.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UIUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InstructionOverlay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameDemoScreen.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\UI\UIUtils.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Core\Game.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Entities\Ball.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Entities\BallManager.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverScreen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Entities\Player.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlayScreen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Math\MathUtils.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="GameStartScreen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Math\PhysicsUtils.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsUtils.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Overlays\InstructionOverlay.h">
+      <Filter>Overlays</Filter>
     </ClInclude>
-    <ClInclude Include="BallManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Overlays\Overlay.h">
+      <Filter>Overlays</Filter>
     </ClInclude>
-    <ClInclude Include="TextButton.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Overlays\PauseMenuOverlay.h">
+      <Filter>Overlays</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenuOverlay.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Screens\GameDemoScreen.h">
+      <Filter>Screens</Filter>
     </ClInclude>
-    <ClInclude Include="Overlay.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Screens\GameOverScreen.h">
+      <Filter>Screens</Filter>
     </ClInclude>
-    <ClInclude Include="InstructionOverlay.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Screens\GamePlayScreen.h">
+      <Filter>Screens</Filter>
     </ClInclude>
-    <ClInclude Include="GameDemoScreen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Screens\GameStartScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Screens\Screen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\TextButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UIUtils.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

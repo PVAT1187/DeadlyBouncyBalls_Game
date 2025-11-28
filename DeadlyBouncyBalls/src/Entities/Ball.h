@@ -1,7 +1,7 @@
 #ifndef BALL_H
 #define BALL_H	
 
-#include "Player.h"
+#include "Entities/Player.h"
 
 class Ball
 {

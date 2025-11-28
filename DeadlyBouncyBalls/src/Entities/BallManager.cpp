@@ -1,6 +1,6 @@
-#include "BallManager.h"
-#include "MathUtils.h"
-#include "PhysicsUtils.h"
+#include "Entities/BallManager.h"
+#include "Math/MathUtils.h"
+#include "Math/PhysicsUtils.h"
 
 using namespace std;
 using namespace sf;

@@ -1,6 +1,6 @@
-#include "GameStartScreen.h"
-#include "UIUtils.h"
-#include "Game.h"
+#include "Screens/GameStartScreen.h"
+#include "UI/UIUtils.h"
+#include "Core/Game.h"
 
 using namespace sf;
 using namespace std;

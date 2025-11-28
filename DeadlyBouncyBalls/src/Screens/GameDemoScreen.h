@@ -1,9 +1,9 @@
 #ifndef GAME_DEMO_SCREEN_H
 #define GAME_DEMO_SCREEN_H
 
-#include "Screen.h"
-#include "BallManager.h"
-#include "InstructionOverlay.h"
+#include "Screens/Screen.h"
+#include "Entities/BallManager.h"
+#include "Overlays/InstructionOverlay.h"
 
 class GameDemoScreen : public Screen
 {

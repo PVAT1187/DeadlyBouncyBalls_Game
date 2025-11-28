@@ -1,10 +1,10 @@
 #ifndef GAME_PLAY_SCREEN_H
 #define GAME_PLAY_SCREEN_H
 
-#include "Screen.h"
-#include "Player.h"
-#include "BallManager.h"
-#include "PauseMenuOverlay.h"
+#include "Screens/Screen.h"
+#include "Entities/Player.h"
+#include "Entities/BallManager.h"
+#include "Overlays/PauseMenuOverlay.h"
 
 #include <vector>
 

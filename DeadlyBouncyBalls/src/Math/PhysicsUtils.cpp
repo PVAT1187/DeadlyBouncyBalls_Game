@@ -1,5 +1,5 @@
-#include "PhysicsUtils.h"
-#include "MathUtils.h"
+#include "Math/PhysicsUtils.h"
+#include "Math/MathUtils.h"
 
 #include <iostream>
 

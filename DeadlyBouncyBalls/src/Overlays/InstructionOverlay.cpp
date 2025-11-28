@@ -1,6 +1,6 @@
-#include "InstructionOverlay.h"
-#include "UIUtils.h"
-#include "Game.h"
+#include "Overlays/InstructionOverlay.h"
+#include "UI/UIUtils.h"
+#include "Core/Game.h"
 
 using namespace sf;
 using namespace std;

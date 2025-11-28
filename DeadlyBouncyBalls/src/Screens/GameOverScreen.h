@@ -1,8 +1,8 @@
 #ifndef GAME_OVER_SCREEN_H
 #define GAME_OVER_SCREEN_H
 
-#include "Screen.h"
-#include "TextButton.h"
+#include "Screens/Screen.h"
+#include "UI/TextButton.h"
 
 class GameOverScreen : public Screen
 {

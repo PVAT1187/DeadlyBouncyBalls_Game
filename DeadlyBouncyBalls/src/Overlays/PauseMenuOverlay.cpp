@@ -1,7 +1,7 @@
-#include "PauseMenuOverlay.h"
-#include "UIUtils.h"
-#include "Game.h"
-#include "GamePlayScreen.h"
+#include "Overlays/PauseMenuOverlay.h"
+#include "UI/UIUtils.h"
+#include "Screens/GamePlayScreen.h"
+#include "Core/Game.h"
 
 using namespace sf;
 using namespace std;

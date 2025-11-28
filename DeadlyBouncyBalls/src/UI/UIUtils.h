@@ -1,7 +1,7 @@
 #ifndef UI_UTILS_H
 #define UI_UTILS_H
 
-#include "TextButton.h"
+#include "UI/TextButton.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>

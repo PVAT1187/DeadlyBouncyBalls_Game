@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Screen.h"
-#include "Player.h"
-#include "Ball.h"
+#include "Screens/Screen.h"
+#include "Entities/Player.h"
+#include "Entities/Ball.h"
 
 class Game
 {

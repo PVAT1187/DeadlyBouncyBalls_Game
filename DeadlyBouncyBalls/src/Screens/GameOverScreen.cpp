@@ -1,6 +1,6 @@
-#include "GameOverScreen.h"
-#include "UIUtils.h"
-#include "Game.h"
+#include "Screens/GameOverScreen.h"
+#include "UI/UIUtils.h"
+#include "Core/Game.h"
 
 #include <iostream>
 
