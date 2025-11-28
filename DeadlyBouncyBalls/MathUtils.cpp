@@ -5,11 +5,11 @@
 using namespace sf;
 using namespace std;
 
-const float MIN_DIRECTION = -1.f;
-const float MAX_DIRECTION = 1.f;
+constexpr float MIN_DIRECTION = -1.f;
+constexpr float MAX_DIRECTION = 1.f;
 
-const uint8_t COLOR_MAX = 255;
-const uint8_t FULL_OPACITY = 255;
+constexpr uint8_t COLOR_MAX = 255;
+constexpr uint8_t FULL_OPACITY = 255;
 
 float MathUtils::computeClamp(float value, float min, float max)
 {

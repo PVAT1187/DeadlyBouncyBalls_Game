@@ -7,16 +7,16 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-const float MIN_RADIUS = 10.f;
-const float MAX_RADIUS = 50.f;
-const float	MIN_SPEED = 500.f;
-const float MAX_SPEED = 1000.f;
+constexpr float MIN_RADIUS = 10.f;
+constexpr float MAX_RADIUS = 50.f;
+constexpr float	MIN_SPEED = 500.f;
+constexpr float MAX_SPEED = 1000.f;
 
-const float AMOUNT_RADIUS_DECREASED_BY = 10.f;
-const float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
-const float INITIAL_SPLITTING_TIME = 5.f;
-const float SPLIT_TIME_MULTIPLIER = 2.f;
-const float	BLINKING_DURATION = 0.5f;
+constexpr float AMOUNT_RADIUS_DECREASED_BY = 10.f;
+constexpr float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
+constexpr float INITIAL_SPLITTING_TIME = 5.f;
+constexpr float SPLIT_TIME_MULTIPLIER = 2.f;
+constexpr float	BLINKING_DURATION = 0.5f;
 
 BallManager::BallManager(const RenderWindow& window) :
 	splittingTimer(0.f), blinkTriggered(false), 

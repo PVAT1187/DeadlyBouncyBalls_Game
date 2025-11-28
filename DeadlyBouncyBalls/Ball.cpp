@@ -6,7 +6,7 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-const float BLINKING_SPEED = 10.f;
+constexpr float BLINKING_SPEED = 10.f;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 	isFlashing(false), flashTimer(0.f)

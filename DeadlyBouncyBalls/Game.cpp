@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "GameStartScreen.h"
+#include "GameDemoScreen.h"
 #include "GamePlayScreen.h"
 #include "GameOverScreen.h"
 
@@ -15,6 +16,7 @@ Game::Game() :
 		Style::None)
 {
 	initFont();
+	initTextColor();
 	switchToGameStartScreen();
 }
 
@@ -47,6 +49,11 @@ void Game::switchToGameStartScreen()
 	currentScreen = make_unique<GameStartScreen>(*this, window);
 }
 
+void Game::switchToGameDemoScreen()
+{
+	currentScreen = std::make_unique<GameDemoScreen>(*this, window);
+}
+
 void Game::switchToGamePlayScreen()
 {
 	currentScreen = make_unique<GamePlayScreen>(*this, window);
@@ -66,7 +73,17 @@ void Game::initFont()
 	}
 }
 
-Font& Game::getFont() 
+void Game::initTextColor()
+{
+	textColor = Color::White;
+}
+
+const Font& Game::getFont() const
 { 
 	return font; 
+}
+
+const Color& Game::getTextColor() const
+{
+	return textColor;
 }

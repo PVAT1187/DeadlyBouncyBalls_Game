@@ -6,10 +6,10 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-const float RECTANGLE_WIDTH = 60.f;
-const float RECTANGLE_HEIGHT = 30.f;
+constexpr float RECTANGLE_WIDTH = 60.f;
+constexpr float RECTANGLE_HEIGHT = 30.f;
 
-const float FOLLOW_SMOOTHING = 0.7f;
+constexpr float FOLLOW_SMOOTHING = 0.7f;
 
 Player::Player(const RenderWindow& window)
 {

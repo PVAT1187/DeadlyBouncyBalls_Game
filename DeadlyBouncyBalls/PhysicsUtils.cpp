@@ -6,7 +6,7 @@
 using namespace sf;
 using namespace MathUtils;
 
-const float COLLISION_SEPARATION_RATIO = 0.5f;
+constexpr float COLLISION_SEPARATION_RATIO = 0.5f;
 
 void PhysicsUtils::clampRectangleToWindow(Vector2f& position,
     const Vector2f& size, const Vector2u& windowSize)

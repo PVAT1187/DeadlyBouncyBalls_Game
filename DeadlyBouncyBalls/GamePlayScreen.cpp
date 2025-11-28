@@ -6,7 +6,7 @@
 using namespace sf;
 using namespace std;
 
-const float DEGREE = 90.f;
+constexpr float DEGREE = 90.f;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),

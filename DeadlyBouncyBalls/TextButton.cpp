@@ -2,14 +2,14 @@
 
 using namespace sf;
 
-const float NORMAL_SCALE = 1.f;
-const float HOVER_SCALE = 1.2f;
+constexpr float NORMAL_SCALE = 1.f;
+constexpr float HOVER_SCALE = 1.2f;
 
-const float SMOOTH_SCALING_MULTIPLIER = 0.2f;
+constexpr float SMOOTH_SCALING_MULTIPLIER = 0.2f;
 
-const unsigned int TextButton::BUTTON_SIZE = 50;
-const float TextButton::TITLE_BUTTON_SPACING = 200.f;
-const float TextButton::BUTTON_SPACING = 80.f;
+constexpr unsigned int TextButton::BUTTON_SIZE = 50;
+constexpr float TextButton::TITLE_BUTTON_SPACING = 200.f;
+constexpr float TextButton::BUTTON_SPACING = 80.f;
 
 TextButton::TextButton(const String& textString, const Font& font,
 	unsigned int size, const Vector2f& position) :

@@ -23,7 +23,7 @@ void GameStartScreen::handleEvent(const Event& event)
 	{
 		if (playButton.isClicked(window))
 		{
-			game.switchToGamePlayScreen();
+			game.switchToGameDemoScreen();
 		}
 		else if (quitButton.isClicked(window))
 		{
@@ -47,7 +47,7 @@ void GameStartScreen::render(RenderWindow& window)
 
 void GameStartScreen::initGameTilteText()
 {
-	colorAndCenterText(gameTitleText, window);
+	centerTitleText(gameTitleText, window);
 }
 
 

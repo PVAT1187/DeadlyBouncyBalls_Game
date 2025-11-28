@@ -8,8 +8,6 @@ using namespace sf;
 using namespace std;
 using namespace UIUtils;
 
-const float TEXT_SPACING = 125.f;
-
 GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
 	float finalSurvivalTime) :
 	Screen(game, window),
@@ -57,21 +55,14 @@ void GameOverScreen::render(RenderWindow& window)
 
 void GameOverScreen::initGameOverText()
 {
-	colorAndCenterText(gameOverText, window);
+	centerTitleText(gameOverText, window);
 }
 
 void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 {
 	finalSurvivalTimeText.setString("Survived: " + 
 		to_string(finalSurvivalTime) + "s");
-	finalSurvivalTimeText.setFillColor(Color::White);
-
-	Vector2f centerPosition = static_cast<Vector2f>
-		(window.getSize()) / 2.f;
-	FloatRect survivalTimeTextBounds = finalSurvivalTimeText.getLocalBounds();
-	finalSurvivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
-	finalSurvivalTimeText.setPosition(Vector2f(
-		centerPosition.x, centerPosition.y + TEXT_SPACING));
+	centerBodyText(finalSurvivalTimeText, window, Screen::TEXT_SPACING);
 }
 
 void GameOverScreen::updateButtonPosition()
