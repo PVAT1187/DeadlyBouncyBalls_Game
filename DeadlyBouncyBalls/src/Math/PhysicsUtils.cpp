@@ -11,9 +11,9 @@ constexpr float COLLISION_SEPARATION_RATIO = 0.5f;
 void PhysicsUtils::clampRectangleToWindow(Vector2f& position,
     const Vector2f& size, const Vector2u& windowSize)
 {
-    position.x = computeClamp(position.x,
+    position.x = computeClamp(position.x, 
         size.x, windowSize.x - size.x);
-    position.y = computeClamp(position.y,
+    position.y = computeClamp(position.y, 
         size.y, windowSize.y - size.y);
 }
 

@@ -6,8 +6,6 @@
 using namespace sf;
 using namespace std;
 
-constexpr float DEGREE = 90.f;
-
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
 	player(window),
@@ -38,12 +36,6 @@ void GamePlayScreen::handleEvent(const Event& event)
 	{
 		pauseOverlay->handleEvent(event);
 		return;
-	}
-	
-	if (event.is<Event::MouseButtonPressed>() &&
-		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
-	{
-		player.rotate(DEGREE);
 	}
 }
 

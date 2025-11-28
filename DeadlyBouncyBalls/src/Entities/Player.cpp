@@ -6,8 +6,8 @@ using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-constexpr float RECTANGLE_WIDTH = 60.f;
-constexpr float RECTANGLE_HEIGHT = 30.f;
+constexpr float RECTANGLE_WIDTH = 50.f;
+constexpr float RECTANGLE_HEIGHT = 50.f;
 
 constexpr float FOLLOW_SMOOTHING = 0.7f;
 
@@ -19,11 +19,6 @@ Player::Player(const RenderWindow& window)
     rectangle.setFillColor(Color::Red);
     rectangle.setPosition(
         static_cast<Vector2f>(window.getSize()) / 2.f);
-}
-
-void Player::rotate(float angle)
-{
-    rectangle.rotate(degrees(angle));
 }
 
 void Player::update(const RenderWindow& window)
