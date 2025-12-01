@@ -28,6 +28,7 @@ class Ball
 		sf::CircleShape ball;
 
 		float mass;
+		float radius;
 		sf::Vector2f position;
 		sf::Vector2f velocity;
 

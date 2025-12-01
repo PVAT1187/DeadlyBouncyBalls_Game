@@ -9,7 +9,7 @@ using namespace PhysicsUtils;
 constexpr float BLINKING_SPEED = 10.f;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
-	position(position), velocity(velocity), 
+	radius(radius), position(position), velocity(velocity), 
 	isFlashing(false), flashTimer(0.f)
 {
 	ball.setRadius(radius);
@@ -23,7 +23,7 @@ Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 
 float Ball::getRadius() const
 {
-	return ball.getRadius();
+	return radius;
 }
 
 float Ball::getMass() const
@@ -91,5 +91,5 @@ bool Ball::isCollidingWithPlayer(const Player& player) const
 {
 	const RectangleShape& rectangle = player.getRectangle();
 	return isCircleCollidingWithRectangle(position,
-		ball.getRadius(), rectangle);
+		radius, rectangle);
 }
