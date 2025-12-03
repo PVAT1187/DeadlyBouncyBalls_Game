@@ -1,26 +1,27 @@
 # Deadly Bouncy Balls (C++ / SFML Game)
 
 A fast-paced mini game where the player controls a rectangle and must dodge bouncing balls that move, collide, and split over time. 
-Designed to explore game mechanics, real-time physics, entity handling, and game loop architecture while working with the SFML multimedia framework.
 
 ---
 
 ## Design Overview
 This project was created to practice essential game development concepts using modern C++ and SFML. 
-The goal was to build a minimal yet complete game system featuring dynamic entity interactions, physics-based movement, and real-time collision handling.
-   - Game Mechanics: Implements a continuous game loop that updates movement, handles physics, detects collisions, and          renders each frame
-   - Physics Simulation: Balls move with velocity, bounce off walls, collide with each other, and split into smaller,           faster balls over time
-   - Entity Handling: Uses dedicated classes (Ball, BallManager, Player) to modularize gameplay logic
+The goal was to build a minimal yet complete game system featuring game mechanics, game states management, dynamic entity interactions, physics-based movement, real-time collision handling, and UI navigation
+   - Game Mechanics: Implements a continuous game loop architecture that updates movement, handles physics, detects and          resolves collisions, and renders each frame
+   - Physics Simulation: Balls move with velocity, bounce off walls, collide with each other, and split into smaller,            faster balls over time
+   - Entity Handling: Modular gameplay structure with dedicated classes for Player, Ball, and BallManager
+   - Screen Management: Multiple game screens such as Start Screen, Gameplay Screen, and Game Over Screen for game states        manager
+   - Overlays: Interactive overlays for instructions and pause menu using clickable text buttons
    - Visual Effects: Balls blink as a visual warning before splitting, enhancing player feedback and game feel
-   - Framework Integration: Demonstrates use of SFML’s rendering, input handling, vector math, and timing systems
+   - Framework Integration: Demonstrates use of SFML’s real-time rendering, drawable shapes, vector math, and timing systems
 
 ---
 
 ## Design Goals
 - Provide an engaging and reactive gameplay experience based on dodging mechanics
-- Implement a scalable and modular architecture separating physics, rendering, and game state logic
-- Explore real-time game loops, delta-time movement, and entity-based interactions
-- Build familiarity with SFML as a multimedia/game development framework
+- Implement a scalable and modular architecture separating UI and core gameplay
+- Explore real-time game loops, physics handling, delta-time movement, entity-based interactions, game states management,     and UI navigaton
+- Build familiarity with SFML as a game development framework
 - Allow room for future enhancements such as UI, scoring, sound effects, or additional mechanics
 
 ---
@@ -57,18 +58,18 @@ Steps
   - Real-time physics and bouncing
   - Circle-to-rectangle and ball-to-ball collisions
   - Ball splitting with blinking warning effect
-  - Random color, speed, and direction for dynamic difficulty
+  - Random color, speed, position and direction for dynamic difficulty
 - Game States & UI
-  - Start Screen with game title and clickable start button
+  - Start Screen with game title and clickable buttons
   - Gameplay Screen with real-time rendering and physics
   - Game Over Screen with restart and main menu navigation
   - Instructions Overlay available from the menu
-  - Pause Menu Overlay with resume and exit options
+  - Pause Menu Overlay with resume and main menu options
   - Fully interactive SFML Text buttons using mouse detection
 - Architecture
   - Frame-rate independent movement using deltaTime
-  - Modular classes for entities, physics, screens, and overlays
-  - Clean separation of logic vs UI vs rendering
+  - Modular classes for core, entities, math, physics, screens, overlays and UI utilities
+  - Clean separation of logic, UI, rendering
 
 ---
 
@@ -77,18 +78,20 @@ Steps
 - Frameworks: SFML
 - Systems/Concepts:
     - Game loop architecture
-    - State management (screens/overlays)
+    - Game state management (screens/overlays)
+    - Pure Math Utilities
     - Physics & collision detection
     - Entity Management
     - UI rendering and text interaction
     - Real-time updates
-- IDE/Tools: Visual Studio, Git/GitHub
+- IDE/Tools: Visual Studio, Git/GitHub, Unreal Engine for blueprint
 
 ---
 
 ## Future Improvement
-- Explore new alert mechanisms to enhance respnsiveness
-- Expand analytics capabilities with more detailed event tracking
+- Enhance Player Design (new shape or custom sprite-based character, rotation)
+- Expanded Input Handling (introduce keyboard for movement handling and option bindings, )
+- 
 
 ---
 
