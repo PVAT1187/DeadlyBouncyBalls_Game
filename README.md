@@ -8,18 +8,20 @@ Designed to explore game mechanics, real-time physics, entity handling, and game
 ## Design Overview
 This project was created to practice essential game development concepts using modern C++ and SFML. 
 The goal was to build a minimal yet complete game system featuring dynamic entity interactions, physics-based movement, and real-time collision handling.
-   - Facial Analysis: Uses Google ML Kit to detect eye landmarks and probabilities of eye openness in real-time
-   - Alert System: Provides immediate visual warnings when drowsiness is detected
-   - Data Analytics: Logs events to Firebase and exports to BigQuery for monitoring patterns and large-scale analysis
-   - System Design: Modular structure separates detection logic, UI, and backend analytics, allowing future enhancements         easily
+   - Game Mechanics: Implements a continuous game loop that updates movement, handles physics, detects collisions, and          renders each frame
+   - Physics Simulation: Balls move with velocity, bounce off walls, collide with each other, and split into smaller,           faster balls over time
+   - Entity Handling: Uses dedicated classes (Ball, BallManager, Player) to modularize gameplay logic
+   - Visual Effects: Balls blink as a visual warning before splitting, enhancing player feedback and game feel
+   - Framework Integration: Demonstrates use of SFML’s rendering, input handling, vector math, and timing systems
 
 ---
 
 ## Design Goals
-- Provide real-time, immidiate feedback to enhance drivers safety
-- Implement a modular architecture separating detection logic, UI, and backend analytics
-- Integrate cloud-based analytics to monitor performance and usage data
-- Maintain scalability and flexibility for future improvements, such as new alert mechanisms,...
+- Provide an engaging and reactive gameplay experience based on dodging mechanics
+- Implement a scalable and modular architecture separating physics, rendering, and game state logic
+- Explore real-time game loops, delta-time movement, and entity-based interactions
+- Build familiarity with SFML as a multimedia/game development framework
+- Allow room for future enhancements such as UI, scoring, sound effects, or additional mechanics
 
 ---
 
@@ -77,6 +79,7 @@ Steps
     - Game loop architecture
     - State management (screens/overlays)
     - Physics & collision detection
+    - Entity Management
     - UI rendering and text interaction
     - Real-time updates
 - IDE/Tools: Visual Studio, Git/GitHub
