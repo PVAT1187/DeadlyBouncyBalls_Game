@@ -49,7 +49,7 @@ Steps
 ---
 
 ## Usage
-
+![DeadlyBouncyBalls_Demo](https://github.com/user-attachments/assets/6768ab90-7b0b-406b-bb23-dc173ce17414)
 
 ---
 
@@ -89,9 +89,17 @@ Steps
 ---
 
 ## Future Improvement
-- Enhance Player Design (new shape or custom sprite-based character, rotation)
-- Expanded Input Handling (introduce keyboard for movement handling and option bindings, )
-- 
+- Enhance Player Design
+    - Explore new shape or custom sprite-based character
+    - Add player rotation
+- Expanded Input Handling
+    - Introduce keyboard for movement handling and optional bindings
+    - Switch mouse control for player direction and aiming
+- New Gameplay Features
+    - Add new gameplay mechanisims for Player
+- Audio and Visual Effects
+    - Expand experience with sound effects and background music
+    - Polish gameplay animation
 
 ---
 
