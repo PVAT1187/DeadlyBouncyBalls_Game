@@ -26,25 +26,9 @@ The goal was to build a minimal yet complete game system featuring game mechanic
 
 ---
 
-## Setup Instructions
-Prerequisites
-- C++17 or newer
-- SFML 2.5 or newer
-- Visual Studio / any C++ IDE
-- CMake (optional)
+## Download
 
-Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/PVAT1187/DeadlyBouncyBall.git
-2. Install and configure SFML:
-   - Add include and lib paths
-   - Link:
-       - sfml-graphics
-       - sfml-window
-       - sfml-system
-   - Copy SFML .dll files next to your executable if on Windows
-3. Build and run the project
+Get the latest Windows installer: [Releases](https://github.com/PVAT1187/DeadlyBouncyBalls_Game/releases)
 
 ---
 
