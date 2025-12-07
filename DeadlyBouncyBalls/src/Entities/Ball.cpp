@@ -89,7 +89,7 @@ void Ball::startBlink(float duration)
 
 bool Ball::isCollidingWithPlayer(const Player& player) const
 {
-	const RectangleShape& rectangle = player.getRectangle();
-	return isCircleCollidingWithRectangle(position,
-		radius, rectangle);
+	const FloatRect& playerBounds = player.getCollisionBounds();
+	return isCircleCollidingWithSprite(position,
+		radius, playerBounds);
 }

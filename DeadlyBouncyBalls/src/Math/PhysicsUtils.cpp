@@ -8,7 +8,7 @@ using namespace MathUtils;
 
 constexpr float COLLISION_SEPARATION_RATIO = 0.5f;
 
-void PhysicsUtils::clampRectangleToWindow(Vector2f& position,
+void PhysicsUtils::clampSpriteToWindow(Vector2f& position,
     const Vector2f& size, const Vector2u& windowSize)
 {
     position.x = computeClamp(position.x, 
@@ -51,20 +51,24 @@ void PhysicsUtils::bounceCircleOffWindow(Vector2f& position,
     }
 }
 
-bool PhysicsUtils::isCircleCollidingWithRectangle(
+bool PhysicsUtils::isCircleCollidingWithSprite(
     const Vector2f& circlePosition, float circleRadius,
-    const RectangleShape& rectangle)
+    const sf::FloatRect& spriteBounds)
 {
-    Vector2f rectangleCenter = rectangle.getPosition();
-    Vector2f rectangleHalfSize = rectangle.getSize() / 2.f;
+    Vector2f spriteHalfSize(
+        spriteBounds.size.x / 2.f,
+        spriteBounds.size.y / 2.f);
+    Vector2f spriteCenter(
+        spriteBounds.position.x + spriteHalfSize.x,
+		spriteBounds.position.y + spriteHalfSize.y);
 
     Vector2f closestPoint;
     closestPoint.x = computeClamp(circlePosition.x,
-        rectangleCenter.x - rectangleHalfSize.x,
-        rectangleCenter.x + rectangleHalfSize.x);
+        spriteCenter.x - spriteHalfSize.x,
+        spriteCenter.x + spriteHalfSize.x);
     closestPoint.y = computeClamp(circlePosition.y,
-        rectangleCenter.y - rectangleHalfSize.y,
-        rectangleCenter.y + rectangleHalfSize.y);
+        spriteCenter.y - spriteHalfSize.y,
+        spriteCenter.y + spriteHalfSize.y);
 
     float distanceSquared = computeDistanceSquared(circlePosition, closestPoint);
 

@@ -9,13 +9,15 @@ using namespace std;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
-	player(window),
+	player(game.getPlayerTexture()),
 	ballManager(window),
 	paused(false),
 	survivalClock(),
 	survivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE))
 {
 	this->window.setMouseCursorVisible(false);
+	
+	positionPlayer();
 	initSurvivalTimeText();
 	
 	survivalClock.restart();
@@ -85,5 +87,12 @@ void GamePlayScreen::initSurvivalTimeText()
 	FloatRect survivalTimeTextBounds = survivalTimeText.getLocalBounds();
 	survivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
 	survivalTimeText.setPosition(Vector2f(0, 0));
+}
+
+void GamePlayScreen::positionPlayer()
+{
+	Vector2u windowSize = window.getSize();
+	player.getSprite().setPosition(
+		Vector2f(windowSize.x / 2.f, windowSize.y / 2.f));
 }
 

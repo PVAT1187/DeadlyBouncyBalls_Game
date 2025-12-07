@@ -16,6 +16,7 @@ Game::Game() :
 		Style::None)
 {
 	initFont();
+	initTexture();
 	switchScreen<GameStartScreen>(window);
 }
 
@@ -26,7 +27,7 @@ void Game::run()
 	while (window.isOpen())
 	{
 		float deltaTime = clock.restart().asSeconds();
-		
+
 		while (const optional event = window.pollEvent())
 		{
 			if (event->is<Event::Closed>())
@@ -49,7 +50,18 @@ void Game::initFont()
 		throw runtime_error("Failed to load font!");
 }
 
+void Game::initTexture()
+{
+	if (!playerTexture.loadFromFile("assets/PNG/sprite_004.png"))
+		throw runtime_error("Failed to load player texture!");
+}
+
 const Font& Game::getFont() const
 { 
 	return font; 
+}
+
+const Texture& Game::getPlayerTexture() const
+{
+	return playerTexture;
 }

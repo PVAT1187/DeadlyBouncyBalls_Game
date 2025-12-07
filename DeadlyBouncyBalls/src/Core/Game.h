@@ -16,15 +16,18 @@ class Game
 		void switchScreen(Arguments&&... arguments);
 
 		const sf::Font& getFont() const;
+		const sf::Texture& getPlayerTexture() const;
 
 	private:
 		sf::RenderWindow window;
 
 		sf::Font font;
+		sf::Texture playerTexture;
 
 		std::unique_ptr<Screen> currentScreen;
 
 		void initFont();
+		void initTexture();
 };
 
 #include "Core/Game.inl"
