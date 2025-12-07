@@ -10,7 +10,7 @@ using namespace std;
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
 	player(game.getPlayerTexture()),
-	ballManager(window),
+	ballManager(window.getSize()),
 	paused(false),
 	survivalClock(),
 	survivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE))
@@ -51,11 +51,15 @@ void GamePlayScreen::update(float deltaTime)
 	}
 	
 	float survivalTime = survivalClock.getElapsedTime().asSeconds();
-	survivalTimeText.setString("Survival Time: " +
-		to_string(survivalTime) + "s");
+	updateSurvivalTimeText(survivalTime);
 
-	player.update(window);
-	ballManager.update(deltaTime, window);
+	const Vector2u& windowSize = window.getSize();
+	Vector2f mousePosition = 
+		window.mapPixelToCoords(Mouse::getPosition(window));
+
+	player.update(deltaTime, windowSize);
+	player.setRotationTarget(mousePosition);
+	ballManager.update(deltaTime, windowSize);
 
 	if (ballManager.isGameOver(player))
 	{
@@ -87,6 +91,12 @@ void GamePlayScreen::initSurvivalTimeText()
 	FloatRect survivalTimeTextBounds = survivalTimeText.getLocalBounds();
 	survivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
 	survivalTimeText.setPosition(Vector2f(0, 0));
+}
+
+void GamePlayScreen::updateSurvivalTimeText(float survivalTime)
+{
+	survivalTimeText.setString("Survival Time: " +
+		to_string(survivalTime) + "s");
 }
 
 void GamePlayScreen::positionPlayer()

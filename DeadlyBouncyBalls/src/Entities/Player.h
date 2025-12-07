@@ -1,15 +1,19 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Entities/Entity.h"
+
 #include <SFML/Graphics.hpp>
 
-class Player
+class Player : public Entity
 {
 	public:
 		Player(const sf::Texture& texture);
 
-		void update(const sf::RenderWindow& window);
-		void draw(sf::RenderWindow& window) const;
+		void update(float deltaTime, const sf::Vector2u& windowSize) override;
+		void draw(sf::RenderWindow& window) const override;
+
+		void setRotationTarget(const sf::Vector2f& target);
 
 		const sf::Sprite& getSprite() const;
 		sf::Sprite& getSprite();
@@ -18,9 +22,11 @@ class Player
 
 	private:
 		sf::Sprite sprite;
+		sf::Vector2f rotationTarget;
 
-		void clampToWindow(const sf::RenderWindow& window);
-		void followMouse(const sf::RenderWindow& window);
+		void move(float deltaTime);
+		void clampToWindow(const sf::Vector2u& windowSize);
+		void rotate(float deltaTime, const sf::Vector2f& rotationTarget);
 };
 
 #endif // !PLAYER_H

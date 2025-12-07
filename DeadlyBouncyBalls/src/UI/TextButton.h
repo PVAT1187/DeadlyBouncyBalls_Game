@@ -27,6 +27,9 @@ class TextButton
 		sf::Color hoverColor;
 
 		bool isHovered;
+
+		void updateHoverState(const sf::RenderWindow& window);
+		void updateScaling();
 };
 
 #endif // !TEXT_BUTTON_H

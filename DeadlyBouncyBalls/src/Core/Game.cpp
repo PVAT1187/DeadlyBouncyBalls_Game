@@ -44,6 +44,16 @@ void Game::run()
 	}
 }
 
+const Font& Game::getFont() const
+{ 
+	return font; 
+}
+
+const Texture& Game::getPlayerTexture() const
+{
+	return playerTexture;
+}
+
 void Game::initFont()
 {
 	if (!font.openFromFile("assets/fonts/arial.ttf"))
@@ -54,14 +64,4 @@ void Game::initTexture()
 {
 	if (!playerTexture.loadFromFile("assets/PNG/sprite_004.png"))
 		throw runtime_error("Failed to load player texture!");
-}
-
-const Font& Game::getFont() const
-{ 
-	return font; 
-}
-
-const Texture& Game::getPlayerTexture() const
-{
-	return playerTexture;
 }

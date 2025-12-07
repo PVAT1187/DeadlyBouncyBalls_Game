@@ -39,6 +39,7 @@
     <ClInclude Include="src\Core\Game.h" />
     <ClInclude Include="src\Entities\Ball.h" />
     <ClInclude Include="src\Entities\BallManager.h" />
+    <ClInclude Include="src\Entities\Entity.h" />
     <ClInclude Include="src\Entities\Player.h" />
     <ClInclude Include="src\Math\MathUtils.h" />
     <ClInclude Include="src\Math\PhysicsUtils.h" />

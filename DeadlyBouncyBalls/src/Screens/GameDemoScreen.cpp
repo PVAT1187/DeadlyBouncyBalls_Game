@@ -5,7 +5,7 @@ using namespace std;
 
 GameDemoScreen::GameDemoScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
-	ballManager(window),
+	ballManager(window.getSize()),
 	instructionShown(true)
 {
 	instructionOverlay = make_unique<InstructionOverlay>(game, window);
@@ -27,7 +27,8 @@ void GameDemoScreen::update(float deltaTime)
 		instructionOverlay->update();
 	}
 
-	ballManager.update(deltaTime, window);
+	const Vector2u& windowSize = window.getSize();
+	ballManager.update(deltaTime, windowSize);
 }
 
 void GameDemoScreen::render(RenderWindow& window)

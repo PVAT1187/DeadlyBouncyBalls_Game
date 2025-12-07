@@ -53,27 +53,8 @@ Vector2f& Ball::getPosition()
 
 void Ball::update(float deltaTime, const Vector2u& windowSize)
 {
-	position += velocity * deltaTime;
-
-	bounceCircleOffWindow(position, velocity, 
-		ball.getRadius(), windowSize);
-
-	ball.setPosition(position);
-
-	if (!isFlashing)
-		return;
-
-	flashTimer -= deltaTime;
-
-	int whiteState = static_cast<int>(flashTimer * BLINKING_SPEED);
-
-	ball.setFillColor((whiteState & 1) == 0 ? Color::White : color);
-
-	if (flashTimer <= 0.f)
-	{
-		isFlashing = false;
-		ball.setFillColor(color);
-	}
+	move(deltaTime, windowSize);
+	updateFlashing(deltaTime);
 }
 
 void Ball::draw(RenderWindow& window) const
@@ -92,4 +73,32 @@ bool Ball::isCollidingWithPlayer(const Player& player) const
 	const FloatRect& playerBounds = player.getCollisionBounds();
 	return isCircleCollidingWithSprite(position,
 		radius, playerBounds);
+}
+
+void Ball::move(float deltaTime, const sf::Vector2u& windowSize)
+{
+	position += velocity * deltaTime;
+
+	bounceCircleOffWindow(position, velocity,
+		radius, windowSize);
+
+	ball.setPosition(position);
+}
+
+void Ball::updateFlashing(float deltaTime)
+{
+	if (!isFlashing)
+		return;
+
+	flashTimer -= deltaTime;
+
+	int whiteState = static_cast<int>(flashTimer * BLINKING_SPEED);
+
+	ball.setFillColor((whiteState & 1) == 0 ? Color::White : color);
+
+	if (flashTimer <= 0.f)
+	{
+		isFlashing = false;
+		ball.setFillColor(color);
+	}
 }

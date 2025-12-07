@@ -26,25 +26,8 @@ TextButton::TextButton(const String& textString, const Font& font,
 
 void TextButton::update(const RenderWindow& window)
 {
-	Vector2f mousePos = window.mapPixelToCoords(
-		Mouse::getPosition(window));
-
-	if (text.getGlobalBounds().contains(mousePos))
-	{
-		text.setFillColor(hoverColor);
-		isHovered = true;
-	}
-	else
-	{
-		text.setFillColor(normalColor);
-		isHovered = false;
-	}
-
-	float targetScale = isHovered ? HOVER_SCALE : NORMAL_SCALE;
-	float currentScale = text.getScale().x;
-	float scaleStep = (targetScale - currentScale) * SMOOTH_SCALING_MULTIPLIER;
-	float newScale = currentScale + scaleStep;
-	text.setScale(Vector2f(newScale, newScale));
+	updateHoverState(window);
+	updateScaling();
 }
 
 void TextButton::draw(RenderWindow& window)
@@ -60,4 +43,21 @@ void TextButton::setPosition(const sf::Vector2f& newPosition)
 bool TextButton::isClicked(const RenderWindow& window) const
 {
 	return isHovered && Mouse::isButtonPressed(Mouse::Button::Left);
+}
+
+void TextButton::updateHoverState(const sf::RenderWindow& window)
+{
+	Vector2f mousePos = window.mapPixelToCoords(
+		Mouse::getPosition(window));
+	isHovered = text.getGlobalBounds().contains(mousePos);
+	text.setFillColor(isHovered ? hoverColor : normalColor);
+}
+
+void TextButton::updateScaling()
+{
+	float targetScale = isHovered ? HOVER_SCALE : NORMAL_SCALE;
+	float currentScale = text.getScale().x;
+	float scaleStep = (targetScale - currentScale) * SMOOTH_SCALING_MULTIPLIER;
+	float newScale = currentScale + scaleStep;
+	text.setScale(Vector2f(newScale, newScale));
 }

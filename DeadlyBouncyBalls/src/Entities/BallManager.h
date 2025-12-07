@@ -9,9 +9,9 @@
 class BallManager
 {
 	public:	
-		BallManager(const sf::RenderWindow& window);
+		BallManager(const sf::Vector2u& windowSize);
 
-		void update(float deltaTime, const sf::RenderWindow& window);
+		void update(float deltaTime, const sf::Vector2u& windowSize);
 		void draw(sf::RenderWindow& window);
 
 		bool isGameOver(const Player& player);
@@ -22,6 +22,10 @@ class BallManager
 		float currentSplitTime;
 		float splittingTimer;
 		bool blinkTriggered;
+
+		void updateBalls(float deltaTime, const sf::Vector2u& windowSize);
+		void updateBlinking();
+		void updateSplitting();
 
 		void resolveBallCollisions();
 		void splitBall();

@@ -116,6 +116,9 @@
     <ClInclude Include="src\UI\UIUtils.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entities\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game.inl">

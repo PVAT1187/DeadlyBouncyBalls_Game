@@ -3,11 +3,14 @@
 
 #include "Entities/Player.h"
 
-class Ball
+class Ball : public Entity
 {
 	public:
 		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
 
+		void update(float deltaTime, const sf::Vector2u& windowSize) override;
+		void draw(sf::RenderWindow& window) const override;
+		
 		float getRadius() const;
 		float getMass() const;
 
@@ -17,12 +20,10 @@ class Ball
 		const sf::Vector2f getVelocity() const;
 		sf::Vector2f& getVelocity();
 
-		void update(float deltaTime, const sf::Vector2u& windowSize);
-		void draw(sf::RenderWindow& window) const;
-
 		void startBlink(float duration);
 
 		bool isCollidingWithPlayer(const Player& player) const;
+
 
 	private:
 		sf::CircleShape ball;
@@ -35,6 +36,9 @@ class Ball
 		bool isFlashing;
 		float flashTimer;
 		sf::Color color;
+
+		void move(float deltaTime, const sf::Vector2u& windowSize);
+		void updateFlashing(float deltaTime);
 };
 
 #endif // !BALL_H

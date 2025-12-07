@@ -17,15 +17,13 @@ constexpr float MAX_SPEED = 1000.f;
 constexpr float AMOUNT_RADIUS_DECREASED_BY = 10.f;
 constexpr float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
 constexpr float INITIAL_SPLITTING_TIME = 5.f;
-constexpr float SPLIT_TIME_MULTIPLIER = 2.f;
+constexpr float SPLIT_TIME_MULTIPLIER = 3.f;
 constexpr float	BLINKING_DURATION = 0.5f;
 
-BallManager::BallManager(const RenderWindow& window) :
-	splittingTimer(0.f), blinkTriggered(false), 
+BallManager::BallManager(const sf::Vector2u& windowSize) :
+	splittingTimer(0.f), blinkTriggered(false),
 	currentSplitTime(INITIAL_SPLITTING_TIME)
 {
-	const Vector2u& windowSize = window.getSize();
-	
 	for (int i = 0; i < INITIAL_NUMBER_OF_BALL; ++i)
 	{
 		float radius = MAX_RADIUS;
@@ -41,37 +39,14 @@ BallManager::BallManager(const RenderWindow& window) :
 	}
 }
 
-void BallManager::update(float deltaTime, const sf::RenderWindow& window)
-{
-	const Vector2u& windowSize = window.getSize();
-	
-	for (auto& ball : balls)
-	{
-		ball.update(deltaTime, windowSize);
-	}
-
+void BallManager::update(float deltaTime, const sf::Vector2u& windowSize)
+{	
+	updateBalls(deltaTime, windowSize);
 	resolveBallCollisions();
 
 	splittingTimer += deltaTime;
-
-	float splitTimeMinusBlinkDuration = currentSplitTime - BLINKING_DURATION;
-	if (!blinkTriggered &&
-		splittingTimer >= splitTimeMinusBlinkDuration)
-	{
-		for (auto& ball : balls)
-		{
-			ball.startBlink(BLINKING_DURATION);
-		}
-
-		blinkTriggered = true;
-	}
-
-	if (splittingTimer >= currentSplitTime)
-	{
-		splitBall();
-		currentSplitTime *= SPLIT_TIME_MULTIPLIER;
-		blinkTriggered = false;
-	}
+	updateBlinking();
+	updateSplitting();
 }
 
 void BallManager::draw(sf::RenderWindow& window)
@@ -90,6 +65,37 @@ bool BallManager::isGameOver(const Player& player)
 			return true;
 	}
 	return false;
+}
+
+void BallManager::updateBalls(float deltaTime, const Vector2u& windowSize)
+{
+	for (auto& ball : balls)
+	{
+		ball.update(deltaTime, windowSize);
+	}
+}
+
+void BallManager::updateBlinking()
+{
+	float splitTimeMinusBlinkDuration = currentSplitTime - BLINKING_DURATION;
+
+	if (!blinkTriggered && splittingTimer >= splitTimeMinusBlinkDuration)
+	{
+		for (auto& ball : balls)
+			ball.startBlink(BLINKING_DURATION);
+
+		blinkTriggered = true;
+	}
+}
+
+void BallManager::updateSplitting()
+{
+	if (splittingTimer >= currentSplitTime)
+	{
+		splitBall();
+		currentSplitTime *= SPLIT_TIME_MULTIPLIER;
+		blinkTriggered = false;
+	}
 }
 
 void BallManager::resolveBallCollisions()
