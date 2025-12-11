@@ -32,7 +32,7 @@ void Game::run()
 		{
 			if (event->is<Event::Closed>())
 				window.close();
-
+			
 			currentScreen->handleEvent(*event);
 		}
 
@@ -54,6 +54,11 @@ const Texture& Game::getPlayerTexture() const
 	return playerTexture;
 }
 
+const Texture& Game::getAimingIconTexture() const
+{
+	return aimingIconTexture;
+}
+
 void Game::initFont()
 {
 	if (!font.openFromFile("assets/fonts/arial.ttf"))
@@ -62,6 +67,9 @@ void Game::initFont()
 
 void Game::initTexture()
 {
-	if (!playerTexture.loadFromFile("assets/PNG/sprite_004.png"))
+	if (!playerTexture.loadFromFile("assets/PNG/Player/player_sprite.png"))
 		throw runtime_error("Failed to load player texture!");
+
+	if (!aimingIconTexture.loadFromFile("assets/PNG/Icons/crosshair.png"))
+		throw runtime_error("Failed to load aiming icon texture!");
 }

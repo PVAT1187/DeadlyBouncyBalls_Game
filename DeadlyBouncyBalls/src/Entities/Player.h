@@ -8,12 +8,13 @@
 class Player : public Entity
 {
 	public:
-		Player(const sf::Texture& texture);
+		Player(const sf::Texture& playerTexture, 
+			const sf::Texture& aimingIconTexture);
 
 		void update(float deltaTime, const sf::Vector2u& windowSize) override;
 		void draw(sf::RenderWindow& window) const override;
 
-		void setRotationTarget(const sf::Vector2f& target);
+		void setMouseTarget(const sf::Vector2f& target);
 
 		const sf::Sprite& getSprite() const;
 		sf::Sprite& getSprite();
@@ -21,12 +22,19 @@ class Player : public Entity
 		sf::FloatRect getCollisionBounds() const;
 
 	private:
-		sf::Sprite sprite;
-		sf::Vector2f rotationTarget;
+		sf::Sprite playerSprite;
+		sf::Sprite aimingIconSprite;
+
+		sf::Vector2f mouseTarget;
+		sf::VertexArray aimingLine;
+
+		void updatePlayerSprite();
+		void updateAimingIconSprite();
 
 		void move(float deltaTime);
 		void clampToWindow(const sf::Vector2u& windowSize);
 		void rotate(float deltaTime, const sf::Vector2f& rotationTarget);
+		void aimAtTarget(const sf::Vector2f& aimingTarget);
 };
 
 #endif // !PLAYER_H

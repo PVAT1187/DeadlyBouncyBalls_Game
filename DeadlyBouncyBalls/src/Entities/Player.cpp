@@ -13,51 +13,60 @@ constexpr float RADIAN_TO_DEGREE = 180.f / 3.14159265f;
 constexpr float ROTATION_OFFSET = 90.f;
  
 constexpr float PLAYER_SCALE = 0.3f;
-constexpr float PLAYER_SPEED = 600.f;
+constexpr float PLAYER_SPEED = 650.f;
+
+constexpr float AIMING_ICON_SCALE = 0.1F;
+
 constexpr float SHRINK_FACTOR = 0.25f;
 constexpr float FOLLOW_SMOOTHING = 0.7f;
-constexpr float ROTATION_SPEED = 350.f;
 
-Player::Player(const Texture& texture) :
-    sprite(texture)
+constexpr float ROTATION_SPEED = 450.f;
+
+constexpr float DISTANCE_FROM_PLAYER_TIP = 15.f;
+
+Player::Player(const Texture& playerTexture,
+    const sf::Texture& aimingIconTexture) :
+    playerSprite(playerTexture),
+    aimingIconSprite(aimingIconTexture),
+    aimingLine(PrimitiveType::Lines, 2)
 {
-    sprite.setScale({ PLAYER_SCALE, PLAYER_SCALE });
-    FloatRect spriteBounds = sprite.getLocalBounds();
-    sprite.setOrigin(Vector2f(
-        spriteBounds.size.x / 2.f,
-        spriteBounds.size.y / 2.f));
+	updatePlayerSprite();
+	updateAimingIconSprite();
 }
 
 void Player::update(float deltaTime, const sf::Vector2u& windowSize)
 {
     move(deltaTime);
-    rotate(deltaTime, rotationTarget);
+    rotate(deltaTime, mouseTarget);
+	aimAtTarget(mouseTarget);
 	clampToWindow(windowSize);
 }
 
 void Player::draw(RenderWindow& window) const
 {
-    window.draw(sprite);
+    window.draw(playerSprite);
+	window.draw(aimingIconSprite);
+	window.draw(aimingLine);
 }
 
-void Player::setRotationTarget(const sf::Vector2f& target)
+void Player::setMouseTarget(const sf::Vector2f& target)
 {
-	rotationTarget = target;
+    mouseTarget = target;
 }
 
 const Sprite& Player::getSprite() const
 {
-	return sprite;
+	return playerSprite;
 }
 
 Sprite& Player::getSprite()
 {
-    return sprite;
+    return playerSprite;
 }
 
 FloatRect Player::getCollisionBounds() const
 {
-    FloatRect spriteBounds = sprite.getGlobalBounds();
+    FloatRect spriteBounds = playerSprite.getGlobalBounds();
 
     float shrinkBoundX = spriteBounds.size.x * SHRINK_FACTOR;
     float shrinkBoundY = spriteBounds.size.y * SHRINK_FACTOR;
@@ -68,6 +77,24 @@ FloatRect Player::getCollisionBounds() const
     spriteBounds.size.y -= shrinkBoundY * 2.f;
 
 	return spriteBounds;
+}
+
+void Player::updatePlayerSprite()
+{
+    playerSprite.setScale({ PLAYER_SCALE, PLAYER_SCALE });
+    FloatRect spriteBounds = playerSprite.getLocalBounds();
+    playerSprite.setOrigin(Vector2f(
+        spriteBounds.size.x / 2.f,
+        spriteBounds.size.y / 2.f));
+}
+
+void Player::updateAimingIconSprite()
+{
+    aimingIconSprite.setScale({ AIMING_ICON_SCALE, AIMING_ICON_SCALE });
+    FloatRect aimingIconBounds = aimingIconSprite.getLocalBounds();
+    aimingIconSprite.setOrigin(Vector2f(
+        aimingIconBounds.size.x / 2.f,
+        aimingIconBounds.size.y / 2.f));
 }
 
 void Player::move(float deltaTime)
@@ -85,17 +112,16 @@ void Player::move(float deltaTime)
 
     if (movement.x != 0.f || movement.y != 0.f)
     {
-        float length = sqrt(movement.x * movement.x +
-            movement.y * movement.y);
+        float length = sqrt(computeDotProduct(movement, movement));
         movement /= length;
     }
 
-    sprite.move(movement * PLAYER_SPEED * deltaTime);
+    playerSprite.move(movement * PLAYER_SPEED * deltaTime);
 }
 
 void Player::clampToWindow(const Vector2u& windowSize)
 {
-	Vector2f spritePostion = sprite.getPosition();
+	Vector2f spritePostion = playerSprite.getPosition();
     FloatRect spriteBounds = getCollisionBounds();
 	Vector2f spriteHalfSize(
         spriteBounds.size.x / 2.f, 
@@ -103,14 +129,14 @@ void Player::clampToWindow(const Vector2u& windowSize)
 
     clampSpriteToWindow(spritePostion, spriteHalfSize, windowSize);
 
-    sprite.setPosition(spritePostion);
+    playerSprite.setPosition(spritePostion);
 }
 
 void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
 {
-    Vector2f direction = rotationTarget - sprite.getPosition();
+    Vector2f direction = rotationTarget - playerSprite.getPosition();
 
-    float currentAngle = sprite.getRotation().asDegrees();
+    float currentAngle = playerSprite.getRotation().asDegrees();
     float targetAngle = atan2(direction.y, direction.x) * 
         RADIAN_TO_DEGREE + ROTATION_OFFSET;
 
@@ -123,5 +149,25 @@ void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
 	float maxStep = ROTATION_SPEED * deltaTime;
 	float step = computeClamp(angleDifference, -maxStep, maxStep);
 
-    sprite.setRotation(degrees(currentAngle + step));
+    playerSprite.setRotation(degrees(currentAngle + step));
 }   
+
+void Player::aimAtTarget(const Vector2f& aimingTarget)
+{
+	Vector2f direction = aimingTarget - playerSprite.getPosition();
+
+	float length = sqrt(computeDotProduct(direction, direction));
+    if (length != 0.f)
+		direction /= length;
+
+	Vector2f tipPosition = playerSprite.getPosition() + direction
+        * DISTANCE_FROM_PLAYER_TIP;
+
+	aimingLine[0].position = tipPosition;
+	aimingLine[1].position = aimingTarget;
+
+	aimingLine[0].color = Color::Red;
+	aimingLine[1].color = Color::Red;
+
+	aimingIconSprite.setPosition(aimingTarget);
+}

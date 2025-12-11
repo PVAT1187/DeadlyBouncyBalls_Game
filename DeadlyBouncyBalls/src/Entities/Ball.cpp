@@ -10,7 +10,7 @@ constexpr float BLINKING_SPEED = 10.f;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 	radius(radius), position(position), velocity(velocity), 
-	isFlashing(false), flashTimer(0.f)
+	isFlashing(false), flashingTime(0.f)
 {
 	ball.setRadius(radius);
 	ball.setFillColor(randomColor());
@@ -31,7 +31,7 @@ float Ball::getMass() const
 	return mass;
 }
 
-const Vector2f Ball::getVelocity() const
+const Vector2f& Ball::getVelocity() const
 {
 	return velocity;
 }
@@ -41,7 +41,7 @@ Vector2f& Ball::getVelocity()
 	return velocity;
 }
 
-const Vector2f Ball::getPosition() const
+const Vector2f& Ball::getPosition() const
 {
 	return position;
 }
@@ -65,7 +65,7 @@ void Ball::draw(RenderWindow& window) const
 void Ball::startBlink(float duration)
 {
 	isFlashing = true;
-	flashTimer = duration;
+	flashingTime = duration;
 }
 
 bool Ball::isCollidingWithPlayer(const Player& player) const
@@ -90,13 +90,13 @@ void Ball::updateFlashing(float deltaTime)
 	if (!isFlashing)
 		return;
 
-	flashTimer -= deltaTime;
+	flashingTime -= deltaTime;
 
-	int whiteState = static_cast<int>(flashTimer * BLINKING_SPEED);
+	int whiteState = static_cast<int>(flashingTime * BLINKING_SPEED);
 
 	ball.setFillColor((whiteState & 1) == 0 ? Color::White : color);
 
-	if (flashTimer <= 0.f)
+	if (flashingTime <= 0.f)
 	{
 		isFlashing = false;
 		ball.setFillColor(color);

@@ -18,6 +18,7 @@ class GameDemoScreen : public Screen
 		BallManager ballManager;
 
 		bool instructionShown;
+
 		std::unique_ptr<InstructionOverlay> instructionOverlay;
 };
 

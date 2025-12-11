@@ -9,7 +9,7 @@ using namespace std;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
-	player(game.getPlayerTexture()),
+	player(game.getPlayerTexture(), game.getAimingIconTexture()),
 	ballManager(window.getSize()),
 	paused(false),
 	survivalClock(),
@@ -57,10 +57,10 @@ void GamePlayScreen::update(float deltaTime)
 	Vector2f mousePosition = 
 		window.mapPixelToCoords(Mouse::getPosition(window));
 
+	player.setMouseTarget(mousePosition);
 	player.update(deltaTime, windowSize);
-	player.setRotationTarget(mousePosition);
-	ballManager.update(deltaTime, windowSize);
 
+	ballManager.update(deltaTime, windowSize);
 	if (ballManager.isGameOver(player))
 	{
 		game.switchScreen<GameOverScreen>(window, survivalTime);

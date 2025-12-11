@@ -15,8 +15,8 @@ PauseMenuOverlay::PauseMenuOverlay(GamePlayScreen& gamePlayScreen, Game& game, R
 	resumeButton("RESUME", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
 	mainMenuButton("MAIN MENU", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
 {
-	initPauseTitle();
 	initDimBackground();
+	initPauseTitle();
 	updateButtonPosition();
 }
 

@@ -14,10 +14,10 @@ class Ball : public Entity
 		float getRadius() const;
 		float getMass() const;
 
-		const sf::Vector2f getPosition() const;
+		const sf::Vector2f& getPosition() const;
 		sf::Vector2f& getPosition();
 
-		const sf::Vector2f getVelocity() const;
+		const sf::Vector2f& getVelocity() const;
 		sf::Vector2f& getVelocity();
 
 		void startBlink(float duration);
@@ -34,7 +34,7 @@ class Ball : public Entity
 		sf::Vector2f velocity;
 
 		bool isFlashing;
-		float flashTimer;
+		float flashingTime;
 		sf::Color color;
 
 		void move(float deltaTime, const sf::Vector2u& windowSize);

@@ -17,12 +17,14 @@ class Game
 
 		const sf::Font& getFont() const;
 		const sf::Texture& getPlayerTexture() const;
+		const sf::Texture& getAimingIconTexture() const;
 
 	private:
 		sf::RenderWindow window;
 
 		sf::Font font;
 		sf::Texture playerTexture;
+		sf::Texture aimingIconTexture;
 
 		std::unique_ptr<Screen> currentScreen;
 

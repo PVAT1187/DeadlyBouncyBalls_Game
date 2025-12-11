@@ -51,7 +51,6 @@ void GameStartScreen::initGameTitleText()
 	centerTitleText(gameTitleText, window);
 }
 
-
 void GameStartScreen::updateButtonPosition()
 {
 	vector<TextButton*> buttons = {&playButton, &quitButton};
