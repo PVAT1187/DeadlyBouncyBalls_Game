@@ -11,9 +11,9 @@ using namespace UIUtils;
 PauseMenuOverlay::PauseMenuOverlay(GamePlayScreen& gamePlayScreen, Game& game, RenderWindow& window) :
 	Overlay(game, window),
 	gamePlayScreen(gamePlayScreen),
-	pauseMenuTitle(Text(game.getFont(), "GAME PAUSED", Screen::TITLE_TEXT_SIZE)),
-	resumeButton("RESUME", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
+	pauseMenuTitle(Text(game.getFont(), "GAME PAUSED", TITLE_TEXT_SIZE)),
+	resumeButton("RESUME", game.getFont(), BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", game.getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initDimBackground();
 	initPauseTitle();

@@ -1,3 +1,4 @@
+#include "GameConstants.h"
 #include "Entities/Ball.h"
 #include "Math/MathUtils.h"
 #include "Math/PhysicsUtils.h"
@@ -5,8 +6,6 @@
 using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
-
-constexpr float BLINKING_SPEED = 10.f;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 	radius(radius), position(position), velocity(velocity), 

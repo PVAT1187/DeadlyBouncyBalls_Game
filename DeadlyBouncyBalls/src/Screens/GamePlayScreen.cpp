@@ -13,7 +13,7 @@ GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	ballManager(window.getSize()),
 	paused(false),
 	survivalClock(),
-	survivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE))
+	survivalTimeText(Text(game.getFont(), "", BODY_TEXT_SIZE))
 {
 	this->window.setMouseCursorVisible(false);
 	

@@ -9,9 +9,9 @@ using namespace UIUtils;
 
 GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
-	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", Screen::TITLE_TEXT_SIZE)),
-	playButton("PLAY", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
-	quitButton("QUIT", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
+	gameTitleText(Text(game.getFont(), "DEADLY BOUNCY BALLS", TITLE_TEXT_SIZE)),
+	playButton("PLAY", game.getFont(), BUTTON_SIZE, { 0, 0 }),
+	quitButton("QUIT", game.getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initGameTitleText();
 	updateButtonPosition();

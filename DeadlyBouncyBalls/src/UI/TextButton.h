@@ -16,10 +16,6 @@ class TextButton
 
 		bool isClicked(const sf::RenderWindow& window) const;
 
-		static const unsigned int BUTTON_SIZE;
-		static const float TITLE_BUTTON_SPACING;
-		static const float BUTTON_SPACING;
-
 	private:
 		sf::Text text;
 		

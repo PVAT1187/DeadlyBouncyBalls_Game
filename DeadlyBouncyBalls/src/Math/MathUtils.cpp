@@ -1,3 +1,4 @@
+#include "GameConstants.h"
 #include "Math/MathUtils.h"
 
 #include <random>
@@ -5,13 +6,6 @@
 
 using namespace sf;
 using namespace std;
-
-constexpr float MIN_DIRECTION = -1.f;
-constexpr float MAX_DIRECTION = 1.f;
-
-constexpr int COLOR_MIN = 1;
-constexpr int COLOR_MAX = 255;
-constexpr uint8_t FULL_OPACITY = 255;
 
 float MathUtils::computeClamp(float value, float min, float max)
 {

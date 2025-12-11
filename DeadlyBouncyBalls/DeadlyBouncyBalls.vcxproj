@@ -41,6 +41,7 @@
     <ClInclude Include="src\Entities\BallManager.h" />
     <ClInclude Include="src\Entities\Entity.h" />
     <ClInclude Include="src\Entities\Player.h" />
+    <ClInclude Include="src\GameConstants.h" />
     <ClInclude Include="src\Math\MathUtils.h" />
     <ClInclude Include="src\Math\PhysicsUtils.h" />
     <ClInclude Include="src\Overlays\InstructionOverlay.h" />
@@ -55,7 +56,7 @@
     <ClInclude Include="src\UI\UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Game.inl" />
+    <None Include="src\Core\Game.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

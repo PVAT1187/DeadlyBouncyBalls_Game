@@ -1,3 +1,4 @@
+#include "GameConstants.h"
 #include "Math/PhysicsUtils.h"
 #include "Math/MathUtils.h"
 
@@ -5,8 +6,6 @@
 
 using namespace sf;
 using namespace MathUtils;
-
-constexpr float COLLISION_SEPARATION_RATIO = 0.5f;
 
 void PhysicsUtils::clampSpriteToWindow(Vector2f& position,
     const Vector2f& size, const Vector2u& windowSize)

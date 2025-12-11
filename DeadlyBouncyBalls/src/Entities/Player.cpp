@@ -1,3 +1,4 @@
+#include "GameConstants.h"
 #include "Entities/Player.h"
 #include "Math/MathUtils.h"
 #include "Math/PhysicsUtils.h"
@@ -5,24 +6,6 @@
 using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
-
-constexpr float FULL_CIRCLE_DEGREE = 360.f;
-constexpr float HALF_CIRCLE_DEGREE = 180.f;
-
-constexpr float RADIAN_TO_DEGREE = 180.f / 3.14159265f;
-constexpr float ROTATION_OFFSET = 90.f;
- 
-constexpr float PLAYER_SCALE = 0.3f;
-constexpr float PLAYER_SPEED = 650.f;
-
-constexpr float AIMING_ICON_SCALE = 0.1F;
-
-constexpr float SHRINK_FACTOR = 0.25f;
-constexpr float FOLLOW_SMOOTHING = 0.7f;
-
-constexpr float ROTATION_SPEED = 450.f;
-
-constexpr float DISTANCE_FROM_PLAYER_TIP = 15.f;
 
 Player::Player(const Texture& playerTexture,
     const sf::Texture& aimingIconTexture) :

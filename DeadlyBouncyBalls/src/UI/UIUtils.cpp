@@ -1,3 +1,4 @@
+#include "GameConstants.h"
 #include "UI/UIUtils.h"
 
 using namespace sf;
@@ -30,14 +31,14 @@ void UIUtils::positionButtons(const Text& text,
 	vector<TextButton*>& buttons, RenderWindow& window)
 {
 	float centerX = window.getSize().x / 2.f;
-	float startY = text.getPosition().y + TextButton::TITLE_BUTTON_SPACING;
+	float startY = text.getPosition().y + TITLE_BUTTON_SPACING;
 
 	buttons[0]->setPosition({ centerX, startY });
 
 	size_t buttonsSize = buttons.size();
 	for (size_t i = 1; i < buttonsSize; ++i)
 	{
-		float y = startY + TextButton::BUTTON_SPACING;
+		float y = startY + BUTTON_SPACING;
 		buttons[i]->setPosition({ centerX, y });
 	}
 }

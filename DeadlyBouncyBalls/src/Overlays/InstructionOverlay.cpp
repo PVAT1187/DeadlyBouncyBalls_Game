@@ -9,9 +9,9 @@ using namespace UIUtils;
 
 InstructionOverlay::InstructionOverlay(Game& game, RenderWindow& window) :
 	Overlay(game, window),
-	instructionOverlayTitle(Text(game.getFont(), "HOW TO PLAY", Screen::TITLE_TEXT_SIZE)),
-	instructions(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE)),
-	continueButton("CONTINUE", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
+	instructionOverlayTitle(Text(game.getFont(), "HOW TO PLAY", TITLE_TEXT_SIZE)),
+	instructions(Text(game.getFont(), "", BODY_TEXT_SIZE)),
+	continueButton("CONTINUE", game.getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initDimBackground();
 	initInstructionOverlayTitle();
@@ -53,7 +53,7 @@ void InstructionOverlay::initInstructionOverlayTitle()
 void InstructionOverlay::initInstructionText()
 {
 	instructions.setString("Dodge the balls and try to survive as long as possible\n");
-	centerBodyText(instructions, window, Screen::TEXT_SPACING);
+	centerBodyText(instructions, window, TEXT_SPACING);
 }
 
 void InstructionOverlay::updateButtonPosition()

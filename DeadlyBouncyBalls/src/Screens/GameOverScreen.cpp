@@ -13,10 +13,10 @@ using namespace UIUtils;
 GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
 	float finalSurvivalTime) :
 	Screen(game, window),
-	gameOverText(Text(game.getFont(), "GAME OVER", Screen::TITLE_TEXT_SIZE)),
-	finalSurvivalTimeText(Text(game.getFont(), "", Screen::BODY_TEXT_SIZE)),
-	playAgainButton("PLAY AGAIN", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", game.getFont(), TextButton::BUTTON_SIZE, { 0, 0 })
+	gameOverText(Text(game.getFont(), "GAME OVER", TITLE_TEXT_SIZE)),
+	finalSurvivalTimeText(Text(game.getFont(), "", BODY_TEXT_SIZE)),
+	playAgainButton("PLAY AGAIN", game.getFont(), BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", game.getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	this->window.setMouseCursorVisible(true);
 	
@@ -64,7 +64,7 @@ void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 {
 	finalSurvivalTimeText.setString("Survived: " + 
 		to_string(finalSurvivalTime) + "s");
-	centerBodyText(finalSurvivalTimeText, window, Screen::TEXT_SPACING);
+	centerBodyText(finalSurvivalTimeText, window, TEXT_SPACING);
 }
 
 void GameOverScreen::updateButtonPosition()

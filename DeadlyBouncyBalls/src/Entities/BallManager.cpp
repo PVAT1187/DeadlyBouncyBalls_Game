@@ -1,3 +1,4 @@
+#include "GameConstants.h"
 #include "Entities/BallManager.h"
 #include "Math/MathUtils.h"
 #include "Math/PhysicsUtils.h"
@@ -6,19 +7,6 @@ using namespace std;
 using namespace sf;
 using namespace MathUtils;
 using namespace PhysicsUtils;
-
-constexpr int INITIAL_NUMBER_OF_BALL = 2;
-
-constexpr float MIN_RADIUS = 10.f;
-constexpr float MAX_RADIUS = 50.f;
-constexpr float	MIN_SPEED = 500.f;
-constexpr float MAX_SPEED = 1000.f;
-
-constexpr float AMOUNT_RADIUS_DECREASED_BY = 10.f;
-constexpr float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
-constexpr float INITIAL_SPLITTING_TIME = 5.f;
-constexpr float SPLIT_TIME_MULTIPLIER = 3.f;
-constexpr float	BLINKING_DURATION = 0.5f;
 
 BallManager::BallManager(const sf::Vector2u& windowSize) :
 	splittingTimer(0.f), blinkTriggered(false),

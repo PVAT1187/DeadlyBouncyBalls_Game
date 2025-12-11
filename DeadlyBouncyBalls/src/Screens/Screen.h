@@ -1,6 +1,7 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include "GameConstants.h"
 #include "UI/TextButton.h"
 
 #include <SFML/Graphics.hpp>
@@ -16,10 +17,6 @@ class Screen
 		virtual void render(sf::RenderWindow& window) = 0;
 
 		virtual ~Screen() = default;
-
-		static constexpr unsigned int TITLE_TEXT_SIZE = 100;
-		static constexpr unsigned int BODY_TEXT_SIZE = 25;
-		static constexpr float TEXT_SPACING = 125.f;
 
 	protected:
 		Game& game;

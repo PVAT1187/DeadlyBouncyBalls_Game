@@ -119,9 +119,10 @@
     <ClInclude Include="src\Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameConstants.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Game.inl">
+    <None Include="src\Core\Game.inl">
       <Filter>Core</Filter>
     </None>
   </ItemGroup>
