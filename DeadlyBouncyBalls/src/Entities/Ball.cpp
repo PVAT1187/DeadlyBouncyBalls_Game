@@ -1,7 +1,7 @@
-#include "GameConstants.h"
+#include "Core/GameConstants.h"
 #include "Entities/Ball.h"
-#include "Math/MathUtils.h"
-#include "Math/PhysicsUtils.h"
+#include "Utilities/MathUtils.h"
+#include "Utilities/PhysicsUtils.h"
 
 using namespace sf;
 using namespace MathUtils;

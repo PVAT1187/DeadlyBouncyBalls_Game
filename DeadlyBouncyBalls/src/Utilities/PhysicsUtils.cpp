@@ -1,6 +1,6 @@
-#include "GameConstants.h"
-#include "Math/PhysicsUtils.h"
-#include "Math/MathUtils.h"
+#include "Core/GameConstants.h"
+#include "Utilities/PhysicsUtils.h"
+#include "Utilities/MathUtils.h"
 
 #include <iostream>
 

@@ -7,9 +7,6 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{30a3024e-ecb0-4fdd-8511-477ef1363f1c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{7e642652-24f2-40dd-aa31-229393b2e829}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Overlays">
       <UniqueIdentifier>{431c0cf4-a4b5-4f9c-8806-b33254f62f04}</UniqueIdentifier>
     </Filter>
@@ -18,6 +15,12 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{32de6cf6-db3a-4d7e-959e-8a0244790b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{0b27598c-42ad-4d8a-8df9-87147e813b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{d41cbce8-9b88-492a-bfb6-4345a65a113c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,12 +38,6 @@
     </ClCompile>
     <ClCompile Include="src\Entities\Player.cpp">
       <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\MathUtils.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\PhysicsUtils.cpp">
-      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="src\Overlays\InstructionOverlay.cpp">
       <Filter>Overlays</Filter>
@@ -66,6 +63,15 @@
     <ClCompile Include="src\UI\UIUtils.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utilities\MathUtils.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\PhysicsUtils.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\AimingSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Game.h">
@@ -79,12 +85,6 @@
     </ClInclude>
     <ClInclude Include="src\Entities\Player.h">
       <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathUtils.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\PhysicsUtils.h">
-      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="src\Overlays\InstructionOverlay.h">
       <Filter>Overlays</Filter>
@@ -119,7 +119,18 @@
     <ClInclude Include="src\Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameConstants.h" />
+    <ClInclude Include="src\Core\GameConstants.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\MathUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\PhysicsUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\AimingSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Core\Game.inl">

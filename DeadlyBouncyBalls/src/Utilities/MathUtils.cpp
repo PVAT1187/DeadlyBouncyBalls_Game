@@ -1,5 +1,5 @@
-#include "GameConstants.h"
-#include "Math/MathUtils.h"
+#include "Core/GameConstants.h"
+#include "Utilities/MathUtils.h"
 
 #include <random>
 #include <algorithm>
@@ -17,17 +17,28 @@ float MathUtils::computeMass(float radius)
 	return radius * radius * radius;
 }
 
+Vector2f MathUtils::computeDirection(const Vector2f& vectorA,
+	const Vector2f& vectorB)
+{
+	return vectorA - vectorB;
+}
+
 float MathUtils::computeDotProduct(const Vector2f& vectorA, 
     const Vector2f& vectorB)
 {
     return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
 }
 
+float MathUtils::computeLength(const sf::Vector2f& vector)
+{
+	return sqrt(computeDotProduct(vector, vector));
+}
+
 float MathUtils::computeDistanceSquared(const Vector2f& vectorA,
 	const Vector2f& vectorB)
 {
-	Vector2f difference = vectorA - vectorB;
-	return computeDotProduct(difference, difference);
+	Vector2f direction = computeDirection(vectorA, vectorB);
+	return computeDotProduct(direction, direction);
 }
 
 float MathUtils::computeDistance(const Vector2f& vectorA,
@@ -39,13 +50,13 @@ float MathUtils::computeDistance(const Vector2f& vectorA,
 Vector2f MathUtils::computeNormal(const Vector2f& vectorA,
 	const Vector2f& vectorB)
 {
-	Vector2f difference = vectorA - vectorB;
-	float distance = computeDistance(vectorA, vectorB);
+	Vector2f direction = computeDirection(vectorA, vectorB);
+	float distance = computeLength(direction);
 
 	if (distance == 0.f)
 		return { 0.f, 0.f };
 
-	return difference / distance;
+	return direction / distance;
 }
 
 Vector2f MathUtils::computeVector(const Vector2f& tangent, float dpTangent,
@@ -56,7 +67,7 @@ Vector2f MathUtils::computeVector(const Vector2f& tangent, float dpTangent,
 
 Vector2f MathUtils::normalize(const Vector2f& vector)
 {
-	float length = sqrt(computeDotProduct(vector, vector));
+	float length = computeLength(vector);
 
 	if (length == 0.f)
 		return { 1.f, 0.f };

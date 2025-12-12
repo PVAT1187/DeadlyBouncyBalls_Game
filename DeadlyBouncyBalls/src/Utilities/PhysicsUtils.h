@@ -9,6 +9,7 @@ namespace PhysicsUtils
 		const sf::Vector2f& size, const sf::Vector2u& windowSize);
 	void bounceCircleOffWindow(sf::Vector2f& position, sf::Vector2f& velocity,
 		float radius, const sf::Vector2u& windowSize);
+
 	bool isCircleCollidingWithSprite(const sf::Vector2f& circlePosition,
 		float circleRadius, const sf::FloatRect& spriteBounds);
 	bool isCircleCollidingWithCircle(const sf::Vector2f& positionA,

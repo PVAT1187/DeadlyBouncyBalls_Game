@@ -7,8 +7,6 @@
 constexpr float PLAYER_SCALE = 0.3f;
 constexpr float PLAYER_SPEED = 650.f;
 
-constexpr float DISTANCE_FROM_PLAYER_TIP = 15.f;
-
 constexpr float ROTATION_OFFSET = 90.f;
 constexpr float ROTATION_SPEED = 450.f;
 
@@ -18,8 +16,11 @@ constexpr float HALF_CIRCLE_DEGREE = 180.f;
 constexpr float SHRINK_FACTOR = 0.25f;
 constexpr float FOLLOW_SMOOTHING = 0.7f;
 
-// ---------------- Aiming Icon ----------------
-constexpr float AIMING_ICON_SCALE = 0.1F;
+// ---------------- Aiming System ----------------
+constexpr float AIMING_ICON_SCALE = 0.1f;
+
+constexpr float DISTANCE_FROM_PLAYER_TIP = 20.f;
+constexpr float DISTANCE_TO_AIMING_ICON = 20.f;
 
 // ---------------- Ball ----------------
 constexpr float BLINKING_SPEED = 10.f;

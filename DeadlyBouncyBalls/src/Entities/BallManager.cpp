@@ -1,7 +1,7 @@
-#include "GameConstants.h"
+#include "Core/GameConstants.h"
 #include "Entities/BallManager.h"
-#include "Math/MathUtils.h"
-#include "Math/PhysicsUtils.h"
+#include "Utilities/MathUtils.h"
+#include "Utilities/PhysicsUtils.h"
 
 using namespace std;
 using namespace sf;

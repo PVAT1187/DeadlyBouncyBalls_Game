@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "Entities/Entity.h"
+#include "Systems/AimingSystem.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -23,18 +24,14 @@ class Player : public Entity
 
 	private:
 		sf::Sprite playerSprite;
-		sf::Sprite aimingIconSprite;
 
 		sf::Vector2f mouseTarget;
-		sf::VertexArray aimingLine;
-
-		void updatePlayerSprite();
-		void updateAimingIconSprite();
+		AimingSystem aimingSystem;
 
 		void move(float deltaTime);
 		void clampToWindow(const sf::Vector2u& windowSize);
 		void rotate(float deltaTime, const sf::Vector2f& rotationTarget);
-		void aimAtTarget(const sf::Vector2f& aimingTarget);
+		
 };
 
 #endif // !PLAYER_H

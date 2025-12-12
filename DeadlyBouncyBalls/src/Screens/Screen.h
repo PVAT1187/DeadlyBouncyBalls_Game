@@ -1,7 +1,7 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-#include "GameConstants.h"
+#include "Core/GameConstants.h"
 #include "UI/TextButton.h"
 
 #include <SFML/Graphics.hpp>

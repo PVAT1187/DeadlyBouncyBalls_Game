@@ -24,26 +24,25 @@
     <ClCompile Include="src\Entities\Ball.cpp" />
     <ClCompile Include="src\Entities\BallManager.cpp" />
     <ClCompile Include="src\Entities\Player.cpp" />
-    <ClCompile Include="src\Math\MathUtils.cpp" />
-    <ClCompile Include="src\Math\PhysicsUtils.cpp" />
     <ClCompile Include="src\Overlays\InstructionOverlay.cpp" />
     <ClCompile Include="src\Overlays\PauseMenuOverlay.cpp" />
     <ClCompile Include="src\Screens\GameDemoScreen.cpp" />
     <ClCompile Include="src\Screens\GameOverScreen.cpp" />
     <ClCompile Include="src\Screens\GamePlayScreen.cpp" />
     <ClCompile Include="src\Screens\GameStartScreen.cpp" />
+    <ClCompile Include="src\Systems\AimingSystem.cpp" />
     <ClCompile Include="src\UI\TextButton.cpp" />
     <ClCompile Include="src\UI\UIUtils.cpp" />
+    <ClCompile Include="src\Utilities\MathUtils.cpp" />
+    <ClCompile Include="src\Utilities\PhysicsUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Game.h" />
+    <ClInclude Include="src\Core\GameConstants.h" />
     <ClInclude Include="src\Entities\Ball.h" />
     <ClInclude Include="src\Entities\BallManager.h" />
     <ClInclude Include="src\Entities\Entity.h" />
     <ClInclude Include="src\Entities\Player.h" />
-    <ClInclude Include="src\GameConstants.h" />
-    <ClInclude Include="src\Math\MathUtils.h" />
-    <ClInclude Include="src\Math\PhysicsUtils.h" />
     <ClInclude Include="src\Overlays\InstructionOverlay.h" />
     <ClInclude Include="src\Overlays\Overlay.h" />
     <ClInclude Include="src\Overlays\PauseMenuOverlay.h" />
@@ -52,8 +51,11 @@
     <ClInclude Include="src\Screens\GamePlayScreen.h" />
     <ClInclude Include="src\Screens\GameStartScreen.h" />
     <ClInclude Include="src\Screens\Screen.h" />
+    <ClInclude Include="src\Systems\AimingSystem.h" />
     <ClInclude Include="src\UI\TextButton.h" />
     <ClInclude Include="src\UI\UIUtils.h" />
+    <ClInclude Include="src\Utilities\MathUtils.h" />
+    <ClInclude Include="src\Utilities\PhysicsUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Core\Game.inl" />

@@ -7,9 +7,12 @@ namespace MathUtils
 {
 	float computeClamp(float value, float min, float max);
 	float computeMass(float radius);
+	sf::Vector2f computeDirection(const sf::Vector2f& positionA, 
+		const sf::Vector2f& positionB);
 
 	float computeDotProduct(const sf::Vector2f& vectorA, 
 		const sf::Vector2f& vectorB);
+	float computeLength(const sf::Vector2f& vector);
 
 	float computeDistanceSquared(const sf::Vector2f& vectorA,
 		const sf::Vector2f& vectorB);

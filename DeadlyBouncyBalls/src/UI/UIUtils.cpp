@@ -1,4 +1,4 @@
-#include "GameConstants.h"
+#include "Core/GameConstants.h"
 #include "UI/UIUtils.h"
 
 using namespace sf;
