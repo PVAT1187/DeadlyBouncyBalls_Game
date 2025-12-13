@@ -26,6 +26,7 @@
     <ClCompile Include="src\Entities\Player.cpp" />
     <ClCompile Include="src\Overlays\InstructionOverlay.cpp" />
     <ClCompile Include="src\Overlays\PauseMenuOverlay.cpp" />
+    <ClCompile Include="src\Projectiles\Bullet.cpp" />
     <ClCompile Include="src\Screens\GameDemoScreen.cpp" />
     <ClCompile Include="src\Screens\GameOverScreen.cpp" />
     <ClCompile Include="src\Screens\GamePlayScreen.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="src\Overlays\InstructionOverlay.h" />
     <ClInclude Include="src\Overlays\Overlay.h" />
     <ClInclude Include="src\Overlays\PauseMenuOverlay.h" />
+    <ClInclude Include="src\Projectiles\Bullet.h" />
     <ClInclude Include="src\Screens\GameDemoScreen.h" />
     <ClInclude Include="src\Screens\GameOverScreen.h" />
     <ClInclude Include="src\Screens\GamePlayScreen.h" />

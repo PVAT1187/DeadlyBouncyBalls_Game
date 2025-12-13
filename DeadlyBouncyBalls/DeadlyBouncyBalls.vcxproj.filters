@@ -22,6 +22,9 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{d41cbce8-9b88-492a-bfb6-4345a65a113c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Projectiles">
+      <UniqueIdentifier>{ad72f16d-ce31-4935-b2b0-1294f920da44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Game.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="src\Systems\AimingSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Projectiles\Bullet.cpp">
+      <Filter>Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="src\Systems\AimingSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Projectiles\Bullet.h">
+      <Filter>Projectiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

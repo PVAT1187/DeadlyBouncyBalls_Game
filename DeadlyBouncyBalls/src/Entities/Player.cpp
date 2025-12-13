@@ -32,8 +32,8 @@ void Player::update(float deltaTime, const sf::Vector2u& windowSize)
 
 void Player::draw(RenderWindow& window) const
 {
-    window.draw(playerSprite);
     aimingSystem.draw(window);
+    window.draw(playerSprite);
 }
 
 void Player::setMouseTarget(const sf::Vector2f& target)

@@ -59,8 +59,8 @@ void GamePlayScreen::update(float deltaTime)
 
 	player.setMouseTarget(mousePosition);
 	player.update(deltaTime, windowSize);
-
 	ballManager.update(deltaTime, windowSize);
+
 	if (ballManager.isGameOver(player))
 	{
 		game.switchScreen<GameOverScreen>(window, survivalTime);
