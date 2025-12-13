@@ -1,0 +1,26 @@
+#ifndef GAME_START_SCREEN_H
+#define	GAME_START_SCREEN_H
+
+#include "Screens/Screen.h"
+#include "UI/Buttons/TextButton.h"
+
+class GameStartScreen : public Screen
+{
+	public:
+		GameStartScreen(Game& game, sf::RenderWindow& window);
+
+		void handleEvent(const sf::Event& event) override;
+		void update(float deltaTime) override;
+		void render(sf::RenderWindow& window) override;
+
+	private:
+		sf::Text gameTitleText;
+
+		TextButton playButton;
+		TextButton quitButton;
+
+		void initGameTitleText();
+		void updateButtonPosition();
+};
+
+#endif // !GAME_START_SCREEN_H

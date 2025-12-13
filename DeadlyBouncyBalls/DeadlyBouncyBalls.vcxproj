@@ -19,48 +19,50 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Game.cpp" />
+    <ClCompile Include="src\Core\Application\Game.cpp" />
     <ClCompile Include="src\Core\main.cpp" />
-    <ClCompile Include="src\Entities\Ball.cpp" />
-    <ClCompile Include="src\Entities\BallManager.cpp" />
-    <ClCompile Include="src\Entities\Player.cpp" />
-    <ClCompile Include="src\Overlays\InstructionOverlay.cpp" />
-    <ClCompile Include="src\Overlays\PauseMenuOverlay.cpp" />
-    <ClCompile Include="src\Projectiles\Bullet.cpp" />
-    <ClCompile Include="src\Screens\GameDemoScreen.cpp" />
-    <ClCompile Include="src\Screens\GameOverScreen.cpp" />
-    <ClCompile Include="src\Screens\GamePlayScreen.cpp" />
-    <ClCompile Include="src\Screens\GameStartScreen.cpp" />
-    <ClCompile Include="src\Systems\AimingSystem.cpp" />
-    <ClCompile Include="src\UI\TextButton.cpp" />
-    <ClCompile Include="src\UI\UIUtils.cpp" />
-    <ClCompile Include="src\Utilities\MathUtils.cpp" />
-    <ClCompile Include="src\Utilities\PhysicsUtils.cpp" />
+    <ClCompile Include="src\Entities\Enemies\Ball.cpp" />
+    <ClCompile Include="src\Entities\Enemies\BallManager.cpp" />
+    <ClCompile Include="src\Entities\Player\Player.cpp" />
+    <ClCompile Include="src\Entities\Projectiles\Bullet.cpp" />
+    <ClCompile Include="src\Overlays\Instruction\InstructionOverlay.cpp" />
+    <ClCompile Include="src\Overlays\PauseMenu\PauseMenuOverlay.cpp" />
+    <ClCompile Include="src\Screens\GameDemo\GameDemoScreen.cpp" />
+    <ClCompile Include="src\Screens\GameOver\GameOverScreen.cpp" />
+    <ClCompile Include="src\Screens\GamePlay\GamePlayScreen.cpp" />
+    <ClCompile Include="src\Screens\GameStart\GameStartScreen.cpp" />
+    <ClCompile Include="src\Systems\Aiming\AimingSystem.cpp" />
+    <ClCompile Include="src\Systems\Shooting\ShootingSystem.cpp" />
+    <ClCompile Include="src\UI\Buttons\TextButton.cpp" />
+    <ClCompile Include="src\Utilities\Math\MathUtils.cpp" />
+    <ClCompile Include="src\Utilities\Physics\PhysicsUtils.cpp" />
+    <ClCompile Include="src\Utilities\UI\UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\Game.h" />
-    <ClInclude Include="src\Core\GameConstants.h" />
-    <ClInclude Include="src\Entities\Ball.h" />
-    <ClInclude Include="src\Entities\BallManager.h" />
+    <ClInclude Include="src\Config\Constants\GameConstants.h" />
+    <ClInclude Include="src\Core\Application\Game.h" />
+    <ClInclude Include="src\Entities\Enemies\Ball.h" />
+    <ClInclude Include="src\Entities\Enemies\BallManager.h" />
     <ClInclude Include="src\Entities\Entity.h" />
-    <ClInclude Include="src\Entities\Player.h" />
-    <ClInclude Include="src\Overlays\InstructionOverlay.h" />
+    <ClInclude Include="src\Entities\Player\Player.h" />
+    <ClInclude Include="src\Entities\Projectiles\Bullet.h" />
+    <ClInclude Include="src\Overlays\Instruction\InstructionOverlay.h" />
     <ClInclude Include="src\Overlays\Overlay.h" />
-    <ClInclude Include="src\Overlays\PauseMenuOverlay.h" />
-    <ClInclude Include="src\Projectiles\Bullet.h" />
-    <ClInclude Include="src\Screens\GameDemoScreen.h" />
-    <ClInclude Include="src\Screens\GameOverScreen.h" />
-    <ClInclude Include="src\Screens\GamePlayScreen.h" />
-    <ClInclude Include="src\Screens\GameStartScreen.h" />
+    <ClInclude Include="src\Overlays\PauseMenu\PauseMenuOverlay.h" />
+    <ClInclude Include="src\Screens\GameDemo\GameDemoScreen.h" />
+    <ClInclude Include="src\Screens\GameOver\GameOverScreen.h" />
+    <ClInclude Include="src\Screens\GamePlay\GamePlayScreen.h" />
+    <ClInclude Include="src\Screens\GameStart\GameStartScreen.h" />
     <ClInclude Include="src\Screens\Screen.h" />
-    <ClInclude Include="src\Systems\AimingSystem.h" />
-    <ClInclude Include="src\UI\TextButton.h" />
-    <ClInclude Include="src\UI\UIUtils.h" />
-    <ClInclude Include="src\Utilities\MathUtils.h" />
-    <ClInclude Include="src\Utilities\PhysicsUtils.h" />
+    <ClInclude Include="src\Systems\Aiming\AimingSystem.h" />
+    <ClInclude Include="src\Systems\Shooting\ShootingSystem.h" />
+    <ClInclude Include="src\UI\Buttons\TextButton.h" />
+    <ClInclude Include="src\Utilities\Math\MathUtils.h" />
+    <ClInclude Include="src\Utilities\Physics\PhysicsUtils.h" />
+    <ClInclude Include="src\Utilities\UI\UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Core\Game.inl" />
+    <None Include="src\Core\Application\Game.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

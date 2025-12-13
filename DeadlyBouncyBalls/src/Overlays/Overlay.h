@@ -1,9 +1,9 @@
 #ifndef OVERLAY_H
 #define OVERLAY_H
 
-#include <SFML/Graphics.hpp>
+#include "Config/Constants/GameConstants.h"
 
-constexpr uint8_t DIM_ALPHA = 150;
+#include <SFML/Graphics.hpp>
 
 class Game;
 
