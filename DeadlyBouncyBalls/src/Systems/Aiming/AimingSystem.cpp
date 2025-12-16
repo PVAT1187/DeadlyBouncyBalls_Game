@@ -27,7 +27,7 @@ void AimingSystem::update(const Vector2f& playerPosition,
 
 void AimingSystem::draw(RenderWindow& window) const
 {
-	window.draw(aimingLine);
+	//window.draw(aimingLine);
 	window.draw(aimingIconSprite);
 }
 

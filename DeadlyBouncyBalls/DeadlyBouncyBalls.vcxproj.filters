@@ -76,6 +76,9 @@
     <Filter Include="Screens\GameOver">
       <UniqueIdentifier>{ef65ead9-e47e-4fd1-8489-e60fbd1184a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\Combat">
+      <UniqueIdentifier>{a4c5d809-0fb5-4254-a9f1-0bc08680bfab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\main.cpp">
@@ -134,9 +137,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Entities\Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="src\Config\Constants\GameConstants.h">
       <Filter>Config\Constants</Filter>
     </ClInclude>
@@ -196,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="src\Screens\GameOver\GameOverScreen.h">
       <Filter>Screens\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Entity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

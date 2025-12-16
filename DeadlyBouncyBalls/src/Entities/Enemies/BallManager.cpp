@@ -80,7 +80,7 @@ void BallManager::updateSplitting()
 {
 	if (splittingTimer >= currentSplitTime)
 	{
-		splitBall();
+		splitBallOnTime();
 		currentSplitTime *= SPLIT_TIME_MULTIPLIER;
 		blinkTriggered = false;
 	}
@@ -107,33 +107,56 @@ void BallManager::resolveBallCollisions()
 	}
 }
 
-void BallManager::splitBall()
+void BallManager::splitBall(const Ball& ball,
+	vector<Ball>& newBalls)
+{
+	float newRadius = ball.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
+
+	if (newRadius < MIN_RADIUS)
+		return;
+
+	Vector2f position = ball.getPosition();
+		
+	Vector2f parentDirection = normalize(ball.getVelocity());
+	Vector2f newDirection = normalize(parentDirection + randomDirection() 
+		* DIRECTION_RANDOMNESS_FACTOR);
+		
+	float newSpeed = randomFloat(MIN_SPEED, MAX_SPEED) * (MAX_RADIUS / newRadius);
+		
+	Vector2f newVelocity = newDirection * newSpeed;
+
+	newBalls.emplace_back(newRadius, position, newVelocity);
+}
+
+void BallManager::splitBallOnTime()
 {
 	vector<Ball> newBalls;
 	newBalls.reserve(balls.size());
-
-	for (auto& ball : balls)
+	
+	for (const auto& ball : balls)
 	{
-		float newRadius = ball.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
-
-		if (newRadius < MIN_RADIUS)
-			continue;
-
-		Vector2f position = ball.getPosition();
-		
-		Vector2f parentDirection = normalize(ball.getVelocity());
-		Vector2f newDirection = normalize(parentDirection + randomDirection() 
-			* DIRECTION_RANDOMNESS_FACTOR);
-		
-		float newSpeed = randomFloat(MIN_SPEED, MAX_SPEED) * (MAX_RADIUS / newRadius);
-		
-		Vector2f newVelocity = newDirection * newSpeed;
-
-		newBalls.emplace_back(newRadius, position, newVelocity);
+		splitBall(ball, newBalls);
 	}
 
-	for (auto& newBall : newBalls)
+	balls.insert(balls.end(), newBalls.begin(), newBalls.end());
+}
+
+void BallManager::splitBallOnHit(size_t index)
+{
+	Ball& hitBall = balls[index];
+	
+	float hitBallRadius = hitBall.getRadius();
+	if (hitBallRadius <= MIN_RADIUS)
 	{
-		balls.push_back(newBall);
+		balls.erase(balls.begin() + index);
+		return;
 	}
+
+	vector<Ball> newBalls;
+	newBalls.reserve(balls.size());
+
+	splitBall(hitBall, newBalls);
+
+	balls.erase(balls.begin() + index);
+	balls.insert(balls.end(), newBalls.begin(), newBalls.end());
 }

@@ -28,7 +28,11 @@ class BallManager
 		void updateSplitting();
 
 		void resolveBallCollisions();
-		void splitBall();
+		
+		void splitBall(const Ball& ball,
+			std::vector<Ball>& newBalls);
+		void splitBallOnTime();
+		void splitBallOnHit(size_t index);
 };
 
 #endif // !BALL_MANAGER_H
