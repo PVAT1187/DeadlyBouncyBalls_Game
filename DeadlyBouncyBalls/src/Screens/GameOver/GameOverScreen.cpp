@@ -1,8 +1,8 @@
 #include "Config/Constants/GameConstants.h"
 #include "Core/Application/Game.h"
-#include "Screens/GameOver/GameOverScreen.h"
 #include "Screens/GameStart/GameStartScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
+#include "Screens/GameOver/GameOverScreen.h"
 #include "Utilities/UI/UIUtils.h"
 
 #include <iostream>

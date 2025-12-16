@@ -1,6 +1,5 @@
 #include "Config/Constants/GameConstants.h"
 #include "Entities/Player/Player.h"
-#include "Systems/Aiming/AimingSystem.h"
 #include "Utilities/Math/MathUtils.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 

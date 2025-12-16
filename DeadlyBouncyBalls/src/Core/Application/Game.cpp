@@ -4,8 +4,6 @@
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
 
-#include <iostream>
-
 using namespace sf;
 using namespace std;
 

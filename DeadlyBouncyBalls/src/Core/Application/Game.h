@@ -2,8 +2,6 @@
 #define GAME_H
 
 #include "Screens/Screen.h"
-#include "Entities/Player/Player.h"
-#include "Entities/Enemies/Ball.h"
 
 class Game
 {

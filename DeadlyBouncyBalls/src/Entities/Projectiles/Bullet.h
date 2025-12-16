@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+class Ball;
+
 class Bullet
 {
 	public:
@@ -15,6 +17,7 @@ class Bullet
 		void draw(sf::RenderWindow& window) const;
 
 		bool isExpired() const;
+		bool hitsEnemy(const Ball& ball) const;
 
 	private:
 		sf::CircleShape bullet;
