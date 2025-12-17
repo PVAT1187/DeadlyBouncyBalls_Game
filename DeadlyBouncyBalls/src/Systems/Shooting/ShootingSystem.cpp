@@ -1,12 +1,10 @@
+#include "Config/Constants/GameConstants.h"
 #include "Systems/Shooting/ShootingSystem.h"
 
 using namespace sf;
 using namespace std;
 
-ShootingSystem::ShootingSystem()
-{
-	fireCooldown = 0.0f;
-}
+ShootingSystem::ShootingSystem() : fireCooldown(0.f) {}
 
 void ShootingSystem::update(float deltaTime)
 {
@@ -23,15 +21,20 @@ void ShootingSystem::draw(sf::RenderWindow& window) const
 	}
 }
 
+vector<Bullet>& ShootingSystem::getBullets()
+{
+	return bullets;
+}
+
 void ShootingSystem::shoot(const sf::Vector2f& position,
 	const sf::Vector2f& direction)
 {
 	if (fireCooldown > 0.f)
 		return;
 
-	bullets.emplace_back(position, direction, 1500.f, 2.f);
+	bullets.emplace_back(position, direction, BULLET_SPEED, BULLET_LIFESPAN);
 
-	fireCooldown = 0.2f;
+	fireCooldown = FIRE_COOLDOWN;
 }
 
 void ShootingSystem::updateBullets(float deltaTime)

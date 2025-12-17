@@ -3,8 +3,7 @@
 
 #include "Screens/Screen.h"
 #include "Overlays/PauseMenu/PauseMenuOverlay.h"
-#include "Entities/Player/Player.h"
-#include "Entities/Enemies/BallManager.h"
+#include "Core/GameWorld/GameWorld.h"
 
 #include <vector>
 
@@ -20,8 +19,7 @@ class GamePlayScreen : public Screen
 		void unpause();
 
 	private:
-		Player player;
-		BallManager ballManager;
+		GameWorld gameWorld;
 
 		sf::Clock survivalClock;
 		sf::Text survivalTimeText;
@@ -31,7 +29,7 @@ class GamePlayScreen : public Screen
 
 		void initSurvivalTimeText();
 		void updateSurvivalTimeText(float survivalTime);
-		void positionPlayer();
+		
 };
 
 #endif // !GAME_PLAY_SCREEN_H

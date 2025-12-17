@@ -12,9 +12,13 @@ class BallManager
 		BallManager(const sf::Vector2u& windowSize);
 
 		void update(float deltaTime, const sf::Vector2u& windowSize);
-		void draw(sf::RenderWindow& window);
+		void draw(sf::RenderWindow& window) const;
 
-		bool isGameOver(const Player& player);
+		std::vector<Ball>& getBalls();
+
+		void splitBallOnHit(size_t index);
+		
+		bool hitsPlayer(const Player& player) const;
 
 	private:
 		std::vector<Ball> balls;
@@ -30,7 +34,6 @@ class BallManager
 		void resolveBallCollisions();
 		
 		void splitBallOnTimer();
-		void splitBallOnHit(size_t index);
 };
 
 #endif // !BALL_MANAGER_H

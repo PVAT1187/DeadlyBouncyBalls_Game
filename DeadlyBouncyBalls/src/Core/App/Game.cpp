@@ -1,4 +1,4 @@
-#include "Core/Application/Game.h"
+#include "Core/App/Game.h"
 #include "Screens/GameStart/GameStartScreen.h"
 #include "Screens/GameDemo/GameDemoScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"

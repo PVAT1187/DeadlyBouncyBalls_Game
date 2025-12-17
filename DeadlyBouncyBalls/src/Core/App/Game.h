@@ -34,6 +34,6 @@ class Game
 		void initTexture();
 };
 
-#include "Core/Application/Game.inl"
+#include "Core/App/Game.inl"
 #endif // !GAME_H
 

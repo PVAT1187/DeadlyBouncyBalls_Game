@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Application\Game.cpp" />
+    <ClCompile Include="src\Core\App\Game.cpp" />
+    <ClCompile Include="src\Core\GameWorld\GameWorld.cpp" />
     <ClCompile Include="src\Core\main.cpp" />
     <ClCompile Include="src\Entities\Enemies\Ball.cpp" />
     <ClCompile Include="src\Entities\Enemies\BallManager.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="src\Screens\GamePlay\GamePlayScreen.cpp" />
     <ClCompile Include="src\Screens\GameStart\GameStartScreen.cpp" />
     <ClCompile Include="src\Systems\Aiming\AimingSystem.cpp" />
+    <ClCompile Include="src\Systems\Combat\CombatSystem.cpp" />
     <ClCompile Include="src\Systems\Shooting\ShootingSystem.cpp" />
     <ClCompile Include="src\UI\Buttons\TextButton.cpp" />
     <ClCompile Include="src\Utilities\Math\MathUtils.cpp" />
@@ -40,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config\Constants\GameConstants.h" />
-    <ClInclude Include="src\Core\Application\Game.h" />
+    <ClInclude Include="src\Core\App\Game.h" />
+    <ClInclude Include="src\Core\GameWorld\GameWorld.h" />
     <ClInclude Include="src\Entities\Enemies\Ball.h" />
     <ClInclude Include="src\Entities\Enemies\BallManager.h" />
     <ClInclude Include="src\Entities\Entity.h" />
@@ -55,6 +58,7 @@
     <ClInclude Include="src\Screens\GameStart\GameStartScreen.h" />
     <ClInclude Include="src\Screens\Screen.h" />
     <ClInclude Include="src\Systems\Aiming\AimingSystem.h" />
+    <ClInclude Include="src\Systems\Combat\CombatSystem.h" />
     <ClInclude Include="src\Systems\Shooting\ShootingSystem.h" />
     <ClInclude Include="src\UI\Buttons\TextButton.h" />
     <ClInclude Include="src\Utilities\Math\MathUtils.h" />
@@ -62,7 +66,7 @@
     <ClInclude Include="src\Utilities\UI\UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Core\Application\Game.inl" />
+    <None Include="src\Core\App\Game.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

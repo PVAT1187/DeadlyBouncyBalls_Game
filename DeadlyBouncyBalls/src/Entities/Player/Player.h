@@ -22,6 +22,7 @@ class Player : public Entity
 		sf::Sprite& getSprite();
 
 		sf::FloatRect getCollisionBounds() const;
+		ShootingSystem& getShootingSystem();
 
 	private:
 		sf::Sprite playerSprite;

@@ -1,5 +1,5 @@
 #include "Config/Constants/GameConstants.h"
-#include "Core/Application/Game.h"
+#include "Core/App/Game.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
 
@@ -8,15 +8,13 @@ using namespace std;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window),
-	player(game.getPlayerTexture(), game.getAimingIconTexture()),
-	ballManager(window.getSize()),
+	gameWorld(game, window.getSize()),
 	paused(false),
 	survivalClock(),
 	survivalTimeText(Text(game.getFont(), "", BODY_TEXT_SIZE))
 {
 	this->window.setMouseCursorVisible(false);
 	
-	positionPlayer();
 	initSurvivalTimeText();
 	
 	survivalClock.restart();
@@ -52,15 +50,13 @@ void GamePlayScreen::update(float deltaTime)
 	float survivalTime = survivalClock.getElapsedTime().asSeconds();
 	updateSurvivalTimeText(survivalTime);
 
-	const Vector2u& windowSize = window.getSize();
-	Vector2f mousePosition = 
+	Vector2f mousePosition =
 		window.mapPixelToCoords(Mouse::getPosition(window));
+	const Vector2u& windowSize = window.getSize();
 
-	player.setMouseTarget(mousePosition);
-	player.update(deltaTime, windowSize);
-	ballManager.update(deltaTime, windowSize);
+	gameWorld.update(deltaTime, windowSize, mousePosition);
 
-	if (ballManager.isGameOver(player))
+	if (gameWorld.isGameOver())
 	{
 		game.switchScreen<GameOverScreen>(window, survivalTime);
 		return;
@@ -69,8 +65,7 @@ void GamePlayScreen::update(float deltaTime)
 
 void GamePlayScreen::render(RenderWindow& window)
 {
-	player.draw(window);
-	ballManager.draw(window);
+	gameWorld.render(window);
 	window.draw(survivalTimeText);
 
 	if (paused)
@@ -97,11 +92,3 @@ void GamePlayScreen::updateSurvivalTimeText(float survivalTime)
 	survivalTimeText.setString("Survival Time: " +
 		to_string(survivalTime) + "s");
 }
-
-void GamePlayScreen::positionPlayer()
-{
-	Vector2u windowSize = window.getSize();
-	player.getSprite().setPosition(
-		Vector2f(windowSize.x / 2.f, windowSize.y / 2.f));
-}
-

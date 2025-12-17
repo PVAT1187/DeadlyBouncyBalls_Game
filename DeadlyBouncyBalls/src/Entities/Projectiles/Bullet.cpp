@@ -1,3 +1,4 @@
+#include "Config/Constants/GameConstants.h"
 #include "Entities/Enemies/Ball.h"
 #include "Entities/Projectiles/Bullet.h"
 #include "Utilities/Math/MathUtils.h"
@@ -15,7 +16,7 @@ Bullet::Bullet(const sf::Vector2f& startPosition,
 {
 	bullet.setPosition(position);
 	bullet.setFillColor(Color::Red);
-	bullet.setRadius(5.0f);
+	bullet.setRadius(BULLET_RADIUS);
 	bullet.setOrigin(Vector2f(bullet.getRadius(), bullet.getRadius()));
 	velocity = normalize(direction) * speed;
 }

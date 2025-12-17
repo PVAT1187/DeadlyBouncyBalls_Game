@@ -14,12 +14,12 @@ BallManager::BallManager(const sf::Vector2u& windowSize) :
 {
 	for (int i = 0; i < INITIAL_NUMBER_OF_BALL; ++i)
 	{
-		float radius = MAX_RADIUS;
+		float radius = BALL_MAX_RADIUS;
 		
 		Vector2f position(randomFloat(radius, windowSize.x - radius),
 			randomFloat(radius, windowSize.y - radius));
 
-		float speed = randomFloat(MIN_SPEED, MAX_SPEED);
+		float speed = randomFloat(BALL_MIN_SPEED, BALL_MAX_SPEED);
 		Vector2f direction = randomDirection();
 		Vector2f velocity = direction * speed;
 
@@ -37,7 +37,7 @@ void BallManager::update(float deltaTime, const sf::Vector2u& windowSize)
 	updateSplitting();
 }
 
-void BallManager::draw(sf::RenderWindow& window)
+void BallManager::draw(sf::RenderWindow& window) const
 {
 	for (const auto& ball : balls)
 	{
@@ -45,9 +45,53 @@ void BallManager::draw(sf::RenderWindow& window)
 	}
 }
 
-bool BallManager::isGameOver(const Player& player)
+vector<Ball>& BallManager::getBalls()
 {
-	for (auto& ball : balls)
+	return balls;
+}
+
+void BallManager::splitBallOnHit(size_t index)
+{
+	Ball& hitBall = balls[index];
+
+	float newRadius = hitBall.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
+	if (newRadius <= BALL_MIN_RADIUS)
+	{
+		balls.erase(balls.begin() + index);
+		return;
+	}
+
+	vector<Ball> newBalls;
+	newBalls.reserve(balls.size());
+
+	Vector2f position = hitBall.getPosition();
+
+	Vector2f parentDirection = normalize(hitBall.getVelocity());
+
+	Vector2f childDirection1 = normalize(parentDirection + randomDirection()
+		* DIRECTION_RANDOMNESS_FACTOR);
+	Vector2f childDirection2 = normalize(parentDirection + randomDirection()
+		* DIRECTION_RANDOMNESS_FACTOR);
+
+	float newSpeed = randomFloat(BALL_MIN_SPEED, BALL_MAX_SPEED)
+		* (BALL_MAX_RADIUS / newRadius);
+
+	Vector2f newVelocity1 = childDirection1 * newSpeed;
+	Vector2f newVelocity2 = childDirection2 * newSpeed;
+
+	newBalls.emplace_back(newRadius, position, newVelocity1);
+	newBalls.emplace_back(newRadius, position, newVelocity2);
+
+	balls.erase(balls.begin() + index);
+	for (const auto& ball : newBalls)
+	{
+		balls.push_back(ball);
+	}
+}
+
+bool BallManager::hitsPlayer(const Player& player) const
+{
+	for (const auto& ball : balls)
 	{
 		if (ball.isCollidingWithPlayer(player))
 			return true;
@@ -116,7 +160,7 @@ void BallManager::splitBallOnTimer()
 	{
 		float newRadius = ball.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
 
-		if (newRadius < MIN_RADIUS)
+		if (newRadius < BALL_MIN_RADIUS)
 			continue;
 
 		Vector2f position = ball.getPosition();
@@ -125,51 +169,14 @@ void BallManager::splitBallOnTimer()
 		Vector2f newDirection = normalize(parentDirection + randomDirection()
 			* DIRECTION_RANDOMNESS_FACTOR);
 
-		float newSpeed = randomFloat(MIN_SPEED, MAX_SPEED) * (MAX_RADIUS / newRadius);
+		float newSpeed = randomFloat(BALL_MIN_SPEED, BALL_MAX_SPEED)
+			* (BALL_MAX_RADIUS / newRadius);
 
 		Vector2f newVelocity = newDirection * newSpeed;
 
 		newBalls.emplace_back(newRadius, position, newVelocity);
 	}
 
-	for (const auto& ball : newBalls)
-	{
-		balls.push_back(ball);
-	}
-}
-
-void BallManager::splitBallOnHit(size_t index)
-{
-	Ball& hitBall = balls[index];
-	
-	float newRadius = hitBall.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
-	if (newRadius <= MIN_RADIUS)
-	{
-		balls.erase(balls.begin() + index);
-		return;
-	}
-
-	vector<Ball> newBalls;
-	newBalls.reserve(balls.size());
-
-	Vector2f position = hitBall.getPosition();
-
-	Vector2f parentDirection = normalize(hitBall.getVelocity());
-
-	Vector2f childDirection1 = normalize(parentDirection + randomDirection()
-		* DIRECTION_RANDOMNESS_FACTOR);
-	Vector2f childDirection2 = normalize(parentDirection + randomDirection()
-		* DIRECTION_RANDOMNESS_FACTOR);
-	
-	float newSpeed = randomFloat(MIN_SPEED, MAX_SPEED) * (MAX_RADIUS / newRadius);
-
-	Vector2f newVelocity1 = childDirection1 * newSpeed;	
-	Vector2f newVelocity2 = childDirection2 * newSpeed;
-
-	newBalls.emplace_back(newRadius, position, newVelocity1);
-	newBalls.emplace_back(newRadius, position, newVelocity2);
-
-	balls.erase(balls.begin() + index);
 	for (const auto& ball : newBalls)
 	{
 		balls.push_back(ball);

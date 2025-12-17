@@ -1,5 +1,5 @@
 #include "Config/Constants/GameConstants.h"
-#include "Core/Application/Game.h"
+#include "Core/App/Game.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Overlays/Instruction/InstructionOverlay.h"
 #include "Utilities/UI/UIUtils.h"

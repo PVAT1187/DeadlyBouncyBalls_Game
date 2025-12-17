@@ -73,6 +73,11 @@ FloatRect Player::getCollisionBounds() const
 	return spriteBounds;
 }
 
+ShootingSystem& Player::getShootingSystem()
+{
+	return shootingSystem;
+}
+
 void Player::move(float deltaTime)
 {
     Vector2f movement;

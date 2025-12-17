@@ -10,6 +10,8 @@ class ShootingSystem
 
 		void update(float deltaTime);
 		void draw(sf::RenderWindow& window) const;
+		
+		std::vector<Bullet>& getBullets();
 
 		void shoot(const sf::Vector2f& position, 
 			const sf::Vector2f& direction);

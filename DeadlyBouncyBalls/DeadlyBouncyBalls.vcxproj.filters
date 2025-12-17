@@ -25,9 +25,6 @@
     <Filter Include="Config\Constants">
       <UniqueIdentifier>{d8a85168-9edc-4cde-9f9c-bcf1a599d793}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Application">
-      <UniqueIdentifier>{b420bb40-31de-412e-abfe-1d61b5325104}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Player">
       <UniqueIdentifier>{43a7f531-345b-42f7-b276-915956a03d80}</UniqueIdentifier>
     </Filter>
@@ -79,13 +76,16 @@
     <Filter Include="Systems\Combat">
       <UniqueIdentifier>{a4c5d809-0fb5-4254-a9f1-0bc08680bfab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\App">
+      <UniqueIdentifier>{b420bb40-31de-412e-abfe-1d61b5325104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameWorld">
+      <UniqueIdentifier>{250250e9-0443-48d6-8fb9-55c572ba6703}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\main.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Application\Game.cpp">
-      <Filter>Core\Application</Filter>
     </ClCompile>
     <ClCompile Include="src\Entities\Player\Player.cpp">
       <Filter>Entities\Player</Filter>
@@ -135,13 +135,19 @@
     <ClCompile Include="src\Screens\GameOver\GameOverScreen.cpp">
       <Filter>Screens\GameOver</Filter>
     </ClCompile>
+    <ClCompile Include="src\Systems\Combat\CombatSystem.cpp">
+      <Filter>Systems\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\App\Game.cpp">
+      <Filter>Core\App</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\GameWorld\GameWorld.cpp">
+      <Filter>Core\GameWorld</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config\Constants\GameConstants.h">
       <Filter>Config\Constants</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Application\Game.h">
-      <Filter>Core\Application</Filter>
     </ClInclude>
     <ClInclude Include="src\Entities\Player\Player.h">
       <Filter>Entities\Player</Filter>
@@ -200,10 +206,19 @@
     <ClInclude Include="src\Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\Systems\Combat\CombatSystem.h">
+      <Filter>Systems\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\App\Game.h">
+      <Filter>Core\App</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\GameWorld\GameWorld.h">
+      <Filter>Core\GameWorld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Core\Application\Game.inl">
-      <Filter>Core\Application</Filter>
+    <None Include="src\Core\App\Game.inl">
+      <Filter>Core\App</Filter>
     </None>
   </ItemGroup>
 </Project>
