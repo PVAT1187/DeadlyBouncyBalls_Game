@@ -124,11 +124,8 @@ void PhysicsUtils::resolveCircleCollisions(Vector2f& positionA,
     Vector2f& velocityA, float radiusA, float massA,
     Vector2f& positionB, Vector2f& velocityB, float radiusB, float massB)
 {
-    if (isCircleCollidingWithCircle(positionA, radiusA, positionB, radiusB))
-    {
-        resolveStaticCircleCollision(positionA, radiusA, positionB, radiusB);
+    resolveStaticCircleCollision(positionA, radiusA, positionB, radiusB);
 
-        Vector2f normal = computeNormal(positionA, positionB);
-        resolveDynamicCircleCollision(velocityA, massA, velocityB, massB, normal);
-    }
+    Vector2f normal = computeNormal(positionA, positionB);
+    resolveDynamicCircleCollision(velocityA, massA, velocityB, massB, normal);
 }

@@ -1,5 +1,6 @@
 #include "Config/Constants/GameConstants.h"
 #include "Entities/Enemies/BallManager.h"
+#include "Systems/CollisionDetection/CollisionDetectionSystem.h"
 #include "Utilities/Math/MathUtils.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
@@ -43,6 +44,11 @@ void BallManager::draw(sf::RenderWindow& window) const
 	{
 		ball.draw(window);
 	}
+}
+
+const vector<Ball>& BallManager::getBalls() const
+{
+	return balls;
 }
 
 vector<Ball>& BallManager::getBalls()
@@ -91,12 +97,8 @@ void BallManager::splitBallOnHit(size_t index)
 
 bool BallManager::hitsPlayer(const Player& player) const
 {
-	for (const auto& ball : balls)
-	{
-		if (ball.isCollidingWithPlayer(player))
-			return true;
-	}
-	return false;
+	CollisionDetectionSystem collisionDetector;
+	return collisionDetector.detectPlayerBallCollisions(player, *this);
 }
 
 void BallManager::updateBalls(float deltaTime, const Vector2u& windowSize)
@@ -132,22 +134,24 @@ void BallManager::updateSplitting()
 
 void BallManager::resolveBallCollisions()
 {
-	size_t size = balls.size();
-	for (size_t i = 0; i < size; ++i)
-	{
-		for (size_t j = i + 1; j < size; ++j)
-		{
-			resolveCircleCollisions(
-				balls[i].getPosition(),
-				balls[i].getVelocity(),
-				balls[i].getRadius(),
-				balls[i].getMass(),
+	CollisionDetectionSystem collisionDetector;
+	auto collisionPairs = collisionDetector.detectBallCollisions(balls);
 
-				balls[j].getPosition(),
-				balls[j].getVelocity(),
-				balls[j].getRadius(),
-				balls[j].getMass());
-		}
+	for (const auto& pair : collisionPairs)
+	{
+		size_t i = pair.first;
+		size_t j = pair.second;
+
+		resolveCircleCollisions(
+			balls[i].getPosition(),
+			balls[i].getVelocity(),
+			balls[i].getRadius(),
+			balls[i].getMass(),
+
+			balls[j].getPosition(),
+			balls[j].getVelocity(),
+			balls[j].getRadius(),
+			balls[j].getMass());
 	}
 }
 

@@ -1,4 +1,5 @@
 #include "Systems/Combat/CombatSystem.h"
+#include "Systems/CollisionDetection/CollisionDetectionSystem.h"
 
 void CombatSystem::update(ShootingSystem& shootingSystem,
 	BallManager& ballManager)
@@ -6,28 +7,17 @@ void CombatSystem::update(ShootingSystem& shootingSystem,
 	auto& bullets = shootingSystem.getBullets();
 	auto& balls = ballManager.getBalls();
 
-	size_t bulletsSize = bullets.size();
-	size_t ballsSize = balls.size();
+	CollisionDetectionSystem collisionDetector;
+	auto collisions = collisionDetector.detectBulletBallCollisions(
+		bullets, balls);
 
-	bool splitHappened = false;
-	size_t i = 0;
-	while (i < bulletsSize && !splitHappened)
+	auto iterEnd = collisions.rend();
+	for (auto iterator = collisions.rbegin(); iterator != iterEnd; ++iterator)
 	{
-		size_t j = 0;
-		while (j < ballsSize)
-		{
-			if (bullets[i].hitsEnemy(balls[j]))
-			{
-				ballManager.splitBallOnHit(j);
+		size_t bulletIndex = iterator->first;
+		size_t ballIndex = iterator->second;
 
-				bullets.erase(bullets.begin() + i);
-				--i;
-
-				splitHappened = true;
-				break;
-			}
-			++j;
-		}
-		++i;
+		ballManager.splitBallOnHit(ballIndex);
+		bullets.erase(bullets.begin() + bulletIndex);
 	}
 }

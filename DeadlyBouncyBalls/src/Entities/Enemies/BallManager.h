@@ -14,6 +14,7 @@ class BallManager
 		void update(float deltaTime, const sf::Vector2u& windowSize);
 		void draw(sf::RenderWindow& window) const;
 
+		const std::vector<Ball>& getBalls() const;
 		std::vector<Ball>& getBalls();
 
 		void splitBallOnHit(size_t index);

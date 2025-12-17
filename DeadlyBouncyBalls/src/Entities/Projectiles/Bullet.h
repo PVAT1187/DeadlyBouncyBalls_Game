@@ -16,8 +16,10 @@ class Bullet
 		void update(float deltaTime);
 		void draw(sf::RenderWindow& window) const;
 
+		const sf::Vector2f& getPosition() const;
+		float getRadius() const;
+
 		bool isExpired() const;
-		bool hitsEnemy(const Ball& ball) const;
 
 	private:
 		sf::CircleShape bullet;

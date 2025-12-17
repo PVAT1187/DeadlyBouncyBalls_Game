@@ -82,6 +82,9 @@
     <Filter Include="Core\GameWorld">
       <UniqueIdentifier>{250250e9-0443-48d6-8fb9-55c572ba6703}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\CollisionDetection">
+      <UniqueIdentifier>{9ed9d54c-3fd5-4ba1-bb4b-622c3c5d06fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\main.cpp">
@@ -143,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="src\Core\GameWorld\GameWorld.cpp">
       <Filter>Core\GameWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\CollisionDetection\CollisionDetectionSystem.cpp">
+      <Filter>Systems\CollisionDetection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="src\Core\GameWorld\GameWorld.h">
       <Filter>Core\GameWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\CollisionDetection\CollisionDetectionSystem.h">
+      <Filter>Systems\CollisionDetection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

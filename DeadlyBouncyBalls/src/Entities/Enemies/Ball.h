@@ -22,9 +22,6 @@ class Ball : public Entity
 
 		void startBlink(float duration);
 
-		bool isCollidingWithPlayer(const Player& player) const;
-
-
 	private:
 		sf::CircleShape ball;
 

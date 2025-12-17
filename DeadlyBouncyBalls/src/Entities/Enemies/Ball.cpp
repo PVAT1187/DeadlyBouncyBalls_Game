@@ -67,13 +67,6 @@ void Ball::startBlink(float duration)
 	flashingTime = duration;
 }
 
-bool Ball::isCollidingWithPlayer(const Player& player) const
-{
-	const FloatRect& playerBounds = player.getCollisionBounds();
-	return isCircleCollidingWithSprite(position,
-		radius, playerBounds);
-}
-
 void Ball::move(float deltaTime, const sf::Vector2u& windowSize)
 {
 	position += velocity * deltaTime;

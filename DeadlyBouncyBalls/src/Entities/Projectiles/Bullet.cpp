@@ -33,20 +33,18 @@ void Bullet::draw(sf::RenderWindow& window) const
 	window.draw(bullet);
 }
 
+const sf::Vector2f& Bullet::getPosition() const
+{
+	return position;
+}
+
+float Bullet::getRadius() const
+{
+	return bullet.getRadius();
+}
+
 bool Bullet::isExpired() const
 {
 	return age >= lifespan;
-}
-
-bool Bullet::hitsEnemy(const Ball& ball) const
-{
-	Vector2f bulletPosition = bullet.getPosition();
-	Vector2f ballPosition = ball.getPosition();
-
-	float bulletRadius = bullet.getRadius();
-	float ballRadius = ball.getRadius();
-	
-	return isCircleCollidingWithCircle(bulletPosition, bulletRadius,
-		ballPosition, ballRadius);
 }
 
