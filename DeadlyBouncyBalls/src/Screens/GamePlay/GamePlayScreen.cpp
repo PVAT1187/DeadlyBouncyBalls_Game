@@ -7,16 +7,14 @@ using namespace sf;
 using namespace std;
 
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
-	Screen(game, window),
+	Screen(game, window, &game.getAssets()),
 	gameWorld(game, window.getSize()),
 	paused(false),
 	survivalClock(),
-	survivalTimeText(Text(game.getFont(), "", BODY_TEXT_SIZE))
+	survivalTimeText(Text(assets->getFont(), "", BODY_TEXT_SIZE))
 {
 	this->window.setMouseCursorVisible(false);
-	
 	initSurvivalTimeText();
-	
 	survivalClock.restart();
 
 	pauseOverlay = make_unique<PauseMenuOverlay>(*this, game, window);

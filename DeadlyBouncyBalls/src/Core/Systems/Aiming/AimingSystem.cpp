@@ -1,5 +1,5 @@
 #include "Config/Constants/GameConstants.h"
-#include "Systems/Aiming/AimingSystem.h"
+#include "Core/Systems/Aiming/AimingSystem.h"
 #include "Utilities/Math/MathUtils.h"
 
 using namespace sf;

@@ -1,4 +1,4 @@
-#include "Systems/CollisionDetection/CollisionDetectionSystem.h"
+#include "Core/Systems/CollisionDetection/CollisionDetectionSystem.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
 using namespace std;
@@ -38,9 +38,9 @@ std::vector<std::pair<size_t, size_t>>
 	{
 		for (size_t j = 0; j < ballSize; ++j)
 		{
-			if (isCircleCollidingWithCircle(
-				bullets[i].getPosition(), bullets[i].getRadius(),
-				balls[j].getPosition(), balls[j].getRadius()))
+			if (isCircleCollidingWithSprite(
+				balls[j].getPosition(), balls[j].getRadius(),
+				bullets[i].getCollisionBounds()))
 			{
 				collisionPairs.emplace_back(i, j);
 			}

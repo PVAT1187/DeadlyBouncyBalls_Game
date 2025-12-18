@@ -1,5 +1,5 @@
-#include "Systems/Combat/CombatSystem.h"
-#include "Systems/CollisionDetection/CollisionDetectionSystem.h"
+#include "Core/Systems/CollisionDetection/CollisionDetectionSystem.h"
+#include "Core/Systems/Combat/CombatSystem.h"
 
 void CombatSystem::update(ShootingSystem& shootingSystem,
 	BallManager& ballManager)

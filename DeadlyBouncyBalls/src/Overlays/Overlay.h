@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 class Game;
+class GameAssets;
 
 class Overlay
 {
@@ -19,11 +20,12 @@ class Overlay
 	protected:
 		Game& game;
 		sf::RenderWindow& window;
+		const GameAssets* assets;
 
 		sf::RectangleShape dimBackground;
 
-		Overlay(Game& game, sf::RenderWindow& window) :
-			game(game), window(window) {}
+		Overlay(Game& game, sf::RenderWindow& window, const GameAssets* assets = nullptr) :
+			game(game), window(window), assets(assets) {}
 
 		void initDimBackground()
 		{

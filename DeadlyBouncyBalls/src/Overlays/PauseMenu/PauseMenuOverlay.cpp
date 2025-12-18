@@ -9,12 +9,13 @@ using namespace sf;
 using namespace std;
 using namespace UIUtils;
 
-PauseMenuOverlay::PauseMenuOverlay(GamePlayScreen& gamePlayScreen, Game& game, RenderWindow& window) :
-	Overlay(game, window),
+PauseMenuOverlay::PauseMenuOverlay(GamePlayScreen& gamePlayScreen, 
+	Game& game, RenderWindow& window) :
+	Overlay(game, window, &game.getAssets()),
 	gamePlayScreen(gamePlayScreen),
-	pauseMenuTitle(Text(game.getFont(), "GAME PAUSED", TITLE_TEXT_SIZE)),
-	resumeButton("RESUME", game.getFont(), BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", game.getFont(), BUTTON_SIZE, { 0, 0 })
+	pauseMenuTitle(Text(assets->getFont(), "GAME PAUSED", TITLE_TEXT_SIZE)),
+	resumeButton("RESUME", assets->getFont(), BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", assets->getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initDimBackground();
 	initPauseTitle();

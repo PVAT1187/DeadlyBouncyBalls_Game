@@ -8,9 +8,11 @@ using namespace MathUtils;
 using namespace PhysicsUtils;
 
 Player::Player(const Texture& playerTexture,
-    const sf::Texture& aimingIconTexture) :
+    const sf::Texture& aimingIconTexture,
+    const sf::Texture& bulletTexture) :
     playerSprite(playerTexture),
-    aimingSystem(aimingIconTexture)
+    aimingSystem(aimingIconTexture),
+	shootingSystem(bulletTexture)
 {
     playerSprite.setScale({ PLAYER_SCALE, PLAYER_SCALE });
     FloatRect spriteBounds = playerSprite.getLocalBounds();
@@ -27,13 +29,7 @@ void Player::update(float deltaTime, const sf::Vector2u& windowSize)
 
     Vector2f playerPosition = playerSprite.getPosition();
     aimingSystem.update(playerPosition, mouseTarget);
-
-    if (Mouse::isButtonPressed(Mouse::Button::Left))
-    {
-        Vector2f direction = computeDirection(mouseTarget, playerPosition);
-		shootingSystem.shoot(playerPosition, direction);
-    }
-	shootingSystem.update(deltaTime);
+	shoot(deltaTime, playerPosition);
 }
 
 void Player::draw(RenderWindow& window) const
@@ -62,8 +58,8 @@ FloatRect Player::getCollisionBounds() const
 {
     FloatRect spriteBounds = playerSprite.getGlobalBounds();
 
-    float shrinkBoundX = spriteBounds.size.x * SHRINK_FACTOR;
-    float shrinkBoundY = spriteBounds.size.y * SHRINK_FACTOR;
+    float shrinkBoundX = spriteBounds.size.x * PLAYER_SHRINK_FACTOR;
+    float shrinkBoundY = spriteBounds.size.y * PLAYER_SHRINK_FACTOR;
 
     spriteBounds.position.x += shrinkBoundX;
     spriteBounds.position.y += shrinkBoundY;
@@ -117,7 +113,7 @@ void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
 
     float currentAngle = playerSprite.getRotation().asDegrees();
     float targetAngle = atan2(direction.y, direction.x) * 
-        RADIAN_TO_DEGREE + ROTATION_OFFSET;
+        RADIAN_TO_DEGREE + PLAYER_ROTATION_OFFSET;
 
     float angleDifference = targetAngle - currentAngle;
 
@@ -131,3 +127,13 @@ void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
 
     playerSprite.setRotation(degrees(currentAngle + step));
 }   
+
+void Player::shoot(float deltaTime, const Vector2f& playerPosition)
+{
+    if (Mouse::isButtonPressed(Mouse::Button::Left))
+    {
+        Vector2f direction = computeDirection(mouseTarget, playerPosition);
+        shootingSystem.shoot(playerPosition, direction);
+    }
+    shootingSystem.update(deltaTime);
+}

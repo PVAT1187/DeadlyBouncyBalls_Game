@@ -1,9 +1,10 @@
 #ifndef GAME_WORLD_H
 #define GAME_WORLD_H
 
+#include "Core/Assets/GameAssets.h"
+#include "Core/Systems/Combat/CombatSystem.h"
 #include "Entities/Player/Player.h"
 #include "Entities/Enemies/BallManager.h"
-#include "Systems/Combat/CombatSystem.h"
 
 class Game;
 
@@ -20,6 +21,8 @@ class GameWorld
 		bool isGameOver() const;
 
 	private:
+		GameAssets assets;
+		
 		Player player;
 		BallManager ballManager;
 		CombatSystem combatSystem;

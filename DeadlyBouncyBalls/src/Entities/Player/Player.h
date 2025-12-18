@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Core/Systems/Aiming/AimingSystem.h"
+#include "Core/Systems/Shooting/ShootingSystem.h"
 #include "Entities/Entity.h"
-#include "Systems/Aiming/AimingSystem.h"
-#include "Systems/Shooting/ShootingSystem.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -11,7 +11,8 @@ class Player : public Entity
 {
 	public:
 		Player(const sf::Texture& playerTexture, 
-			const sf::Texture& aimingIconTexture);
+			const sf::Texture& aimingIconTexture,
+			const sf::Texture& bulletTexture);
 
 		void update(float deltaTime, const sf::Vector2u& windowSize) override;
 		void draw(sf::RenderWindow& window) const override;
@@ -35,6 +36,7 @@ class Player : public Entity
 		void clampToWindow(const sf::Vector2u& windowSize);
 		void rotate(float deltaTime, const sf::Vector2f& rotationTarget);
 		
+		void shoot(float deltaTime, const sf::Vector2f& playerPosition);
 };
 
 #endif // !PLAYER_H

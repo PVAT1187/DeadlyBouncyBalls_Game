@@ -6,7 +6,7 @@
 class ShootingSystem 
 {
 	public:
-		ShootingSystem();
+		ShootingSystem(const sf::Texture& bulletTexture);
 
 		void update(float deltaTime);
 		void draw(sf::RenderWindow& window) const;
@@ -18,6 +18,7 @@ class ShootingSystem
 
 	private:
 		std::vector<Bullet> bullets;
+		sf::Texture bulletTexture;
 
 		float fireCooldown;
 

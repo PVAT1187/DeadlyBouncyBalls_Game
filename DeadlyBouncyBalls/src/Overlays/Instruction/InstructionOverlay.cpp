@@ -8,11 +8,12 @@ using namespace sf;
 using namespace std;
 using namespace UIUtils;
 
-InstructionOverlay::InstructionOverlay(Game& game, RenderWindow& window) :
-	Overlay(game, window),
-	instructionOverlayTitle(Text(game.getFont(), "HOW TO PLAY", TITLE_TEXT_SIZE)),
-	instructions(Text(game.getFont(), "", BODY_TEXT_SIZE)),
-	continueButton("CONTINUE", game.getFont(), BUTTON_SIZE, { 0, 0 })
+InstructionOverlay::InstructionOverlay(Game& game,
+	RenderWindow& window) :
+	Overlay(game, window, &game.getAssets()),
+	instructionOverlayTitle(Text(assets->getFont(), "HOW TO PLAY", TITLE_TEXT_SIZE)),
+	instructions(Text(assets->getFont(), "", BODY_TEXT_SIZE)),
+	continueButton("CONTINUE", assets->getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initDimBackground();
 	initInstructionOverlayTitle();

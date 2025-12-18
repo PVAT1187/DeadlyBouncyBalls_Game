@@ -4,7 +4,8 @@
 using namespace sf;
 
 GameWorld::GameWorld(Game& game, const Vector2u& windowSize) :
-	player(game.getPlayerTexture(), game.getAimingIconTexture()),
+	assets(game.getAssets()),
+	player(assets.getPlayerTexture(), assets.getAimingIconTexture(), assets.getBulletTexture()),
 	ballManager(windowSize)
 {
 	player.getSprite().setPosition(

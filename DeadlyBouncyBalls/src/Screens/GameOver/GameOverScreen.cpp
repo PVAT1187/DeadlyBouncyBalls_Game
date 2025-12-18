@@ -13,11 +13,11 @@ using namespace UIUtils;
 
 GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
 	float finalSurvivalTime) :
-	Screen(game, window),
-	gameOverText(Text(game.getFont(), "GAME OVER", TITLE_TEXT_SIZE)),
-	finalSurvivalTimeText(Text(game.getFont(), "", BODY_TEXT_SIZE)),
-	playAgainButton("PLAY AGAIN", game.getFont(), BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", game.getFont(), BUTTON_SIZE, { 0, 0 })
+	Screen(game, window, &game.getAssets()),
+	gameOverText(Text(assets->getFont(), "GAME OVER", TITLE_TEXT_SIZE)),
+	finalSurvivalTimeText(Text(assets->getFont(), "", BODY_TEXT_SIZE)),
+	playAgainButton("PLAY AGAIN", assets->getFont(), BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", assets->getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	this->window.setMouseCursorVisible(true);
 	

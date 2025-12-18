@@ -8,7 +8,8 @@ class Ball;
 class Bullet
 {
 	public:
-		Bullet(const sf::Vector2f& startPosition, 
+		Bullet(const sf::Texture& bulletTexture,
+			const sf::Vector2f& startPosition, 
 			const sf::Vector2f& direction, 
 			float speed, 
 			float lifespan);
@@ -16,13 +17,12 @@ class Bullet
 		void update(float deltaTime);
 		void draw(sf::RenderWindow& window) const;
 
-		const sf::Vector2f& getPosition() const;
-		float getRadius() const;
+		sf::FloatRect getCollisionBounds() const;
 
 		bool isExpired() const;
 
 	private:
-		sf::CircleShape bullet;
+		sf::Sprite bulletSprite;
 
 		sf::Vector2f velocity;
 		sf::Vector2f position;

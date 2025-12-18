@@ -49,15 +49,6 @@
     <Filter Include="Utilities\UI">
       <UniqueIdentifier>{b7c5a0b2-d1d2-437d-a7ea-ad602d68d528}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems">
-      <UniqueIdentifier>{addd45f4-c110-4d8b-bcea-230c7e8e4e58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Systems\Aiming">
-      <UniqueIdentifier>{cb818bf7-e24a-4297-b42d-bfb457378d7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Systems\Shooting">
-      <UniqueIdentifier>{b95e6368-178e-43c9-99fd-905cbf2e0409}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Overlays\PauseMenu">
       <UniqueIdentifier>{12f51b10-ac0a-4008-8d81-c6c08beeec17}</UniqueIdentifier>
     </Filter>
@@ -73,17 +64,29 @@
     <Filter Include="Screens\GameOver">
       <UniqueIdentifier>{ef65ead9-e47e-4fd1-8489-e60fbd1184a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\Combat">
-      <UniqueIdentifier>{a4c5d809-0fb5-4254-a9f1-0bc08680bfab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\App">
       <UniqueIdentifier>{b420bb40-31de-412e-abfe-1d61b5325104}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\GameWorld">
       <UniqueIdentifier>{250250e9-0443-48d6-8fb9-55c572ba6703}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\CollisionDetection">
-      <UniqueIdentifier>{9ed9d54c-3fd5-4ba1-bb4b-622c3c5d06fc}</UniqueIdentifier>
+    <Filter Include="Core\Systems">
+      <UniqueIdentifier>{addd45f4-c110-4d8b-bcea-230c7e8e4e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\Aiming">
+      <UniqueIdentifier>{94f6a425-fe71-42d1-8eca-d4fd33dfb781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\CollisionDetection">
+      <UniqueIdentifier>{423da9d2-7177-4e5d-8df6-27ffdd720c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\Combat">
+      <UniqueIdentifier>{336b8013-d511-407d-9c12-8e2f6f310c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\Shooting">
+      <UniqueIdentifier>{d73af4f9-224a-4b47-9aba-8dff93fcb79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Assets">
+      <UniqueIdentifier>{747f9561-8311-4728-ab49-ed78a64d9792}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,12 +120,6 @@
     <ClCompile Include="src\Utilities\UI\UIUtils.cpp">
       <Filter>Utilities\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\Aiming\AimingSystem.cpp">
-      <Filter>Systems\Aiming</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Systems\Shooting\ShootingSystem.cpp">
-      <Filter>Systems\Shooting</Filter>
-    </ClCompile>
     <ClCompile Include="src\Overlays\PauseMenu\PauseMenuOverlay.cpp">
       <Filter>Overlays\PauseMenu</Filter>
     </ClCompile>
@@ -138,17 +135,26 @@
     <ClCompile Include="src\Screens\GameOver\GameOverScreen.cpp">
       <Filter>Screens\GameOver</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\Combat\CombatSystem.cpp">
-      <Filter>Systems\Combat</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\App\Game.cpp">
       <Filter>Core\App</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\GameWorld\GameWorld.cpp">
       <Filter>Core\GameWorld</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\CollisionDetection\CollisionDetectionSystem.cpp">
-      <Filter>Systems\CollisionDetection</Filter>
+    <ClCompile Include="src\Core\Systems\Aiming\AimingSystem.cpp">
+      <Filter>Core\Systems\Aiming</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Systems\CollisionDetection\CollisionDetectionSystem.cpp">
+      <Filter>Core\Systems\CollisionDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Systems\Combat\CombatSystem.cpp">
+      <Filter>Core\Systems\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Systems\Shooting\ShootingSystem.cpp">
+      <Filter>Core\Systems\Shooting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Assets\GameAssets.cpp">
+      <Filter>Core\Assets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="src\Entities\Enemies\BallManager.h">
       <Filter>Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Entities\Projectiles\Bullet.h">
-      <Filter>Entities\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="src\Overlays\Instruction\InstructionOverlay.h">
       <Filter>Overlays\Instruction</Filter>
@@ -188,12 +191,6 @@
     <ClInclude Include="src\Utilities\UI\UIUtils.h">
       <Filter>Utilities\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\Aiming\AimingSystem.h">
-      <Filter>Systems\Aiming</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Systems\Shooting\ShootingSystem.h">
-      <Filter>Systems\Shooting</Filter>
-    </ClInclude>
     <ClInclude Include="src\Overlays\PauseMenu\PauseMenuOverlay.h">
       <Filter>Overlays\PauseMenu</Filter>
     </ClInclude>
@@ -212,17 +209,29 @@
     <ClInclude Include="src\Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\Combat\CombatSystem.h">
-      <Filter>Systems\Combat</Filter>
-    </ClInclude>
     <ClInclude Include="src\Core\App\Game.h">
       <Filter>Core\App</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\GameWorld\GameWorld.h">
       <Filter>Core\GameWorld</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\CollisionDetection\CollisionDetectionSystem.h">
-      <Filter>Systems\CollisionDetection</Filter>
+    <ClInclude Include="src\Entities\Projectiles\Bullet.h">
+      <Filter>Entities\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\Aiming\AimingSystem.h">
+      <Filter>Core\Systems\Aiming</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\CollisionDetection\CollisionDetectionSystem.h">
+      <Filter>Core\Systems\CollisionDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\Combat\CombatSystem.h">
+      <Filter>Core\Systems\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\Shooting\ShootingSystem.h">
+      <Filter>Core\Systems\Shooting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Assets\GameAssets.h">
+      <Filter>Core\Assets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include <vector>
 
 class Game;
+class GameAssets;
 
 class Screen
 {
@@ -18,9 +19,10 @@ class Screen
 	protected:
 		Game& game;
 		sf::RenderWindow& window;
+		const GameAssets* assets;
 
-		Screen(Game& game, sf::RenderWindow& window) : 
-			game(game), window(window) {}
+		Screen(Game& game, sf::RenderWindow& window, const GameAssets* assets = nullptr) :
+			game(game), window(window), assets(assets) {}
 };
 
 #endif // !SCREEN_H

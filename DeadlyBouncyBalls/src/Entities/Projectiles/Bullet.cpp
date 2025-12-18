@@ -5,42 +5,58 @@
 #include "Utilities/Physics/PhysicsUtils.h"
 
 using namespace sf;
+using namespace std;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-Bullet::Bullet(const sf::Vector2f& startPosition,
-	const sf::Vector2f& direction, float speed, float lifespan) :
+Bullet::Bullet(const sf::Texture& bulletTexture,
+	const sf::Vector2f& startPosition,
+	const sf::Vector2f& direction, 
+	float speed, float lifespan) :
+	bulletSprite(bulletTexture),
 	position(startPosition),
 	lifespan(lifespan), 
 	age(0.0f)
 {
-	bullet.setPosition(position);
-	bullet.setFillColor(Color::Red);
-	bullet.setRadius(BULLET_RADIUS);
-	bullet.setOrigin(Vector2f(bullet.getRadius(), bullet.getRadius()));
+	bulletSprite.setScale({ BULLET_SCALE, BULLET_SCALE });
+	bulletSprite.setPosition(position);
+
+	FloatRect spriteBounds = bulletSprite.getLocalBounds();
+	bulletSprite.setOrigin(Vector2f(
+		spriteBounds.size.x / 2.f,
+		spriteBounds.size.y / 2.f));
+
 	velocity = normalize(direction) * speed;
+
+	float rotationAngle = atan2(direction.y, direction.x) * RADIAN_TO_DEGREE;
+	bulletSprite.setRotation(degrees(rotationAngle));
 }
 
 void Bullet::update(float deltaTime)
 {
 	position += velocity * deltaTime;
 	age += deltaTime;
-	bullet.setPosition(position);
+	bulletSprite.setPosition(position);
 }
 
 void Bullet::draw(sf::RenderWindow& window) const
 {
-	window.draw(bullet);
+	window.draw(bulletSprite);
 }
 
-const sf::Vector2f& Bullet::getPosition() const
+FloatRect Bullet::getCollisionBounds() const
 {
-	return position;
-}
+	FloatRect spriteBounds = bulletSprite.getGlobalBounds();
 
-float Bullet::getRadius() const
-{
-	return bullet.getRadius();
+	float shrinkBoundX = spriteBounds.size.x * BULLET_SHRINK_FACTOR;
+	float shrinkBoundY = spriteBounds.size.y * BULLET_SHRINK_FACTOR;
+
+	spriteBounds.position.x += shrinkBoundX;
+	spriteBounds.position.y += shrinkBoundY;
+	spriteBounds.size.x -= shrinkBoundX * 2.f;
+	spriteBounds.size.y -= shrinkBoundY * 2.f;
+
+	return spriteBounds;
 }
 
 bool Bullet::isExpired() const

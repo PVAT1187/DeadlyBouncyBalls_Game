@@ -13,8 +13,8 @@ Game::Game() :
 	window(VideoMode(DESKTOP_MODE), "Deadly Bouncy Balls",
 		Style::None)
 {
-	initFont();
-	initTexture();
+	assets.loadFont();
+	assets.loadAssets();
 	switchScreen<GameStartScreen>(window);
 }
 
@@ -42,40 +42,7 @@ void Game::run()
 	}
 }
 
-const Font& Game::getFont() const
-{ 
-	return font; 
-}
-
-const Texture& Game::getPlayerTexture() const
+const GameAssets& Game::getAssets() const
 {
-	return playerTexture;
-}
-
-const Texture& Game::getAimingIconTexture() const
-{
-	return aimingIconTexture;
-}
-
-const Texture& Game::getBulletIconTexture() const
-{
-	return bulletIconTexture;
-}
-
-void Game::initFont()
-{
-	if (!font.openFromFile("assets/fonts/arial.ttf"))
-		throw runtime_error("Failed to load font!");
-}
-
-void Game::initTexture()
-{
-	if (!playerTexture.loadFromFile("assets/PNG/Player/player_sprite.png"))
-		throw runtime_error("Failed to load player texture!");
-
-	if (!aimingIconTexture.loadFromFile("assets/PNG/Icons/crosshair_sprite.png"))
-		throw runtime_error("Failed to load aiming icon texture!");
-
-	if (!bulletIconTexture.loadFromFile("assets/PNG/Icons/bullet_sprite.png"))
-		throw runtime_error("Failed to load bullet icon texture!");
+	return assets;
 }

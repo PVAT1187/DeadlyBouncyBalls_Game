@@ -20,8 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\App\Game.cpp" />
+    <ClCompile Include="src\Core\Assets\GameAssets.cpp" />
     <ClCompile Include="src\Core\GameWorld\GameWorld.cpp" />
     <ClCompile Include="src\Core\main.cpp" />
+    <ClCompile Include="src\Core\Systems\Aiming\AimingSystem.cpp" />
+    <ClCompile Include="src\Core\Systems\CollisionDetection\CollisionDetectionSystem.cpp" />
+    <ClCompile Include="src\Core\Systems\Combat\CombatSystem.cpp" />
+    <ClCompile Include="src\Core\Systems\Shooting\ShootingSystem.cpp" />
     <ClCompile Include="src\Entities\Enemies\Ball.cpp" />
     <ClCompile Include="src\Entities\Enemies\BallManager.cpp" />
     <ClCompile Include="src\Entities\Player\Player.cpp" />
@@ -32,10 +37,6 @@
     <ClCompile Include="src\Screens\GameOver\GameOverScreen.cpp" />
     <ClCompile Include="src\Screens\GamePlay\GamePlayScreen.cpp" />
     <ClCompile Include="src\Screens\GameStart\GameStartScreen.cpp" />
-    <ClCompile Include="src\Systems\Aiming\AimingSystem.cpp" />
-    <ClCompile Include="src\Systems\CollisionDetection\CollisionDetectionSystem.cpp" />
-    <ClCompile Include="src\Systems\Combat\CombatSystem.cpp" />
-    <ClCompile Include="src\Systems\Shooting\ShootingSystem.cpp" />
     <ClCompile Include="src\UI\Buttons\TextButton.cpp" />
     <ClCompile Include="src\Utilities\Math\MathUtils.cpp" />
     <ClCompile Include="src\Utilities\Physics\PhysicsUtils.cpp" />
@@ -44,7 +45,12 @@
   <ItemGroup>
     <ClInclude Include="src\Config\Constants\GameConstants.h" />
     <ClInclude Include="src\Core\App\Game.h" />
+    <ClInclude Include="src\Core\Assets\GameAssets.h" />
     <ClInclude Include="src\Core\GameWorld\GameWorld.h" />
+    <ClInclude Include="src\Core\Systems\Aiming\AimingSystem.h" />
+    <ClInclude Include="src\Core\Systems\CollisionDetection\CollisionDetectionSystem.h" />
+    <ClInclude Include="src\Core\Systems\Combat\CombatSystem.h" />
+    <ClInclude Include="src\Core\Systems\Shooting\ShootingSystem.h" />
     <ClInclude Include="src\Entities\Enemies\Ball.h" />
     <ClInclude Include="src\Entities\Enemies\BallManager.h" />
     <ClInclude Include="src\Entities\Entity.h" />
@@ -58,10 +64,6 @@
     <ClInclude Include="src\Screens\GamePlay\GamePlayScreen.h" />
     <ClInclude Include="src\Screens\GameStart\GameStartScreen.h" />
     <ClInclude Include="src\Screens\Screen.h" />
-    <ClInclude Include="src\Systems\Aiming\AimingSystem.h" />
-    <ClInclude Include="src\Systems\CollisionDetection\CollisionDetectionSystem.h" />
-    <ClInclude Include="src\Systems\Combat\CombatSystem.h" />
-    <ClInclude Include="src\Systems\Shooting\ShootingSystem.h" />
     <ClInclude Include="src\UI\Buttons\TextButton.h" />
     <ClInclude Include="src\Utilities\Math\MathUtils.h" />
     <ClInclude Include="src\Utilities\Physics\PhysicsUtils.h" />
