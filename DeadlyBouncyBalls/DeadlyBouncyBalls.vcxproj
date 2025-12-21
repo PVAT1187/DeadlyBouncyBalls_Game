@@ -38,6 +38,7 @@
     <ClCompile Include="src\Screens\GamePlay\GamePlayScreen.cpp" />
     <ClCompile Include="src\Screens\GameStart\GameStartScreen.cpp" />
     <ClCompile Include="src\UI\Buttons\TextButton.cpp" />
+    <ClCompile Include="src\Utilities\Graphics\AnimatedSprite.cpp" />
     <ClCompile Include="src\Utilities\Math\MathUtils.cpp" />
     <ClCompile Include="src\Utilities\Physics\PhysicsUtils.cpp" />
     <ClCompile Include="src\Utilities\UI\UIUtils.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="src\Screens\GameStart\GameStartScreen.h" />
     <ClInclude Include="src\Screens\Screen.h" />
     <ClInclude Include="src\UI\Buttons\TextButton.h" />
+    <ClInclude Include="src\Utilities\Graphics\AnimatedSprite.h" />
     <ClInclude Include="src\Utilities\Math\MathUtils.h" />
     <ClInclude Include="src\Utilities\Physics\PhysicsUtils.h" />
     <ClInclude Include="src\Utilities\UI\UIUtils.h" />

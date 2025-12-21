@@ -88,6 +88,9 @@
     <Filter Include="Core\Assets">
       <UniqueIdentifier>{747f9561-8311-4728-ab49-ed78a64d9792}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities\Graphics">
+      <UniqueIdentifier>{ce11ebc9-d24c-418f-9a98-88a32db0928b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\main.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="src\Core\Assets\GameAssets.cpp">
       <Filter>Core\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Graphics\AnimatedSprite.cpp">
+      <Filter>Utilities\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="src\Core\Assets\GameAssets.h">
       <Filter>Core\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\Graphics\AnimatedSprite.h">
+      <Filter>Utilities\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

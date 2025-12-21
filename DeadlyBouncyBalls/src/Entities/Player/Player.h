@@ -36,7 +36,7 @@ class Player : public Entity
 		void clampToWindow(const sf::Vector2u& windowSize);
 		void rotate(float deltaTime, const sf::Vector2f& rotationTarget);
 		
-		void shoot(float deltaTime, const sf::Vector2f& playerPosition);
+		bool shoot(float deltaTime, const sf::Vector2f& playerPosition);
 };
 
 #endif // !PLAYER_H

@@ -14,7 +14,7 @@ void GameAssets::loadAssets()
 	if (!playerTexture.loadFromFile("assets/PNG/Player/player_sprite.png"))
 		throw runtime_error("Failed to load player texture!");
 
-	if (!aimingIconTexture.loadFromFile("assets/PNG/Icons/crosshair_sprite.png"))
+	if (!aimingIconTexture.loadFromFile("assets/PNG/Icons/crosshair_spritesheet.png"))
 		throw runtime_error("Failed to load aiming icon texture!");
 
 	if (!bulletTexture.loadFromFile("assets/PNG/Icons/bullet_sprite.png"))

@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+using namespace sf;
+
 // ---------------- Player ----------------
 constexpr float PLAYER_SCALE = 0.3f;
 constexpr float PLAYER_SPEED = 650.f;
@@ -36,10 +38,15 @@ constexpr float BULLET_SCALE = 0.05f;
 constexpr float BULLET_SHRINK_FACTOR = 0.2f;
 
 // ---------------- Aiming System ----------------
-constexpr float AIMING_ICON_SCALE = 0.1f;
+constexpr float CROSSHAIR_SCALE = 1.f;
 
 constexpr float DISTANCE_FROM_PLAYER_TIP = 20.f;
-constexpr float DISTANCE_TO_AIMING_ICON = 20.f;
+constexpr float DISTANCE_TO_CROSSHAIR = 20.f;
+
+constexpr int CROSSHAIR_ROW_INDEX = 6;
+constexpr Vector2i CROSSHAIR_FRAME_SIZE = { 64, 64 };
+constexpr int CROSSHAIR_FRAME_COUNT = 4;
+constexpr float CROSSHAIR_FRAME_DURATION = 0.015f;
 
 // ---------------- Shooting System ----------------
 constexpr float BULLET_SPEED = 1500.f;

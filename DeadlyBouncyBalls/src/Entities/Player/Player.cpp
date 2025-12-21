@@ -28,8 +28,10 @@ void Player::update(float deltaTime, const sf::Vector2u& windowSize)
 	clampToWindow(windowSize);
 
     Vector2f playerPosition = playerSprite.getPosition();
-    aimingSystem.update(playerPosition, mouseTarget);
-	shoot(deltaTime, playerPosition);
+    aimingSystem.update(deltaTime, playerPosition, mouseTarget);
+
+    if (shoot(deltaTime, playerPosition))
+        aimingSystem.resetAnimation();
 }
 
 void Player::draw(RenderWindow& window) const
@@ -128,12 +130,18 @@ void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
     playerSprite.setRotation(degrees(currentAngle + step));
 }   
 
-void Player::shoot(float deltaTime, const Vector2f& playerPosition)
+bool Player::shoot(float deltaTime, const Vector2f& playerPosition)
 {
+	bool isShooting = false;
+    
     if (Mouse::isButtonPressed(Mouse::Button::Left))
     {
         Vector2f direction = computeDirection(mouseTarget, playerPosition);
         shootingSystem.shoot(playerPosition, direction);
+		isShooting = true;
     }
+
     shootingSystem.update(deltaTime);
+
+    return isShooting;
 }
