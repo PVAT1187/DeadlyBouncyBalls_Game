@@ -34,9 +34,6 @@
     <Filter Include="Entities\Projectiles">
       <UniqueIdentifier>{16ce9182-ac93-4047-b25b-27f6a1ac881a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Overlays\Instruction">
-      <UniqueIdentifier>{b2401e27-6894-4852-bc92-8bf680455b94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI\Buttons">
       <UniqueIdentifier>{c10a251e-5b95-4b74-97e1-397971b0d347}</UniqueIdentifier>
     </Filter>
@@ -51,9 +48,6 @@
     </Filter>
     <Filter Include="Overlays\PauseMenu">
       <UniqueIdentifier>{12f51b10-ac0a-4008-8d81-c6c08beeec17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Screens\GameDemo">
-      <UniqueIdentifier>{273c94dd-988e-4915-8e1e-67f3f305c95b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Screens\GameStart">
       <UniqueIdentifier>{df5d57e1-49cb-4c6a-afe4-d10fd3fbabc1}</UniqueIdentifier>
@@ -91,6 +85,12 @@
     <Filter Include="Utilities\Graphics">
       <UniqueIdentifier>{ce11ebc9-d24c-418f-9a98-88a32db0928b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Screens\Tutorial">
+      <UniqueIdentifier>{273c94dd-988e-4915-8e1e-67f3f305c95b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overlays\Tutorial">
+      <UniqueIdentifier>{e09ee758-7474-4307-97e2-5088af3fd68d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\main.cpp">
@@ -108,9 +108,6 @@
     <ClCompile Include="src\Entities\Projectiles\Bullet.cpp">
       <Filter>Entities\Projectiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\Overlays\Instruction\InstructionOverlay.cpp">
-      <Filter>Overlays\Instruction</Filter>
-    </ClCompile>
     <ClCompile Include="src\UI\Buttons\TextButton.cpp">
       <Filter>UI\Buttons</Filter>
     </ClCompile>
@@ -125,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="src\Overlays\PauseMenu\PauseMenuOverlay.cpp">
       <Filter>Overlays\PauseMenu</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Screens\GameDemo\GameDemoScreen.cpp">
-      <Filter>Screens\GameDemo</Filter>
     </ClCompile>
     <ClCompile Include="src\Screens\GameStart\GameStartScreen.cpp">
       <Filter>Screens\GameStart</Filter>
@@ -162,6 +156,12 @@
     <ClCompile Include="src\Utilities\Graphics\AnimatedSprite.cpp">
       <Filter>Utilities\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\Screens\Tutorial\TutorialScreen.cpp">
+      <Filter>Screens\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Overlays\Tutorial\TutorialOverlay.cpp">
+      <Filter>Overlays\Tutorial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config\Constants\GameConstants.h">
@@ -175,9 +175,6 @@
     </ClInclude>
     <ClInclude Include="src\Entities\Enemies\BallManager.h">
       <Filter>Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Overlays\Instruction\InstructionOverlay.h">
-      <Filter>Overlays\Instruction</Filter>
     </ClInclude>
     <ClInclude Include="src\Overlays\Overlay.h">
       <Filter>Overlays</Filter>
@@ -199,9 +196,6 @@
     </ClInclude>
     <ClInclude Include="src\Overlays\PauseMenu\PauseMenuOverlay.h">
       <Filter>Overlays\PauseMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Screens\GameDemo\GameDemoScreen.h">
-      <Filter>Screens\GameDemo</Filter>
     </ClInclude>
     <ClInclude Include="src\Screens\GameStart\GameStartScreen.h">
       <Filter>Screens\GameStart</Filter>
@@ -241,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="src\Utilities\Graphics\AnimatedSprite.h">
       <Filter>Utilities\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Screens\Tutorial\TutorialScreen.h">
+      <Filter>Screens\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Overlays\Tutorial\TutorialOverlay.h">
+      <Filter>Overlays\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

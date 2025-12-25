@@ -12,5 +12,5 @@ class Entity
 		virtual ~Entity() = default;
 };
 
-#endif // ! ENTITY_H
+#endif // !ENTITY_H
 

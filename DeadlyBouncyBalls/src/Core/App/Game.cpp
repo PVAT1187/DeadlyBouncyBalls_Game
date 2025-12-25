@@ -1,6 +1,6 @@
 #include "Core/App/Game.h"
 #include "Screens/GameStart/GameStartScreen.h"
-#include "Screens/GameDemo/GameDemoScreen.h"
+#include "Screens/Tutorial/TutorialScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
 

@@ -1,14 +1,16 @@
-#ifndef GAME_DEMO_SCREEN_H
-#define GAME_DEMO_SCREEN_H
+#ifndef TUTORIAL_SCREEN_H
+#define TUTORIAL_SCREEN_H
 
 #include "Screens/Screen.h"
-#include "Overlays/Instruction/InstructionOverlay.h"
+#include "Overlays/Tutorial/TutorialOverlay.h"
 #include "Entities/Enemies/BallManager.h"
 
-class GameDemoScreen : public Screen
+#include <vector>
+
+class TutorialScreen : public Screen
 {
 	public:
-		GameDemoScreen(Game& game, sf::RenderWindow& window);
+		TutorialScreen(Game& game, sf::RenderWindow& window);
 
 		void handleEvent(const sf::Event& event) override;
 		void update(float deltaTime) override;
@@ -19,7 +21,7 @@ class GameDemoScreen : public Screen
 
 		bool instructionShown;
 
-		std::unique_ptr<InstructionOverlay> instructionOverlay;
+		std::unique_ptr<TutorialOverlay> tutorialOverlay;
 };
 
 #endif // !GAME_DEMO_SCREEN_H

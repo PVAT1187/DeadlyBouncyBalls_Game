@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Core/Assets/GameAssets.h"
 #include "Core/Systems/Aiming/AimingSystem.h"
 #include "Core/Systems/Shooting/ShootingSystem.h"
 #include "Entities/Entity.h"
@@ -10,20 +11,15 @@
 class Player : public Entity
 {
 	public:
-		Player(const sf::Texture& playerTexture, 
-			const sf::Texture& aimingIconTexture,
-			const sf::Texture& bulletTexture);
+		Player(const GameAssets& assets, const sf::Vector2u& windowSize);
 
 		void update(float deltaTime, const sf::Vector2u& windowSize) override;
 		void draw(sf::RenderWindow& window) const override;
 
-		void setMouseTarget(const sf::Vector2f& target);
-
-		const sf::Sprite& getSprite() const;
-		sf::Sprite& getSprite();
-
 		sf::FloatRect getCollisionBounds() const;
-		ShootingSystem& getShootingSystem();
+		std::vector<Bullet>& getBullets();
+
+		void setMouseTarget(const sf::Vector2f& target);
 
 	private:
 		sf::Sprite playerSprite;
@@ -35,7 +31,6 @@ class Player : public Entity
 		void move(float deltaTime);
 		void clampToWindow(const sf::Vector2u& windowSize);
 		void rotate(float deltaTime, const sf::Vector2f& rotationTarget);
-		
 		bool shoot(float deltaTime, const sf::Vector2f& playerPosition);
 };
 

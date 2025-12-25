@@ -17,6 +17,7 @@ constexpr float FOLLOW_SMOOTHING = 0.7f;
 
 // ---------------- Ball ----------------
 constexpr float BLINKING_SPEED = 10.f;
+constexpr float	BLINKING_DURATION = 0.5f;
 
 // ---------------- Ball Manager ----------------
 constexpr int INITIAL_NUMBER_OF_BALL = 2;
@@ -30,7 +31,6 @@ constexpr float AMOUNT_RADIUS_DECREASED_BY = 10.f;
 constexpr float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
 constexpr float INITIAL_SPLITTING_TIME = 5.f;
 constexpr float SPLIT_TIME_MULTIPLIER = 5.f;
-constexpr float	BLINKING_DURATION = 0.5f;
 
 // ---------------- Bullet ----------------
 constexpr float BULLET_SCALE = 0.05f;
@@ -54,12 +54,17 @@ constexpr float BULLET_LIFESPAN = 1.f;
 
 constexpr float FIRE_COOLDOWN = 0.2f;
 
-// ---------------- Screen ----------------
+// ---------------- UI ----------------
 constexpr unsigned int TITLE_TEXT_SIZE = 100;
 constexpr unsigned int BODY_TEXT_SIZE = 25;
-constexpr float TEXT_SPACING = 125.f;
+constexpr float TITLE_BODY_SPACING = 125.f;
 
-// ---------------- Overlay ----------------
+constexpr float TITLE_INSTRUCTION_SPACING = 5.f;
+constexpr float INSTRUCTION_SPACING = 50.f;
+
+constexpr float TITLE_BUTTON_SPACING = 200.f;
+constexpr float BUTTON_SPACING = 80.f;
+
 constexpr uint8_t DIM_ALPHA = 150;
 
 // ---------------- Text Button ----------------
@@ -69,8 +74,6 @@ constexpr float HOVER_SCALE = 1.2f;
 constexpr float SMOOTH_SCALING_MULTIPLIER = 0.2f;
 
 constexpr unsigned int BUTTON_SIZE = 50;
-constexpr float TITLE_BUTTON_SPACING = 200.f;
-constexpr float BUTTON_SPACING = 80.f;
 
 // ---------------- Math Utilities ----------------
 constexpr float MIN_DIRECTION = -1.f;

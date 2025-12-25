@@ -25,5 +25,5 @@ class AimingSystem
 			const sf::Vector2f& aimingTarget);
 };
 
-#endif // ! AIMING_SYSTEM_H
+#endif // !AIMING_SYSTEM_H
 

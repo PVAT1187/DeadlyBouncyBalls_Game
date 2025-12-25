@@ -23,4 +23,4 @@ class CollisionDetectionSystem
 			const std::vector<Ball>& balls) const;
 };
 
-#endif // ! COLLISION_DETECTION_SYSTEM_H
+#endif // !COLLISION_DETECTION_SYSTEM_H

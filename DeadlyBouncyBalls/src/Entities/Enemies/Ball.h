@@ -20,7 +20,7 @@ class Ball : public Entity
 		const sf::Vector2f& getVelocity() const;
 		sf::Vector2f& getVelocity();
 
-		void startBlink(float duration);
+		void startBlink();
 
 	private:
 		sf::CircleShape ball;

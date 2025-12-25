@@ -20,9 +20,7 @@ class GameWorld
 
 		bool isGameOver() const;
 
-	private:
-		GameAssets assets;
-		
+	private:	
 		Player player;
 		BallManager ballManager;
 		CombatSystem combatSystem;

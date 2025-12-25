@@ -4,13 +4,8 @@
 using namespace sf;
 
 GameWorld::GameWorld(Game& game, const Vector2u& windowSize) :
-	assets(game.getAssets()),
-	player(assets.getPlayerTexture(), assets.getAimingIconTexture(), assets.getBulletTexture()),
-	ballManager(windowSize)
-{
-	player.getSprite().setPosition(
-		Vector2f(windowSize.x / 2.f, windowSize.y / 2.f));
-}
+	player(game.getAssets(), windowSize),
+	ballManager(windowSize) {}
 
 void GameWorld::update(float deltaTime, 
 	const Vector2u& windowSize,
@@ -20,7 +15,7 @@ void GameWorld::update(float deltaTime,
 	player.update(deltaTime, windowSize);
 	ballManager.update(deltaTime, windowSize);
 
-	combatSystem.update(player.getShootingSystem(), ballManager);
+	combatSystem.update(player, ballManager);
 }
 
 void GameWorld::render(RenderWindow& window) const

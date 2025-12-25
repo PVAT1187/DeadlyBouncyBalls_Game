@@ -9,9 +9,9 @@ using namespace std;
 GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
 	Screen(game, window, &game.getAssets()),
 	gameWorld(game, window.getSize()),
-	paused(false),
+	survivalTimeText(Text(assets->getFont(), "", BODY_TEXT_SIZE)),
 	survivalClock(),
-	survivalTimeText(Text(assets->getFont(), "", BODY_TEXT_SIZE))
+	paused(false)
 {
 	this->window.setMouseCursorVisible(false);
 	initSurvivalTimeText();

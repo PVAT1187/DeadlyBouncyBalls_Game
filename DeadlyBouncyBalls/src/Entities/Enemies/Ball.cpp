@@ -9,7 +9,7 @@ using namespace PhysicsUtils;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 	radius(radius), position(position), velocity(velocity), 
-	isFlashing(false), flashingTime(0.f)
+	isFlashing(false), flashingTime(BLINKING_DURATION)
 {
 	ball.setRadius(radius);
 	ball.setFillColor(randomColor());
@@ -61,10 +61,9 @@ void Ball::draw(RenderWindow& window) const
 	window.draw(ball);
 }
 
-void Ball::startBlink(float duration)
+void Ball::startBlink()
 {
 	isFlashing = true;
-	flashingTime = duration;
 }
 
 void Ball::move(float deltaTime, const sf::Vector2u& windowSize)

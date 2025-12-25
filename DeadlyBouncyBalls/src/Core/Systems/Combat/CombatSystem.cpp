@@ -1,10 +1,10 @@
 #include "Core/Systems/CollisionDetection/CollisionDetectionSystem.h"
 #include "Core/Systems/Combat/CombatSystem.h"
 
-void CombatSystem::update(ShootingSystem& shootingSystem,
+void CombatSystem::update(Player& player,
 	BallManager& ballManager)
 {
-	auto& bullets = shootingSystem.getBullets();
+	auto& bullets = player.getBullets();
 	auto& balls = ballManager.getBalls();
 
 	CollisionDetectionSystem collisionDetector;

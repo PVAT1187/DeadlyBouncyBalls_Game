@@ -1,7 +1,7 @@
 #include "Config/Constants/GameConstants.h"
 #include "Core/App/Game.h"
 #include "Screens/GameStart/GameStartScreen.h"
-#include "Screens/GameDemo/GameDemoScreen.h"
+#include "Screens/Tutorial/TutorialScreen.h"
 #include "Utilities/UI/UIUtils.h"
 
 using namespace sf;
@@ -25,7 +25,7 @@ void GameStartScreen::handleEvent(const Event& event)
 	{
 		if (playButton.isClicked(window))
 		{
-			game.switchScreen<GameDemoScreen>(window);
+			game.switchScreen<TutorialScreen>(window);
 		}
 		else if (quitButton.isClicked(window))
 		{
@@ -49,7 +49,7 @@ void GameStartScreen::render(RenderWindow& window)
 
 void GameStartScreen::initGameTitleText()
 {
-	centerTitleText(gameTitleText, window);
+	centerText(gameTitleText, window);
 }
 
 void GameStartScreen::updateButtonPosition()

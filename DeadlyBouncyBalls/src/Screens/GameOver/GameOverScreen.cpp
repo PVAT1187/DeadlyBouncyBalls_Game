@@ -58,14 +58,14 @@ void GameOverScreen::render(RenderWindow& window)
 
 void GameOverScreen::initGameOverText()
 {
-	centerTitleText(gameOverText, window);
+	centerText(gameOverText, window);
 }
 
 void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 {
 	finalSurvivalTimeText.setString("Survived: " + 
 		to_string(finalSurvivalTime) + "s");
-	centerBodyText(finalSurvivalTimeText, window, TEXT_SPACING);
+	centerText(finalSurvivalTimeText, window, TITLE_BODY_SPACING);
 }
 
 void GameOverScreen::updateButtonPosition()

@@ -21,10 +21,11 @@ class GamePlayScreen : public Screen
 	private:
 		GameWorld gameWorld;
 
-		sf::Clock survivalClock;
 		sf::Text survivalTimeText;
+		sf::Clock survivalClock;
 
 		bool paused;
+
 		std::unique_ptr<PauseMenuOverlay> pauseOverlay;
 
 		void initSurvivalTimeText();

@@ -54,7 +54,7 @@ void PauseMenuOverlay::render(RenderWindow& window)
 
 void PauseMenuOverlay::initPauseTitle()
 {
-	centerTitleText(pauseMenuTitle, window);
+	centerText(pauseMenuTitle, window);
 }
 
 void PauseMenuOverlay::updateButtonPosition()

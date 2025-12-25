@@ -4,17 +4,19 @@
 #include "Utilities/Physics/PhysicsUtils.h"
 
 using namespace sf;
+using namespace std;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-Player::Player(const Texture& playerTexture,
-    const sf::Texture& aimingIconTexture,
-    const sf::Texture& bulletTexture) :
-    playerSprite(playerTexture),
-    aimingSystem(aimingIconTexture),
-	shootingSystem(bulletTexture)
+Player::Player(const GameAssets& assets, const Vector2u& windowSize) :
+    playerSprite(assets.getPlayerTexture()),
+    aimingSystem(assets.getAimingIconTexture()),
+	shootingSystem(assets.getBulletTexture())
 {
     playerSprite.setScale({ PLAYER_SCALE, PLAYER_SCALE });
+    playerSprite.setPosition(
+        Vector2f(windowSize.x / 2.f, windowSize.y / 2.f));
+
     FloatRect spriteBounds = playerSprite.getLocalBounds();
     playerSprite.setOrigin(Vector2f(
         spriteBounds.size.x / 2.f,
@@ -25,11 +27,11 @@ void Player::update(float deltaTime, const sf::Vector2u& windowSize)
 {
     move(deltaTime);
     rotate(deltaTime, mouseTarget);
-	clampToWindow(windowSize);
+    clampToWindow(windowSize);
 
     Vector2f playerPosition = playerSprite.getPosition();
     aimingSystem.update(deltaTime, playerPosition, mouseTarget);
-
+    
     if (shoot(deltaTime, playerPosition))
         aimingSystem.resetAnimation();
 }
@@ -39,21 +41,6 @@ void Player::draw(RenderWindow& window) const
     aimingSystem.draw(window);
     window.draw(playerSprite);
 	shootingSystem.draw(window);
-}
-
-void Player::setMouseTarget(const sf::Vector2f& target)
-{
-    mouseTarget = target;
-}
-
-const Sprite& Player::getSprite() const
-{
-	return playerSprite;
-}
-
-Sprite& Player::getSprite()
-{
-    return playerSprite;
 }
 
 FloatRect Player::getCollisionBounds() const
@@ -71,9 +58,14 @@ FloatRect Player::getCollisionBounds() const
 	return spriteBounds;
 }
 
-ShootingSystem& Player::getShootingSystem()
+vector<Bullet>& Player::getBullets()
 {
-	return shootingSystem;
+    return shootingSystem.getBullets();
+}
+
+void Player::setMouseTarget(const sf::Vector2f& target)
+{
+    mouseTarget = target;
 }
 
 void Player::move(float deltaTime)

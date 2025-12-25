@@ -116,8 +116,10 @@ void BallManager::updateBlinking()
 	if (!blinkTriggered && splittingTimer >= splitTimeMinusBlinkDuration)
 	{
 		for (auto& ball : balls)
-			ball.startBlink(BLINKING_DURATION);
-
+		{
+			ball.startBlink();
+		}
+			
 		blinkTriggered = true;
 	}
 }

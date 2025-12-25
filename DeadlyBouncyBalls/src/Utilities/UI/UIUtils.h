@@ -8,9 +8,8 @@
 
 namespace UIUtils
 {
-	void centerTitleText(sf::Text& text, sf::RenderWindow& window);
-	void centerBodyText(sf::Text& text, sf::RenderWindow& window,
-		float verticalOffset);
+	void centerText(sf::Text& text, sf::RenderWindow& window,
+		float verticalOffset = 0.f);
 	void positionButtons(const sf::Text& text,
 		std::vector<TextButton*>& buttons,
 		sf::RenderWindow& window);

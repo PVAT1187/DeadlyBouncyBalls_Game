@@ -29,4 +29,4 @@ class PauseMenuOverlay : public Overlay
 		void updateButtonPosition();
 };
 
-#endif // PAUSE_MENU_OVERLAY_H
+#endif // !PAUSE_MENU_OVERLAY_H

@@ -4,27 +4,16 @@
 using namespace sf;
 using namespace std;
 
-void UIUtils::centerTitleText(Text& text, RenderWindow& window)
-{
-	text.setFillColor(Color::White);
-
-	FloatRect textBounds = text.getLocalBounds();
-	text.setOrigin(textBounds.size / 2.f);
-	text.setPosition(
-		static_cast<Vector2f>(window.getSize()) / 2.f);
-}
-
-void UIUtils::centerBodyText(sf::Text& text, sf::RenderWindow& window,
+void UIUtils::centerText(sf::Text& text, sf::RenderWindow& window,
 	float verticalOffset)
 {
 	text.setFillColor(Color::White);
 
-	Vector2f centerPosition = static_cast<Vector2f>
-		(window.getSize()) / 2.f;
 	FloatRect textBounds = text.getLocalBounds();
 	text.setOrigin(textBounds.size / 2.f);
 	text.setPosition(Vector2f(
-		centerPosition.x, centerPosition.y + verticalOffset));
+		window.getSize().x / 2.f, 
+		window.getSize().y / 2.f + verticalOffset));
 }
 
 void UIUtils::positionButtons(const Text& text,
