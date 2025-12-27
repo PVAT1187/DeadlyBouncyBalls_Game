@@ -60,7 +60,7 @@ void BallManager::splitBallOnHit(size_t index)
 {
 	Ball& hitBall = balls[index];
 
-	float newRadius = hitBall.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
+	float newRadius = hitBall.getRadius() - BALL_RADIUS_DECREASE_AMOUNT;
 	if (newRadius <= BALL_MIN_RADIUS)
 	{
 		balls.erase(balls.begin() + index);
@@ -164,7 +164,7 @@ void BallManager::splitBallOnTimer()
 	
 	for (auto& ball : balls)
 	{
-		float newRadius = ball.getRadius() - AMOUNT_RADIUS_DECREASED_BY;
+		float newRadius = ball.getRadius() - BALL_RADIUS_DECREASE_AMOUNT;
 
 		if (newRadius < BALL_MIN_RADIUS)
 			continue;

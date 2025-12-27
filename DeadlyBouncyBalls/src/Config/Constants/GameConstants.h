@@ -1,9 +1,8 @@
 #ifndef GAME_CONSTANTS_H
 #define GAME_CONSTANTS_H
 
-#include <SFML/Graphics.hpp>
-
-using namespace sf;
+#include <SFML/System/Vector2.hpp>
+#include <cstdint>
 
 // ---------------- Player ----------------
 constexpr float PLAYER_SCALE = 0.3f;
@@ -27,7 +26,7 @@ constexpr float BALL_MAX_RADIUS = 50.f;
 constexpr float	BALL_MIN_SPEED = 100.f;
 constexpr float BALL_MAX_SPEED = 500.f;
 
-constexpr float AMOUNT_RADIUS_DECREASED_BY = 10.f;
+constexpr float BALL_RADIUS_DECREASE_AMOUNT = 10.f;
 constexpr float DIRECTION_RANDOMNESS_FACTOR = 0.5f;
 constexpr float INITIAL_SPLITTING_TIME = 5.f;
 constexpr float SPLIT_TIME_MULTIPLIER = 5.f;
@@ -44,7 +43,7 @@ constexpr float DISTANCE_FROM_PLAYER_TIP = 20.f;
 constexpr float DISTANCE_TO_CROSSHAIR = 20.f;
 
 constexpr int CROSSHAIR_ROW_INDEX = 6;
-constexpr Vector2i CROSSHAIR_FRAME_SIZE = { 64, 64 };
+constexpr sf::Vector2i CROSSHAIR_FRAME_SIZE = { 64, 64 };
 constexpr int CROSSHAIR_FRAME_COUNT = 4;
 constexpr float CROSSHAIR_FRAME_DURATION = 0.015f;
 
@@ -83,7 +82,8 @@ constexpr int COLOR_MIN = 1;
 constexpr int COLOR_MAX = 255;
 constexpr uint8_t FULL_OPACITY = 255;
 
-constexpr float RADIAN_TO_DEGREE = 180.f / 3.14159265f;
+constexpr float PI = 3.14159265f;
+constexpr float RADIAN_TO_DEGREE = 180.f / PI;
 constexpr float FULL_CIRCLE_DEGREE = 360.f;
 constexpr float HALF_CIRCLE_DEGREE = 180.f;
 
