@@ -14,7 +14,6 @@ void GameWorld::update(float deltaTime,
 	player.setMouseTarget(mousePosition);
 	player.update(deltaTime, windowSize);
 	ballManager.update(deltaTime, windowSize);
-
 	combatSystem.update(player, ballManager);
 }
 
@@ -26,5 +25,5 @@ void GameWorld::render(RenderWindow& window) const
 
 bool GameWorld::isGameOver() const
 {
-	return ballManager.hitsPlayer(player);
+	return ballManager.isCollidingWithPlayer(player);
 }

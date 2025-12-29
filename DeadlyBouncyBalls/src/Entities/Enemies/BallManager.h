@@ -19,7 +19,7 @@ class BallManager
 
 		void splitBallOnHit(size_t index);
 		
-		bool hitsPlayer(const Player& player) const;
+		bool isCollidingWithPlayer(const Player& player) const;
 
 	private:
 		std::vector<Ball> balls;

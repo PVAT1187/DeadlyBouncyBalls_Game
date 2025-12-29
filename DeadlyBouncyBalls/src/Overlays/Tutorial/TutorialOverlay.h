@@ -15,7 +15,7 @@ public:
 
 private:
 	sf::Text tutorialOverlayTitle;
-	std::vector<Text> instructions;
+	std::vector<sf::Text> instructions;
 
 	TextButton continueButton;
 

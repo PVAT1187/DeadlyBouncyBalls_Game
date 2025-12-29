@@ -95,7 +95,7 @@ void BallManager::splitBallOnHit(size_t index)
 	}
 }
 
-bool BallManager::hitsPlayer(const Player& player) const
+bool BallManager::isCollidingWithPlayer(const Player& player) const
 {
 	CollisionDetectionSystem collisionDetector;
 	return collisionDetector.detectPlayerBallCollisions(player, *this);
