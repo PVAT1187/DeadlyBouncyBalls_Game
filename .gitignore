@@ -56,3 +56,5 @@ desktop.ini
 *.sdf
 *.cachefile
 !assets/**
+/release/
+/installer/Output/
