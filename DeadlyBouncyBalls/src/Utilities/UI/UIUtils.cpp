@@ -22,12 +22,15 @@ void UIUtils::positionButtons(const Text& text,
 	float centerX = window.getSize().x / 2.f;
 	float startY = text.getPosition().y + TITLE_BUTTON_SPACING;
 
+	if (buttons.empty())
+		return;
+	
 	buttons[0]->setPosition({ centerX, startY });
 
 	size_t buttonsSize = buttons.size();
 	for (size_t i = 1; i < buttonsSize; ++i)
 	{
-		float y = startY + BUTTON_SPACING;
+		float y = startY + i * BUTTON_SPACING;
 		buttons[i]->setPosition({ centerX, y });
 	}
 }
