@@ -5,21 +5,18 @@
 #include "Screens/GameOver/GameOverScreen.h"
 #include "Utilities/UI/UIUtils.h"
 
-#include <iostream>
-
 using namespace sf;
 using namespace std;
 using namespace UIUtils;
 
-GameOverScreen::GameOverScreen(Game& game, RenderWindow& window, 
-	float finalSurvivalTime) :
-	Screen(game, window, &game.getAssets()),
-	gameOverText(Text(assets->getFont(), "GAME OVER", TITLE_TEXT_SIZE)),
-	finalSurvivalTimeText(Text(assets->getFont(), "", BODY_TEXT_SIZE)),
-	playAgainButton("PLAY AGAIN", assets->getFont(), BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", assets->getFont(), BUTTON_SIZE, { 0, 0 })
+GameOverScreen::GameOverScreen(Game& game, float finalSurvivalTime) :
+	Screen(game),
+	gameOverText(Text(game.getAssets().getFont(), "GAME OVER", TITLE_TEXT_SIZE)),
+	finalSurvivalTimeText(Text(game.getAssets().getFont(), "", BODY_TEXT_SIZE)),
+	playAgainButton("PLAY AGAIN", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 })
 {
-	this->window.setMouseCursorVisible(true);
+	game.getRenderer().showCursor(true);
 	
 	initGameOverText();
 	initFinalSurvivalTimeText(finalSurvivalTime);
@@ -31,45 +28,51 @@ void GameOverScreen::handleEvent(const Event& event)
 	if (event.is<Event::MouseButtonPressed>() &&
 		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
 	{
-		if (playAgainButton.isClicked(window))
+		if (playAgainButton.isClicked())
 		{
-			game.switchScreen<GamePlayScreen>(window);
+			game.switchScreen<GamePlayScreen>();
 		}
-		else if (mainMenuButton.isClicked(window))
+		else if (mainMenuButton.isClicked())
 		{
-			game.switchScreen<GameStartScreen>(window);
+			game.switchScreen<GameStartScreen>();
 		}
 	}
 }
 
-void GameOverScreen::update(float deltaTime) 
+void GameOverScreen::update(float deltaTime,
+	const InputState& inputState)
 {
-	playAgainButton.update(window);
-	mainMenuButton.update(window);	
+	playAgainButton.update(inputState.mousePosition);
+	mainMenuButton.update(inputState.mousePosition);
 }
 
-void GameOverScreen::render(RenderWindow& window)
+void GameOverScreen::render()
 {
-	window.draw(gameOverText);
-	window.draw(finalSurvivalTimeText);
-	playAgainButton.draw(window);
-	mainMenuButton.draw(window);
+	auto& renderer = game.getRenderer();
+	
+	renderer.draw(gameOverText);
+	renderer.draw(finalSurvivalTimeText);
+	playAgainButton.draw(renderer);
+	mainMenuButton.draw(renderer);
 }
 
 void GameOverScreen::initGameOverText()
 {
-	centerText(gameOverText, window);
+	centerText(gameOverText, game.getRenderer().getWindowSize());
 }
 
 void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
 {
 	finalSurvivalTimeText.setString("Survived: " + 
 		to_string(finalSurvivalTime) + "s");
-	centerText(finalSurvivalTimeText, window, TITLE_BODY_SPACING);
+	centerText(finalSurvivalTimeText, 
+		game.getRenderer().getWindowSize(),
+		TITLE_BODY_SPACING);
 }
 
 void GameOverScreen::updateButtonPosition()
 {
 	vector<TextButton*> buttons = { &playAgainButton, &mainMenuButton };
-	positionButtons(gameOverText, buttons, window);
+	positionButtons(gameOverText, buttons, 
+		game.getRenderer().getWindowSize());
 } 

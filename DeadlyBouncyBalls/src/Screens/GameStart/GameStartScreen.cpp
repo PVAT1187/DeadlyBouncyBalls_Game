@@ -8,11 +8,11 @@ using namespace sf;
 using namespace std;
 using namespace UIUtils;
 
-GameStartScreen::GameStartScreen(Game& game, RenderWindow& window) :
-	Screen(game, window, &game.getAssets()),
-	gameTitleText(Text(assets->getFont(), "DEADLY BOUNCY BALLS", TITLE_TEXT_SIZE)),
-	playButton("PLAY", assets->getFont(), BUTTON_SIZE, { 0, 0 }),
-	quitButton("QUIT", assets->getFont(), BUTTON_SIZE, { 0, 0 })
+GameStartScreen::GameStartScreen(Game& game) :
+	Screen(game),
+	gameTitleText(Text(game.getAssets().getFont(), "DEADLY BOUNCY BALLS", TITLE_TEXT_SIZE)),
+	playButton("PLAY", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
+	quitButton("QUIT", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 })
 {
 	initGameTitleText();
 	updateButtonPosition();
@@ -23,37 +23,41 @@ void GameStartScreen::handleEvent(const Event& event)
 	if (event.is<Event::MouseButtonPressed>() &&
 		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
 	{
-		if (playButton.isClicked(window))
+		if (playButton.isClicked())
 		{
-			game.switchScreen<TutorialScreen>(window);
+			game.switchScreen<TutorialScreen>();
 		}
-		else if (quitButton.isClicked(window))
+		else if (quitButton.isClicked())
 		{
-			window.close();
+			game.getRenderer().close();
 		}
 	}
 }
 
-void GameStartScreen::update(float deltaTime) 
+void GameStartScreen::update(float deltaTime,
+	const InputState& inputState)
 {
-	playButton.update(window);
-	quitButton.update(window);
+	playButton.update(inputState.mousePosition);
+	quitButton.update(inputState.mousePosition);
 }
 
-void GameStartScreen::render(RenderWindow& window)
+void GameStartScreen::render()
 {
-	window.draw(gameTitleText);
-	playButton.draw(window);
-	quitButton.draw(window);
+	auto& renderer = game.getRenderer();
+
+	renderer.draw(gameTitleText);
+	playButton.draw(renderer);
+	quitButton.draw(renderer);
 }
 
 void GameStartScreen::initGameTitleText()
 {
-	centerText(gameTitleText, window);
+	centerText(gameTitleText, game.getRenderer().getWindowSize());
 }
 
 void GameStartScreen::updateButtonPosition()
 {
 	vector<TextButton*> buttons = {&playButton, &quitButton};
-	positionButtons(gameTitleText, buttons, window);
+	positionButtons(gameTitleText, buttons, 
+		game.getRenderer().getWindowSize());
 }

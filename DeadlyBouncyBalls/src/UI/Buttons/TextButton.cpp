@@ -5,51 +5,49 @@ using namespace sf;
 
 TextButton::TextButton(const String& textString, const Font& font,
 	unsigned int size, const Vector2f& position) :
-	text(Text(font, textString, size)),
+	buttonText(Text(font, textString, size)),
 	normalColor(Color::White), hoverColor(Color::Yellow),
 	isHovered(false)
 {
-	text.setFillColor(normalColor);
+	buttonText.setFillColor(normalColor);
 
-	FloatRect textBounds = text.getLocalBounds();
-	text.setOrigin(textBounds.size / 2.f);
-	text.setPosition(position);
+	FloatRect textBounds = buttonText.getLocalBounds();
+	buttonText.setOrigin(textBounds.size / 2.f);
+	buttonText.setPosition(position);
 }
 
-void TextButton::update(const RenderWindow& window)
+void TextButton::update(const Vector2f& mousePosition)
 {
-	updateHoverState(window);
+	updateHoverState(mousePosition);
 	updateScaling();
 }
 
-void TextButton::draw(RenderWindow& window)
+void TextButton::draw(Renderer& renderer) const
 {
-	window.draw(text);
+	renderer.draw(buttonText);
 }
 
-void TextButton::setPosition(const sf::Vector2f& newPosition)
+void TextButton::setPosition(const Vector2f& newPosition)
 {
-	text.setPosition(newPosition);
+	buttonText.setPosition(newPosition);
 }
 
-bool TextButton::isClicked(const RenderWindow& window) const
+bool TextButton::isClicked() const
 {
 	return isHovered && Mouse::isButtonPressed(Mouse::Button::Left);
 }
 
-void TextButton::updateHoverState(const sf::RenderWindow& window)
+void TextButton::updateHoverState(const Vector2f& mousePosition)
 {
-	Vector2f mousePos = window.mapPixelToCoords(
-		Mouse::getPosition(window));
-	isHovered = text.getGlobalBounds().contains(mousePos);
-	text.setFillColor(isHovered ? hoverColor : normalColor);
+	isHovered = buttonText.getGlobalBounds().contains(mousePosition);
+	buttonText.setFillColor(isHovered ? hoverColor : normalColor);
 }
 
 void TextButton::updateScaling()
 {
 	float targetScale = isHovered ? HOVER_SCALE : NORMAL_SCALE;
-	float currentScale = text.getScale().x;
+	float currentScale = buttonText.getScale().x;
 	float scaleStep = (targetScale - currentScale) * SMOOTH_SCALING_MULTIPLIER;
 	float newScale = currentScale + scaleStep;
-	text.setScale(Vector2f(newScale, newScale));
+	buttonText.setScale(Vector2f(newScale, newScale));
 }

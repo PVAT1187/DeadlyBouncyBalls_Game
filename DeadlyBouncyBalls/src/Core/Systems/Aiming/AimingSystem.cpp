@@ -25,16 +25,16 @@ AimingSystem::AimingSystem(const Texture& crosshairTexture) :
 
 void AimingSystem::update(float deltaTime,
 	const Vector2f& playerPosition, 
-	const sf::Vector2f& aimingTarget)
+	const Vector2f& aimingTarget)
 {
-	aimAtTarget(playerPosition, aimingTarget);
+	updateAimingVisuals(playerPosition, aimingTarget);
 	crosshairSprite.update(deltaTime);
 }
 
-void AimingSystem::draw(RenderWindow& window) const
+void AimingSystem::draw(Renderer& renderer) const
 {
-	//window.draw(aimingLine);
-	crosshairSprite.draw(window);
+	//renderer.draw(aimingLine);
+	renderer.draw(crosshairSprite);
 }
 
 void AimingSystem::resetAnimation()
@@ -42,11 +42,11 @@ void AimingSystem::resetAnimation()
 	crosshairSprite.reset();
 }
 
-void AimingSystem::aimAtTarget(const Vector2f& playerPosition, 
+void AimingSystem::updateAimingVisuals(const Vector2f& playerPosition, 
 	const Vector2f& aimingTarget)
 {
 	Vector2f direction = normalize(
-		computeDirection(aimingTarget, playerPosition));
+		computeDifference(aimingTarget, playerPosition));
 
 	Vector2f tipPosition = playerPosition + direction
 		* DISTANCE_FROM_PLAYER_TIP;

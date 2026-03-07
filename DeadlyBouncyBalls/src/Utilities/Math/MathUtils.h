@@ -1,13 +1,13 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 
 namespace MathUtils
 {
 	float computeClamp(float value, float min, float max);
 	float computeMass(float radius);
-	sf::Vector2f computeDirection(const sf::Vector2f& positionA, 
+	sf::Vector2f computeDifference(const sf::Vector2f& positionA, 
 		const sf::Vector2f& positionB);
 
 	float computeDotProduct(const sf::Vector2f& vectorA, 
@@ -25,11 +25,6 @@ namespace MathUtils
 		const sf::Vector2f& normal, float dpNormal);
 
 	sf::Vector2f normalize(const sf::Vector2f& vector);
-
-	float randomFloat(float min, float max);
-	sf::Vector2f randomDirection();
-	sf::Color randomColor();
-
 };
 
 #endif // !MATH_UTILS_H

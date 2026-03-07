@@ -1,4 +1,4 @@
-#include "Utilities/Graphics/AnimatedSprite.h"
+#include "Utilities/Animation/AnimatedSprite.h"
 
 using namespace sf;
 
@@ -22,27 +22,19 @@ void AnimatedSprite::update(float deltaTime)
 		return;
 
 	elapsedTime += deltaTime;
-	if (elapsedTime >= frameDuration)
+	while (elapsedTime >= frameDuration)
 	{
 		elapsedTime -= frameDuration;
 
+		++currentFrame;
 		if (currentFrame >= frameCount)
 		{
 			currentFrame = 0;
 			isPlaying = false;
 		}
-		else
-		{
-			++currentFrame;
-		}
 
 		updateTextureRect();
 	}
-}
-
-void AnimatedSprite::draw(RenderWindow& window) const
-{
-	window.draw(sprite);
 }
 
 void AnimatedSprite::setPosition(const Vector2f& position)
@@ -90,4 +82,10 @@ void AnimatedSprite::updateTextureRect()
 		  static_cast<int>(rowIndex * frameSize.y) },
 		{ frameSize.x, frameSize.y }
 	));
+}
+
+void AnimatedSprite::draw(RenderTarget& target,
+	RenderStates states) const
+{
+	target.draw(sprite, states);
 }

@@ -61,9 +61,6 @@
     <Filter Include="Core\App">
       <UniqueIdentifier>{b420bb40-31de-412e-abfe-1d61b5325104}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\GameWorld">
-      <UniqueIdentifier>{250250e9-0443-48d6-8fb9-55c572ba6703}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Systems">
       <UniqueIdentifier>{addd45f4-c110-4d8b-bcea-230c7e8e4e58}</UniqueIdentifier>
     </Filter>
@@ -82,14 +79,32 @@
     <Filter Include="Core\Assets">
       <UniqueIdentifier>{747f9561-8311-4728-ab49-ed78a64d9792}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utilities\Graphics">
-      <UniqueIdentifier>{ce11ebc9-d24c-418f-9a98-88a32db0928b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Screens\Tutorial">
       <UniqueIdentifier>{273c94dd-988e-4915-8e1e-67f3f305c95b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Overlays\Tutorial">
       <UniqueIdentifier>{e09ee758-7474-4307-97e2-5088af3fd68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Animation">
+      <UniqueIdentifier>{ce11ebc9-d24c-418f-9a98-88a32db0928b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\Boundary">
+      <UniqueIdentifier>{ca91dbb7-abf5-4113-8e55-e92d23fcc3b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\World">
+      <UniqueIdentifier>{fd86ad4c-57f0-411b-94f7-42acf2e9bc54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\World\GameWorld">
+      <UniqueIdentifier>{a4c23d92-fb6f-4e10-a683-feb313ad27b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\Input">
+      <UniqueIdentifier>{da0b0bff-1551-4119-846d-2d5de68a9819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Rendering">
+      <UniqueIdentifier>{14c0eb04-5be4-4b08-8a8c-538f136f26d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Random">
+      <UniqueIdentifier>{301e4c2a-fe27-4356-a19c-e06d25393fcc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,9 +150,6 @@
     <ClCompile Include="src\Core\App\Game.cpp">
       <Filter>Core\App</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\GameWorld\GameWorld.cpp">
-      <Filter>Core\GameWorld</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\Systems\Aiming\AimingSystem.cpp">
       <Filter>Core\Systems\Aiming</Filter>
     </ClCompile>
@@ -153,14 +165,29 @@
     <ClCompile Include="src\Core\Assets\GameAssets.cpp">
       <Filter>Core\Assets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utilities\Graphics\AnimatedSprite.cpp">
-      <Filter>Utilities\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\Screens\Tutorial\TutorialScreen.cpp">
       <Filter>Screens\Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="src\Overlays\Tutorial\TutorialOverlay.cpp">
       <Filter>Overlays\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Animation\AnimatedSprite.cpp">
+      <Filter>Utilities\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Rendering\Renderer.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\World\GameWorld\GameWorld.cpp">
+      <Filter>Core\World\GameWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Systems\Boundary\BoundarySystem.cpp">
+      <Filter>Core\Systems\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Random\RandomUtils.cpp">
+      <Filter>Utilities\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Systems\Input\InputSystem.cpp">
+      <Filter>Core\Systems\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,14 +233,8 @@
     <ClInclude Include="src\Screens\GameOver\GameOverScreen.h">
       <Filter>Screens\GameOver</Filter>
     </ClInclude>
-    <ClInclude Include="src\Entities\Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="src\Core\App\Game.h">
       <Filter>Core\App</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\GameWorld\GameWorld.h">
-      <Filter>Core\GameWorld</Filter>
     </ClInclude>
     <ClInclude Include="src\Entities\Projectiles\Bullet.h">
       <Filter>Entities\Projectiles</Filter>
@@ -233,14 +254,32 @@
     <ClInclude Include="src\Core\Assets\GameAssets.h">
       <Filter>Core\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utilities\Graphics\AnimatedSprite.h">
-      <Filter>Utilities\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="src\Screens\Tutorial\TutorialScreen.h">
       <Filter>Screens\Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="src\Overlays\Tutorial\TutorialOverlay.h">
       <Filter>Overlays\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\Animation\AnimatedSprite.h">
+      <Filter>Utilities\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Rendering\Renderer.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\Boundary\BoundarySystem.h">
+      <Filter>Core\Systems\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\World\GameWorld\GameWorld.h">
+      <Filter>Core\World\GameWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\World\WorldBounds.h">
+      <Filter>Core\World</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\Input\InputSystem.h">
+      <Filter>Core\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\Random\RandomUtils.h">
+      <Filter>Utilities\Random</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

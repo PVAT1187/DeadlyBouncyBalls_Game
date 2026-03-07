@@ -1,25 +1,27 @@
 #ifndef TUTORIAL_SCREEN_H
 #define TUTORIAL_SCREEN_H
 
+#include "Core/World/WorldBounds.h"
+#include "Core/Systems/Boundary/BoundarySystem.h"
 #include "Screens/Screen.h"
 #include "Overlays/Tutorial/TutorialOverlay.h"
 #include "Entities/Enemies/BallManager.h"
 
-#include <vector>
-
 class TutorialScreen : public Screen
 {
 	public:
-		TutorialScreen(Game& game, sf::RenderWindow& window);
+		TutorialScreen(Game& game);
 
 		void handleEvent(const sf::Event& event) override;
-		void update(float deltaTime) override;
-		void render(sf::RenderWindow& window) override;
+		void update(float deltaTime, 
+			const InputState& inputState) override;
+		void render() override;
 
 	private:
-		BallManager ballManager;
+		WorldBounds worldBounds;
+		BoundarySystem boundarySystem;
 
-		bool instructionShown;
+		BallManager ballManager;
 
 		std::unique_ptr<TutorialOverlay> tutorialOverlay;
 };

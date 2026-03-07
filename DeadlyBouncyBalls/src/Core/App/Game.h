@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include "Core/Assets/GameAssets.h"  
+#include "Core/Rendering/Renderer.h"
+#include "Core/Systems/Input/InputSystem.h"
 #include "Screens/Screen.h"
 
 class Game
@@ -15,10 +17,13 @@ class Game
 		void switchScreen(Arguments&&... arguments);
 
 		const GameAssets& getAssets() const;
+		Renderer& getRenderer();
+		const InputSystem& getInputSystem() const;
 
 	private:
-		sf::RenderWindow window;
+		Renderer renderer;
 		GameAssets assets;
+		InputSystem inputSystem;
 
 		std::unique_ptr<Screen> currentScreen;
 };

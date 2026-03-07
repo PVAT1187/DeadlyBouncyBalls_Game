@@ -1,4 +1,7 @@
 #include "Core/Systems/CollisionDetection/CollisionDetectionSystem.h"
+#include "Entities/Player/Player.h"
+#include "Entities/Enemies/Ball.h"
+#include "Entities/Projectiles/Bullet.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
 using namespace std;
@@ -6,10 +9,8 @@ using namespace PhysicsUtils;
 
 bool CollisionDetectionSystem::detectPlayerBallCollisions(
 	const Player& player,
-	const BallManager& ballManager)
+	const vector<Ball>& balls)
 {
-	const auto& balls = ballManager.getBalls();
-
 	for (const auto& ball : balls)
 	{
 		if (isCircleCollidingWithSprite(
@@ -24,10 +25,10 @@ bool CollisionDetectionSystem::detectPlayerBallCollisions(
 	return false;
 }
 
-std::vector<std::pair<size_t, size_t>> 
+vector<pair<size_t, size_t>> 
 	CollisionDetectionSystem::detectBulletBallCollisions(
-		const std::vector<Bullet>& bullets,
-		const std::vector<Ball>& balls) const
+		const vector<Bullet>& bullets,
+		const vector<Ball>& balls) const
 {
 	vector<pair<size_t, size_t>> collisionPairs;
 
@@ -50,9 +51,9 @@ std::vector<std::pair<size_t, size_t>>
 	return collisionPairs;
 }
 
-std::vector<std::pair<size_t, size_t>> 
+vector<pair<size_t, size_t>> 
 	CollisionDetectionSystem::detectBallCollisions(
-		const std::vector<Ball>& balls) const
+		const vector<Ball>& balls) const
 {
 	vector<pair<size_t, size_t>> collisionPairs;
 

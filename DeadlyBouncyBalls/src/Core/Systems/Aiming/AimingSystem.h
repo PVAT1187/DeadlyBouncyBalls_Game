@@ -1,7 +1,8 @@
 #ifndef  AIMING_SYSTEM_H
 #define  AIMING_SYSTEM_H
 
-#include "Utilities/Graphics/AnimatedSprite.h"
+#include "Core/Rendering/Renderer.h"
+#include "Utilities/Animation/AnimatedSprite.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -13,7 +14,7 @@ class AimingSystem
 		void update(float deltaTime,
 			const sf::Vector2f& playerPosition, 
 			const sf::Vector2f& aimingTarget);
-		void draw(sf::RenderWindow& window) const;
+		void draw(Renderer& renderer) const;
 
 		void resetAnimation();
 
@@ -21,7 +22,7 @@ class AimingSystem
 		AnimatedSprite crosshairSprite;
 		sf::VertexArray aimingLine;
 
-		void aimAtTarget(const sf::Vector2f& playerPosition, 
+		void updateAimingVisuals(const sf::Vector2f& playerPosition, 
 			const sf::Vector2f& aimingTarget);
 };
 

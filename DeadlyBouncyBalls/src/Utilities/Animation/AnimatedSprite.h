@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class AnimatedSprite
+class AnimatedSprite : public sf::Drawable
 {
 	public:
 		AnimatedSprite(const sf::Texture& texture, int rowIndex,
@@ -11,7 +11,6 @@ class AnimatedSprite
 			int frameCount, float frameDuration);
 
 		void update(float deltaTime);
-		void draw(sf::RenderWindow& window) const;
 
 		void setPosition(const sf::Vector2f& position);
 		void setRotation(float angle);
@@ -38,6 +37,9 @@ class AnimatedSprite
 		bool isPlaying;
 
 		void updateTextureRect();
+
+		void draw(sf::RenderTarget& target,
+			sf::RenderStates states) const override;
 };
 
 #endif // !ANIMATED_SPRITE_H

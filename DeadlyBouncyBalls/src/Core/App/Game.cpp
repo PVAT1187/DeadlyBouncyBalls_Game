@@ -7,42 +7,48 @@
 using namespace sf;
 using namespace std;
 
-const VideoMode& DESKTOP_MODE = VideoMode::getDesktopMode();
-
-Game::Game() :
-	window(VideoMode(DESKTOP_MODE), "Deadly Bouncy Balls",
-		Style::None)
+Game::Game()
 {
-	assets.loadFont();
-	assets.loadAssets();
-	switchScreen<GameStartScreen>(window);
+	assets.load();
+	switchScreen<GameStartScreen>();
 }
 
 void Game::run()
 {
 	Clock clock;
 
-	while (window.isOpen())
+	while (renderer.isOpen())
 	{
 		float deltaTime = clock.restart().asSeconds();
 
-		while (const optional event = window.pollEvent())
+		while (const optional event = renderer.pollEvent())
 		{
 			if (event->is<Event::Closed>())
-				window.close();
+				renderer.close();
 			
 			currentScreen->handleEvent(*event);
 		}
 
-		currentScreen->update(deltaTime);
+		InputState inputState = inputSystem.collect(renderer);
+		currentScreen->update(deltaTime, inputState);
 
-		window.clear();
-		currentScreen->render(window);
-		window.display();
+		renderer.clear();
+		currentScreen->render();
+		renderer.display();
 	}
 }
 
 const GameAssets& Game::getAssets() const
 {
 	return assets;
+}
+
+Renderer& Game::getRenderer()
+{
+	return renderer;
+}
+
+const InputSystem& Game::getInputSystem() const 
+{
+	return inputSystem;
 }

@@ -9,9 +9,9 @@ using namespace std;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-Bullet::Bullet(const sf::Texture& bulletTexture,
-	const sf::Vector2f& startPosition,
-	const sf::Vector2f& direction, 
+Bullet::Bullet(const Texture& bulletTexture,
+	const Vector2f& startPosition,
+	const Vector2f& direction, 
 	float speed, float lifespan) :
 	bulletSprite(bulletTexture),
 	position(startPosition),
@@ -39,9 +39,9 @@ void Bullet::update(float deltaTime)
 	bulletSprite.setPosition(position);
 }
 
-void Bullet::draw(sf::RenderWindow& window) const
+const Sprite& Bullet::getSprite() const
 {
-	window.draw(bulletSprite);
+	return bulletSprite;
 }
 
 FloatRect Bullet::getCollisionBounds() const

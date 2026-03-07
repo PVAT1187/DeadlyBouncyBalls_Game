@@ -1,5 +1,10 @@
-#include "Core/Systems/CollisionDetection/CollisionDetectionSystem.h"
 #include "Core/Systems/Combat/CombatSystem.h"
+#include "Entities/Player/Player.h"
+#include "Entities/Enemies/BallManager.h"
+
+
+CombatSystem::CombatSystem() :
+	playerHit(false) {}
 
 void CombatSystem::update(Player& player,
 	BallManager& ballManager)
@@ -7,7 +12,8 @@ void CombatSystem::update(Player& player,
 	auto& bullets = player.getBullets();
 	auto& balls = ballManager.getBalls();
 
-	CollisionDetectionSystem collisionDetector;
+	playerHit = collisionDetector.detectPlayerBallCollisions(player, balls);
+	
 	auto collisions = collisionDetector.detectBulletBallCollisions(
 		bullets, balls);
 
@@ -20,4 +26,9 @@ void CombatSystem::update(Player& player,
 		ballManager.splitBallOnHit(ballIndex);
 		bullets.erase(bullets.begin() + bulletIndex);
 	}
+}
+
+bool CombatSystem::isPlayerHit() const
+{
+	return playerHit;
 }

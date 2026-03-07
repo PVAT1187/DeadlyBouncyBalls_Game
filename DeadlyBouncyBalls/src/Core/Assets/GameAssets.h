@@ -1,13 +1,13 @@
 #ifndef GAME_ASSETS_H
 #define GAME_ASSETS_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 class GameAssets 
 {
 	public:
-		void loadFont();
-		void loadAssets();
+		void load();
 
 		const sf::Font& getFont() const;
 

@@ -1,11 +1,12 @@
 #include "Config/Constants/GameConstants.h"
+#include "Core/Rendering/Renderer.h"
 #include "Entities/Enemies/Ball.h"
 #include "Utilities/Math/MathUtils.h"
-#include "Utilities/Physics/PhysicsUtils.h"
+#include "Utilities/Random/RandomUtils.h"
 
 using namespace sf;
 using namespace MathUtils;
-using namespace PhysicsUtils;
+using namespace RandomUtils;
 
 Ball::Ball(float radius, Vector2f position, Vector2f velocity) :
 	radius(radius), position(position), velocity(velocity), 
@@ -50,15 +51,15 @@ Vector2f& Ball::getPosition()
 	return position;
 }
 
-void Ball::update(float deltaTime, const Vector2u& windowSize)
+void Ball::update(float deltaTime)
 {
-	move(deltaTime, windowSize);
+	move(deltaTime);
 	updateFlashing(deltaTime);
 }
 
-void Ball::draw(RenderWindow& window) const
+void Ball::draw(Renderer& renderer) const 
 {
-	window.draw(ball);
+	renderer.draw(ball);
 }
 
 void Ball::startBlink()
@@ -66,13 +67,9 @@ void Ball::startBlink()
 	isFlashing = true;
 }
 
-void Ball::move(float deltaTime, const sf::Vector2u& windowSize)
+void Ball::move(float deltaTime)
 {
 	position += velocity * deltaTime;
-
-	bounceCircleOffWindow(position, velocity,
-		radius, windowSize);
-
 	ball.setPosition(position);
 }
 

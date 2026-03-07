@@ -5,8 +5,8 @@ using namespace sf;
 using namespace std;
 
 ShootingSystem::ShootingSystem(const sf::Texture& bulletTexture) :
-	fireCooldown(0.f), bulletTexture(bulletTexture) {
-}
+	bulletTexture(bulletTexture), 
+	fireCooldown(0.f) {}
 
 void ShootingSystem::update(float deltaTime)
 {
@@ -15,11 +15,11 @@ void ShootingSystem::update(float deltaTime)
 	removeExpiredBullets();
 }
 
-void ShootingSystem::draw(sf::RenderWindow& window) const
+void ShootingSystem::draw(Renderer& renderer) const
 {
 	for (const auto& bullet : bullets)
 	{
-		bullet.draw(window);
+		renderer.draw(bullet.getSprite());
 	}
 }
 

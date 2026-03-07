@@ -6,22 +6,27 @@
 
 class TutorialOverlay : public Overlay
 {
-public:
-	TutorialOverlay(Game& game, sf::RenderWindow& window);
+	public:
+		TutorialOverlay(Game& game);
 
-	void handleEvent(const sf::Event& event) override;
-	void update() override;
-	void render(sf::RenderWindow& window) override;
+		void handleEvent(const sf::Event& event) override;
+		void update(float deltaTime,
+			const InputState& inputState) override;
+		void render() override;
 
-private:
-	sf::Text tutorialOverlayTitle;
-	std::vector<sf::Text> instructions;
+		bool isFinished() const;
 
-	TextButton continueButton;
+	private:
+		sf::Text tutorialOverlayTitle;
+		std::vector<sf::Text> instructions;
 
-	void initTutorialOverlayTitle();
-	void initInstructions();
-	void updateButtonPosition();
+		TextButton continueButton;
+
+		bool finished;
+
+		void initTutorialOverlayTitle();
+		void initInstructions();
+		void updateButtonPosition();
 };
 
 #endif // !TUTORIAL_OVERLAY_H

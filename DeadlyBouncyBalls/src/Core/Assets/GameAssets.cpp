@@ -3,14 +3,11 @@
 using namespace sf;
 using namespace std;
 
-void GameAssets::loadFont()
+void GameAssets::load()
 {
 	if (!font.openFromFile("assets/fonts/arial.ttf"))
 		throw runtime_error("Failed to load font!");
-}
-
-void GameAssets::loadAssets()
-{
+	
 	if (!playerTexture.loadFromFile("assets/PNG/Player/player_sprite.png"))
 		throw runtime_error("Failed to load player texture!");
 

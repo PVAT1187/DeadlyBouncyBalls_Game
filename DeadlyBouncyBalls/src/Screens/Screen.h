@@ -1,28 +1,26 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-#include <SFML/Graphics.hpp>
-#include <vector>
+#include "Core/Systems/Input/InputSystem.h"
+
+#include <SFML/Window/Event.hpp>
 
 class Game;
-class GameAssets;
 
 class Screen
 {
 	public:
 		virtual void handleEvent(const sf::Event& event) = 0;
-		virtual void update(float deltaTime) = 0;
-		virtual void render(sf::RenderWindow& window) = 0;
+		virtual void update(float deltaTime, 
+			const InputState& inputState) = 0;
+		virtual void render() = 0;
 
 		virtual ~Screen() = default;
 
 	protected:
 		Game& game;
-		sf::RenderWindow& window;
-		const GameAssets* assets;
 
-		Screen(Game& game, sf::RenderWindow& window, const GameAssets* assets = nullptr) :
-			game(game), window(window), assets(assets) {}
+		Screen(Game& game) : game(game) {}
 };
 
 #endif // !SCREEN_H

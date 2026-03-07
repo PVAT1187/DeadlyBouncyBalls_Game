@@ -1,11 +1,11 @@
 #ifndef  COLLISION_DETECTION_SYSTEM_H
 #define  COLLISION_DETECTION_SYSTEM_H
 
-#include "Entities/Player/Player.h"
-#include "Entities/Enemies/BallManager.h"
-#include "Entities/Projectiles/Bullet.h"
-
 #include <vector>
+
+class Player;
+class Ball;
+class Bullet;
 
 class CollisionDetectionSystem
 {
@@ -13,7 +13,7 @@ class CollisionDetectionSystem
 		CollisionDetectionSystem() = default;
 		
 		bool detectPlayerBallCollisions(const Player& player,
-			const BallManager& ballManager);
+			const std::vector<Ball>& balls);
 
 		std::vector<std::pair<size_t, size_t>> detectBulletBallCollisions(
 			const std::vector<Bullet>& bullets,

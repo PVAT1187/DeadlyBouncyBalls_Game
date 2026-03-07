@@ -1,6 +1,5 @@
 #include "Config/Constants/GameConstants.h"
 #include "Core/App/Game.h"
-#include "Screens/GamePlay/GamePlayScreen.h"
 #include "Overlays/Tutorial/TutorialOverlay.h"
 #include "Utilities/UI/UIUtils.h"
 
@@ -8,11 +7,11 @@ using namespace sf;
 using namespace std;
 using namespace UIUtils;
 
-TutorialOverlay::TutorialOverlay(Game& game,
-	RenderWindow& window) :
-	Overlay(game, window, &game.getAssets()),
-	tutorialOverlayTitle(Text(assets->getFont(), "TUTORIAL", TITLE_TEXT_SIZE)),
-	continueButton("CONTINUE", assets->getFont(), BUTTON_SIZE, { 0, 0 })
+TutorialOverlay::TutorialOverlay(Game& game) :
+	Overlay(game),
+	tutorialOverlayTitle(Text(game.getAssets().getFont(), "TUTORIAL", TITLE_TEXT_SIZE)),
+	continueButton("CONTINUE", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
+	finished(false)
 {
 	initDimBackground();
 	initTutorialOverlayTitle();
@@ -25,35 +24,44 @@ void TutorialOverlay::handleEvent(const Event& event)
 	if (event.is<Event::MouseButtonPressed>() &&
 		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
 	{
-		if (continueButton.isClicked(window))
+		if (continueButton.isClicked())
 		{
-			game.switchScreen<GamePlayScreen>(window);
+			finished = true;
 		}
 	}
 }
 
-void TutorialOverlay::update()
+void TutorialOverlay::update(float deltaTime,
+	const InputState& inputState)
 {
-	continueButton.update(window);
+	continueButton.update(inputState.mousePosition);
 }
 
-void TutorialOverlay::render(RenderWindow& window)
+void TutorialOverlay::render()
 {
-	window.draw(dimBackground);
-	window.draw(tutorialOverlayTitle);
+	auto& renderer = game.getRenderer();
+	
+	renderer.draw(dimBackground);
+	renderer.draw(tutorialOverlayTitle);
 	
 	for (const auto& instruction : instructions)
 	{
-		window.draw(instruction);
+		renderer.draw(instruction);
 	}
 		
-	continueButton.draw(window);
+	continueButton.draw(renderer);
 }
 
+bool TutorialOverlay::isFinished() const
+{
+	return finished;
+}
 
 void TutorialOverlay::initTutorialOverlayTitle()
 {
-	centerText(tutorialOverlayTitle, window, -TITLE_BODY_SPACING);
+	centerText(tutorialOverlayTitle, 
+		game.getRenderer().getWindowSize(),
+		-TITLE_BODY_SPACING);
 }
 
 void TutorialOverlay::initInstructions()
@@ -67,12 +75,13 @@ void TutorialOverlay::initInstructions()
 	};
 	
 	float verticalOffset = -TITLE_INSTRUCTION_SPACING *
-		static_cast<float>(instructionLines.size() / 2);
+		(static_cast<float>(instructionLines.size() / 2));
 
 	for (const auto& line : instructionLines)
 	{
-		Text instruction(assets->getFont(), line, BODY_TEXT_SIZE);
-		centerText(instruction, window, verticalOffset);
+		Text instruction(game.getAssets().getFont(), line, BODY_TEXT_SIZE);
+		centerText(instruction, game.getRenderer().getWindowSize(),
+			verticalOffset);
 		verticalOffset += INSTRUCTION_SPACING;
 		instructions.push_back(instruction);
 	}
@@ -82,6 +91,7 @@ void TutorialOverlay::updateButtonPosition()
 {
 	vector<TextButton*> buttons = { &continueButton };
 
-	Text lastInstruction = instructions.back();
-	positionButtons(lastInstruction, buttons, window);
+	const Text& lastInstruction = instructions.back();
+	positionButtons(lastInstruction, buttons, 
+		game.getRenderer().getWindowSize());
 }

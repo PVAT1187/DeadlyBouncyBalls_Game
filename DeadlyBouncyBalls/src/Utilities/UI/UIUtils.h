@@ -8,11 +8,11 @@
 
 namespace UIUtils
 {
-	void centerText(sf::Text& text, sf::RenderWindow& window,
+	void centerText(sf::Text& text, const sf::Vector2u& windowSize,
 		float verticalOffset = 0.f);
 	void positionButtons(const sf::Text& text,
 		std::vector<TextButton*>& buttons,
-		sf::RenderWindow& window);
+		const sf::Vector2u& windowSize);
 };
 
 #endif // !UI_UTILS_H

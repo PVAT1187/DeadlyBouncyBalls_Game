@@ -1,6 +1,7 @@
 #ifndef SHOOTING_SYSTEM_H
 #define SHOOTING_SYSTEM_H
 
+#include "Core/Rendering/Renderer.h"
 #include "Entities/Projectiles/Bullet.h"
 
 class ShootingSystem 
@@ -9,7 +10,7 @@ class ShootingSystem
 		ShootingSystem(const sf::Texture& bulletTexture);
 
 		void update(float deltaTime);
-		void draw(sf::RenderWindow& window) const;
+		void draw(Renderer& renderer) const;
 		
 		std::vector<Bullet>& getBullets();
 
@@ -18,7 +19,7 @@ class ShootingSystem
 
 	private:
 		std::vector<Bullet> bullets;
-		sf::Texture bulletTexture;
+		const sf::Texture& bulletTexture;
 
 		float fireCooldown;
 

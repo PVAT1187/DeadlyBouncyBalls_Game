@@ -1,9 +1,10 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include <SFML/Graphics.hpp>
-
-class Ball;
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class Bullet
 {
@@ -15,8 +16,8 @@ class Bullet
 			float lifespan);
 
 		void update(float deltaTime);
-		void draw(sf::RenderWindow& window) const;
 
+		const sf::Sprite& getSprite() const;
 		sf::FloatRect getCollisionBounds() const;
 
 		bool isExpired() const;

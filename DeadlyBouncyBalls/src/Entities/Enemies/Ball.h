@@ -1,16 +1,20 @@
 #ifndef BALL_H
 #define BALL_H	
 
-#include "Entities/Player/Player.h"
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
 
-class Ball : public Entity
+class Renderer;
+
+class Ball
 {
 	public:
 		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
 
-		void update(float deltaTime, const sf::Vector2u& windowSize) override;
-		void draw(sf::RenderWindow& window) const override;
-		
+		void update(float deltaTime);
+		void draw(Renderer& renderer) const;
+
 		float getRadius() const;
 		float getMass() const;
 
@@ -34,7 +38,7 @@ class Ball : public Entity
 		float flashingTime;
 		sf::Color color;
 
-		void move(float deltaTime, const sf::Vector2u& windowSize);
+		void move(float deltaTime);
 		void updateFlashing(float deltaTime);
 };
 

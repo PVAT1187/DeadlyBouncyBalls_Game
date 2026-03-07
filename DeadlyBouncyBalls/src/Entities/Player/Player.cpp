@@ -1,4 +1,6 @@
 #include "Config/Constants/GameConstants.h"
+#include "Core/Assets/GameAssets.h"
+#include "Core/World/WorldBounds.h"
 #include "Entities/Player/Player.h"
 #include "Utilities/Math/MathUtils.h"
 #include "Utilities/Physics/PhysicsUtils.h"
@@ -8,14 +10,17 @@ using namespace std;
 using namespace MathUtils;
 using namespace PhysicsUtils;
 
-Player::Player(const GameAssets& assets, const Vector2u& windowSize) :
+Player::Player(const GameAssets& assets,
+    const WorldBounds& worldBounds) :
     playerSprite(assets.getPlayerTexture()),
     aimingSystem(assets.getAimingIconTexture()),
 	shootingSystem(assets.getBulletTexture())
 {
+    playerSprite.setPosition(Vector2f(
+        worldBounds.right / 2.f,
+        worldBounds.bottom / 2.f));
+    
     playerSprite.setScale({ PLAYER_SCALE, PLAYER_SCALE });
-    playerSprite.setPosition(
-        Vector2f(windowSize.x / 2.f, windowSize.y / 2.f));
 
     FloatRect spriteBounds = playerSprite.getLocalBounds();
     playerSprite.setOrigin(Vector2f(
@@ -23,24 +28,24 @@ Player::Player(const GameAssets& assets, const Vector2u& windowSize) :
         spriteBounds.size.y / 2.f));
 }
 
-void Player::update(float deltaTime, const sf::Vector2u& windowSize)
+void Player::update(float deltaTime, const InputState& inputState)
 {
-    move(deltaTime);
-    rotate(deltaTime, mouseTarget);
-    clampToWindow(windowSize);
+    move(deltaTime, inputState);
+    rotate(deltaTime, inputState);
 
-    Vector2f playerPosition = playerSprite.getPosition();
-    aimingSystem.update(deltaTime, playerPosition, mouseTarget);
+	Vector2f playerPosition = playerSprite.getPosition();
+    aimingSystem.update(deltaTime, playerPosition, 
+        inputState.mousePosition);
     
-    if (shoot(deltaTime, playerPosition))
+    if (shoot(deltaTime, playerPosition, inputState))
         aimingSystem.resetAnimation();
 }
 
-void Player::draw(RenderWindow& window) const
+void Player::draw(Renderer& renderer) const
 {
-    aimingSystem.draw(window);
-    window.draw(playerSprite);
-	shootingSystem.draw(window);
+    aimingSystem.draw(renderer);
+    renderer.draw(playerSprite);
+	shootingSystem.draw(renderer);
 }
 
 FloatRect Player::getCollisionBounds() const
@@ -63,22 +68,27 @@ vector<Bullet>& Player::getBullets()
     return shootingSystem.getBullets();
 }
 
-void Player::setMouseTarget(const sf::Vector2f& target)
+const Vector2f& Player::getPosition() const
 {
-    mouseTarget = target;
+	return playerSprite.getPosition();
 }
 
-void Player::move(float deltaTime)
+void Player::setPosition(const Vector2f& newPosition)
+{
+	playerSprite.setPosition(newPosition);
+}
+
+void Player::move(float deltaTime, const InputState& inputState)
 {
     Vector2f movement;
 
-    if (Keyboard::isKeyPressed(Keyboard::Scancode::A))
+    if (inputState.moveLeft)
         movement.x -= 1.f;
-    if (Keyboard::isKeyPressed(Keyboard::Scancode::D))
+    if (inputState.moveRight)
         movement.x += 1.f;
-    if (Keyboard::isKeyPressed(Keyboard::Scancode::W))
+    if (inputState.moveUp)
         movement.y -= 1.f;
-    if (Keyboard::isKeyPressed(Keyboard::Scancode::S))
+    if (inputState.moveDown)
         movement.y += 1.f;
 
     if (movement.x != 0.f || movement.y != 0.f)
@@ -87,23 +97,11 @@ void Player::move(float deltaTime)
     playerSprite.move(movement * PLAYER_SPEED * deltaTime);
 }
 
-void Player::clampToWindow(const Vector2u& windowSize)
+void Player::rotate(float deltaTime, const InputState& inputState)
 {
-	Vector2f spritePostion = playerSprite.getPosition();
-    FloatRect spriteBounds = getCollisionBounds();
-	Vector2f spriteHalfSize(
-        spriteBounds.size.x / 2.f, 
-        spriteBounds.size.y / 2.f);
-
-    clampSpriteToWindow(spritePostion, spriteHalfSize, windowSize);
-
-    playerSprite.setPosition(spritePostion);
-}
-
-void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
-{
-	Vector2f playerPosition = playerSprite.getPosition();
-    Vector2f direction = computeDirection(rotationTarget, playerPosition);
+    Vector2f direction = computeDifference(
+        inputState.mousePosition,
+        playerSprite.getPosition());
 
     float currentAngle = playerSprite.getRotation().asDegrees();
     float targetAngle = atan2(direction.y, direction.x) * 
@@ -122,13 +120,16 @@ void Player::rotate(float deltaTime, const sf::Vector2f& rotationTarget)
     playerSprite.setRotation(degrees(currentAngle + step));
 }   
 
-bool Player::shoot(float deltaTime, const Vector2f& playerPosition)
+bool Player::shoot(float deltaTime, 
+    const Vector2f& playerPosition,
+    const InputState& inputState)
 {
 	bool isShooting = false;
     
-    if (Mouse::isButtonPressed(Mouse::Button::Left))
+    if (inputState.shoot)
     {
-        Vector2f direction = computeDirection(mouseTarget, playerPosition);
+        Vector2f direction = computeDifference(
+            inputState.mousePosition, playerPosition);
         shootingSystem.shoot(playerPosition, direction);
 		isShooting = true;
     }

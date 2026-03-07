@@ -1,40 +1,51 @@
+#include "Core/App/Game.h"
 #include "Screens/Tutorial/TutorialScreen.h"
+#include "Screens/GamePlay/GamePlayScreen.h"
 
 using namespace sf;
 using namespace std;
 
-TutorialScreen::TutorialScreen(Game& game, RenderWindow& window) :
-	Screen(game, window),
-	ballManager(window.getSize()),
-	instructionShown(true)
+TutorialScreen::TutorialScreen(Game& game) :
+	Screen(game),
+	worldBounds(game.getRenderer().getWindowSize()),
+	boundarySystem(worldBounds),
+	ballManager(worldBounds)
 {
-	tutorialOverlay = make_unique<TutorialOverlay>(game, window);
+	tutorialOverlay = make_unique<TutorialOverlay>(game);
 }
 
 void TutorialScreen::handleEvent(const Event& event) 
 {
-	if (instructionShown)
+	if (tutorialOverlay)
 	{
 		tutorialOverlay->handleEvent(event);
+
+		if (tutorialOverlay->isFinished())
+		{
+			tutorialOverlay.reset();
+			game.switchScreen<GamePlayScreen>();
+		}
+
 		return;
 	}
 }
 
-void TutorialScreen::update(float deltaTime)
+void TutorialScreen::update(float deltaTime,
+	const InputState& inputState)
 {
-	if (instructionShown && tutorialOverlay)
-	{
-		tutorialOverlay->update();
-	}
+	if (tutorialOverlay)
+		tutorialOverlay->update(deltaTime, inputState);
 
-	const Vector2u& windowSize = window.getSize();
-	ballManager.update(deltaTime, windowSize);
+	ballManager.update(deltaTime);
+	boundarySystem.apply(ballManager);
 }
 
-void TutorialScreen::render(RenderWindow& window)
+void TutorialScreen::render()
 {
-	ballManager.draw(window);
+	auto& renderer = game.getRenderer();
+	
+	ballManager.draw(renderer);
 
-	if (instructionShown)
-		tutorialOverlay->render(window);
+	if (tutorialOverlay)
+		tutorialOverlay->render();
 }

@@ -1,58 +1,58 @@
 #include "Config/Constants/GameConstants.h"
+#include "Core/World/WorldBounds.h"
 #include "Utilities/Math/MathUtils.h"
 #include "Utilities/Physics/PhysicsUtils.h"
-
-#include <iostream>
 
 using namespace sf;
 using namespace MathUtils;
 
-void PhysicsUtils::clampSpriteToWindow(Vector2f& position,
-    const Vector2f& size, const Vector2u& windowSize)
+void PhysicsUtils::clampSpriteToWorldBounds(Vector2f& position,
+    const Vector2f& halfSize, const WorldBounds& worldBounds)
 {
-    position.x = computeClamp(position.x, 
-        size.x, windowSize.x - size.x);
-    position.y = computeClamp(position.y, 
-        size.y, windowSize.y - size.y);
+    position.x = computeClamp(
+        position.x, 
+        worldBounds.left + halfSize.x, 
+        worldBounds.right - halfSize.x);
+    position.y = computeClamp(
+        position.y, 
+        worldBounds.top + halfSize.y, 
+        worldBounds.bottom - halfSize.y);
 }
 
-void PhysicsUtils::bounceCircleOffWindow(Vector2f& position,
-    Vector2f& velocity, float radius, const Vector2u& windowSize)
+void PhysicsUtils::bounceCircleOffWorldBounds(Vector2f& position,
+    Vector2f& velocity, float radius, const WorldBounds& worldBounds)
 {
-    const float windowWidth = static_cast<float>(windowSize.x);
-    const float windowHeight = static_cast<float>(windowSize.y);
-
     float circleLeftEdge = position.x - radius;
     float circleRightEdge = position.x + radius;
     float circleTopEdge = position.y - radius;
     float circleBottomEdge = position.y + radius;
 
-    if (circleLeftEdge <= 0)
+    if (circleLeftEdge <= worldBounds.left)
     {
-        velocity.x = -velocity.x;
-        position.x = radius;
+        velocity.x *= -1.f;
+        position.x = worldBounds.left + radius;
     }
-    else if (circleRightEdge >= windowWidth)
+    else if (circleRightEdge >= worldBounds.right)
     {
-        velocity.x = -velocity.x;
-        position.x = windowWidth - radius;
+        velocity.x *= -1.f;
+        position.x = worldBounds.right - radius;
     }
     
-    if (circleTopEdge <= 0)
+    if (circleTopEdge <= worldBounds.top)
     {
-        velocity.y = -velocity.y;
-        position.y = radius;
+        velocity.y *= -1.f;
+        position.y = worldBounds.top + radius;
     }
-    else if (circleBottomEdge >= windowHeight)
+    else if (circleBottomEdge >= worldBounds.bottom)
     {
-        velocity.y = -velocity.y;
-        position.y = windowHeight - radius;
+        velocity.y *= -1.f;
+        position.y = worldBounds.bottom - radius;
     }
 }
 
 bool PhysicsUtils::isCircleCollidingWithSprite(
     const Vector2f& circlePosition, float circleRadius,
-    const sf::FloatRect& spriteBounds)
+    const FloatRect& spriteBounds)
 {
     Vector2f spriteHalfSize(
         spriteBounds.size.x / 2.f,
@@ -103,7 +103,7 @@ void PhysicsUtils::resolveStaticCircleCollision(
 
 void PhysicsUtils::resolveDynamicCircleCollision(Vector2f& velocityA, 
     float massA, Vector2f& velocityB, float massB,
-    const sf::Vector2f& normal)
+    const Vector2f& normal)
 {
     Vector2f tangent(-normal.y, normal.x);
 

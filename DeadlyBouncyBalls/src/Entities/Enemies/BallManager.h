@@ -1,6 +1,7 @@
 #ifndef BALL_MANAGER_H
 #define BALL_MANAGER_H
 
+#include "Core/World/WorldBounds.h" 
 #include "Entities/Enemies/Ball.h"
 
 #include <SFML/Graphics.hpp>
@@ -9,17 +10,15 @@
 class BallManager
 {
 	public:	
-		BallManager(const sf::Vector2u& windowSize);
+		BallManager(const WorldBounds& worldBounds);
 
-		void update(float deltaTime, const sf::Vector2u& windowSize);
-		void draw(sf::RenderWindow& window) const;
+		void update(float deltaTime);
+		void draw(Renderer& renderer) const;
 
 		const std::vector<Ball>& getBalls() const;
 		std::vector<Ball>& getBalls();
 
 		void splitBallOnHit(size_t index);
-		
-		bool isCollidingWithPlayer(const Player& player) const;
 
 	private:
 		std::vector<Ball> balls;
@@ -28,7 +27,7 @@ class BallManager
 		float splittingTimer;
 		bool blinkTriggered;
 
-		void updateBalls(float deltaTime, const sf::Vector2u& windowSize);
+		void updateBalls(float deltaTime);
 		void updateBlinking();
 		void updateSplitting();
 

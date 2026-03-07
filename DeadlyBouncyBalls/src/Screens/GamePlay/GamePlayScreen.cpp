@@ -1,79 +1,90 @@
 #include "Config/Constants/GameConstants.h"
 #include "Core/App/Game.h"
+#include "Screens/GameStart/GameStartScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
 
 using namespace sf;
 using namespace std;
 
-GamePlayScreen::GamePlayScreen(Game& game, RenderWindow& window) :
-	Screen(game, window, &game.getAssets()),
-	gameWorld(game, window.getSize()),
-	survivalTimeText(Text(assets->getFont(), "", BODY_TEXT_SIZE)),
-	survivalClock(),
-	paused(false)
+GamePlayScreen::GamePlayScreen(Game& game) :
+	Screen(game),
+	gameWorld(game.getAssets(), game.getRenderer().getWindowSize()),
+	survivalTimeText(Text(game.getAssets().getFont(), "", BODY_TEXT_SIZE)),
+	survivalClock()
 {
-	this->window.setMouseCursorVisible(false);
+	game.getRenderer().showCursor(false);
 	initSurvivalTimeText();
 	survivalClock.restart();
-
-	pauseOverlay = make_unique<PauseMenuOverlay>(*this, game, window);
 }
 
 void GamePlayScreen::handleEvent(const Event& event)
 {
 	if (event.is<Event::KeyPressed>() &&
-		event.getIf<Event::KeyPressed>()->code == Keyboard::Key::Escape)
+		event.getIf<Event::KeyPressed>()->code == 
+		Keyboard::Key::Escape)
 	{
-		paused = !paused;
-		window.setMouseCursorVisible(paused);
-		return;
+		if (!pauseOverlay)
+		{
+			pauseOverlay = make_unique<PauseMenuOverlay>(game);
+			game.getRenderer().showCursor(true);
+		}
+		else
+		{
+			pauseOverlay.reset();
+			game.getRenderer().showCursor(false);
+		}
 	}
 
-	if (paused)
+	if (pauseOverlay)
 	{
 		pauseOverlay->handleEvent(event);
-		return;
+		
+		if (pauseOverlay->hasSelectedOption())
+		{
+			switch (pauseOverlay->getSelectedOption())
+			{
+				case PauseMenuOption::RESUME:
+					pauseOverlay.reset();
+					game.getRenderer().showCursor(false);
+					break;
+				case PauseMenuOption::MAIN_MENU:
+					game.switchScreen<GameStartScreen>();
+					break;
+			}
+		}
 	}
 }
 
-void GamePlayScreen::update(float deltaTime)
+void GamePlayScreen::update(float deltaTime,
+	const InputState& inputState)
 {	
-	if (paused)
+	if (pauseOverlay)
 	{
-		pauseOverlay->update();
+		pauseOverlay->update(deltaTime, inputState);
 		return;
 	}
 	
 	float survivalTime = survivalClock.getElapsedTime().asSeconds();
 	updateSurvivalTimeText(survivalTime);
-
-	Vector2f mousePosition =
-		window.mapPixelToCoords(Mouse::getPosition(window));
-	const Vector2u& windowSize = window.getSize();
-
-	gameWorld.update(deltaTime, windowSize, mousePosition);
-
+	
+	gameWorld.update(deltaTime, inputState);
 	if (gameWorld.isGameOver())
 	{
-		game.switchScreen<GameOverScreen>(window, survivalTime);
+		game.switchScreen<GameOverScreen>(survivalTime);
 		return;
 	}
 }
 
-void GamePlayScreen::render(RenderWindow& window)
+void GamePlayScreen::render()
 {
-	gameWorld.render(window);
-	window.draw(survivalTimeText);
+	auto& renderer = game.getRenderer();
+	
+	gameWorld.render(renderer);
+	renderer.draw(survivalTimeText);
 
-	if (paused)
-		pauseOverlay->render(window);
-}
-
-void GamePlayScreen::unpause()
-{
-	paused = false;
-	window.setMouseCursorVisible(false);
+	if (pauseOverlay)
+		pauseOverlay->render();
 }
 
 void GamePlayScreen::initSurvivalTimeText()

@@ -1,14 +1,17 @@
 #ifndef PHYSICS_UTILS_H
 #define PHYSICS_UTILS_H
 
-#include <SFML/Graphics.hpp>
+#include "Core/World/WorldBounds.h"
+
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Rect.hpp>
 
 namespace PhysicsUtils
 {
-	void clampSpriteToWindow(sf::Vector2f& position, 
-		const sf::Vector2f& size, const sf::Vector2u& windowSize);
-	void bounceCircleOffWindow(sf::Vector2f& position, sf::Vector2f& velocity,
-		float radius, const sf::Vector2u& windowSize);
+	void clampSpriteToWorldBounds(sf::Vector2f& position, 
+		const sf::Vector2f& halfSize, const WorldBounds& worldBounds);
+	void bounceCircleOffWorldBounds(sf::Vector2f& position, sf::Vector2f& velocity,
+		float radius, const WorldBounds& worldBounds);
 
 	bool isCircleCollidingWithSprite(const sf::Vector2f& circlePosition,
 		float circleRadius, const sf::FloatRect& spriteBounds);

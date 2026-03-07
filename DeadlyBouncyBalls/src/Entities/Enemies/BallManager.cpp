@@ -1,24 +1,28 @@
 #include "Config/Constants/GameConstants.h"
+#include "Core/World/WorldBounds.h"
 #include "Core/Systems/CollisionDetection/CollisionDetectionSystem.h"
 #include "Entities/Enemies/BallManager.h"
 #include "Utilities/Math/MathUtils.h"
+#include "Utilities/Random/RandomUtils.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
 using namespace std;
 using namespace sf;
 using namespace MathUtils;
+using namespace RandomUtils;
 using namespace PhysicsUtils;
 
-BallManager::BallManager(const sf::Vector2u& windowSize) :
-	splittingTimer(0.f), blinkTriggered(false),
-	currentSplitTime(INITIAL_SPLITTING_TIME)
+BallManager::BallManager(const WorldBounds& worldBounds) :
+	splittingTimer(0.f), 
+	blinkTriggered(false),
+	currentSplitTime(INITIAL_SPLITTING_TIME) 
 {
 	for (int i = 0; i < INITIAL_NUMBER_OF_BALL; ++i)
 	{
 		float radius = BALL_MAX_RADIUS;
-		
-		Vector2f position(randomFloat(radius, windowSize.x - radius),
-			randomFloat(radius, windowSize.y - radius));
+
+		Vector2f position(randomFloat(radius, worldBounds.right - radius),
+			randomFloat(radius, worldBounds.bottom - radius));
 
 		float speed = randomFloat(BALL_MIN_SPEED, BALL_MAX_SPEED);
 		Vector2f direction = randomDirection();
@@ -28,9 +32,9 @@ BallManager::BallManager(const sf::Vector2u& windowSize) :
 	}
 }
 
-void BallManager::update(float deltaTime, const sf::Vector2u& windowSize)
+void BallManager::update(float deltaTime)
 {	
-	updateBalls(deltaTime, windowSize);
+	updateBalls(deltaTime);
 	resolveBallCollisions();
 
 	splittingTimer += deltaTime;
@@ -38,11 +42,11 @@ void BallManager::update(float deltaTime, const sf::Vector2u& windowSize)
 	updateSplitting();
 }
 
-void BallManager::draw(sf::RenderWindow& window) const
+void BallManager::draw(Renderer& renderer) const
 {
 	for (const auto& ball : balls)
 	{
-		ball.draw(window);
+		ball.draw(renderer);
 	}
 }
 
@@ -95,17 +99,11 @@ void BallManager::splitBallOnHit(size_t index)
 	}
 }
 
-bool BallManager::isCollidingWithPlayer(const Player& player) const
-{
-	CollisionDetectionSystem collisionDetector;
-	return collisionDetector.detectPlayerBallCollisions(player, *this);
-}
-
-void BallManager::updateBalls(float deltaTime, const Vector2u& windowSize)
+void BallManager::updateBalls(float deltaTime)
 {
 	for (auto& ball : balls)
 	{
-		ball.update(deltaTime, windowSize);
+		ball.update(deltaTime);
 	}
 }
 

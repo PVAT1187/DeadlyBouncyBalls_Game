@@ -3,20 +3,17 @@
 
 #include "Screens/Screen.h"
 #include "Overlays/PauseMenu/PauseMenuOverlay.h"
-#include "Core/GameWorld/GameWorld.h"
-
-#include <vector>
+#include "Core/World/GameWorld/GameWorld.h"
 
 class GamePlayScreen : public Screen
 {
 	public:
-		GamePlayScreen(Game& game, sf::RenderWindow& window);
+		GamePlayScreen(Game& game);
 
 		void handleEvent(const sf::Event& event) override;
-		void update(float deltaTime) override;
-		void render(sf::RenderWindow& window) override;
-
-		void unpause();
+		void update(float deltaTime,
+			const InputState& inputState) override;
+		void render() override;
 
 	private:
 		GameWorld gameWorld;
@@ -24,13 +21,10 @@ class GamePlayScreen : public Screen
 		sf::Text survivalTimeText;
 		sf::Clock survivalClock;
 
-		bool paused;
-
 		std::unique_ptr<PauseMenuOverlay> pauseOverlay;
 
 		void initSurvivalTimeText();
-		void updateSurvivalTimeText(float survivalTime);
-		
+		void updateSurvivalTimeText(float survivalTime);	
 };
 
 #endif // !GAME_PLAY_SCREEN_H
