@@ -6,7 +6,7 @@ A fast-paced arcade-style mini game where the player dodges and shoots bouncing 
 
 ## Design Overview
 This project was created to practice essential game development concepts using modern C++ and SFML. 
-The goal was to build a minimal yet complete game system featuring game mechanics, game states management, dynamic entity interactions, physics-based movement, real-time collision handling, and UI navigation
+The goal was to build a minimal yet complete game system featuring game mechanics, game states management, dynamic entity interactions, physics-based movement, real-time collision handling, and UI navigation. This project also includes first hands-on experience integrating sprite-based assets and managing visual elements alongside shape-based rendering in SFML
    - Game Mechanics: Implements a continuous game loop architecture that updates movement, handles physics, detects and          resolves collisions, and renders each frame
    - Physics Simulation: Balls move with velocity, bounce off walls, collide with each other, and split into smaller,            faster balls over time
    - Systems: Modular gameplay systems for combat, shooting, aiming, collision detection, and asset management, designed to      separate responsibilities and support future feature expansion
