@@ -6,6 +6,8 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
+class Renderer;
+
 class Bullet
 {
 	public:
@@ -16,20 +18,21 @@ class Bullet
 			float lifespan);
 
 		void update(float deltaTime);
+		void draw(Renderer& renderer) const;
 
-		const sf::Sprite& getSprite() const;
 		sf::FloatRect getCollisionBounds() const;
 
 		bool isExpired() const;
 
 	private:
-		sf::Sprite bulletSprite;
+		sf::Sprite bullet;
 
 		sf::Vector2f velocity;
 		sf::Vector2f position;
+		sf::Vector2f collisionBoxSize;
 		float lifespan;
 		float age;
 };
 
-#endif // !BULLET_h
+#endif // !BULLET_H
 

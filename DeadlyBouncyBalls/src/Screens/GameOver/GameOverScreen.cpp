@@ -1,32 +1,33 @@
-#include "Config/Constants/GameConstants.h"
+#include "Config/GameConfig.h"
 #include "Core/App/Game.h"
+#include "Core/Input/Input.h"
 #include "Screens/GameStart/GameStartScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
 #include "Utilities/UI/UIUtils.h"
 
-using namespace sf;
-using namespace std;
-using namespace UIUtils;
-
-GameOverScreen::GameOverScreen(Game& game, float finalSurvivalTime) :
+GameOverScreen::GameOverScreen(
+	Game& game, 
+	float finalSurvivalTime, 
+	int score) :
 	Screen(game),
-	gameOverText(Text(game.getAssets().getFont(), "GAME OVER", TITLE_TEXT_SIZE)),
-	finalSurvivalTimeText(Text(game.getAssets().getFont(), "", BODY_TEXT_SIZE)),
-	playAgainButton("PLAY AGAIN", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 })
+	gameOverText(sf::Text(game.getAssets().getFont(), "GAME OVER", Config::UI::TITLE_TEXT_SIZE)),
+	finalSurvivalTimeText(sf::Text(game.getAssets().getFont(), "", Config::UI::BODY_TEXT_SIZE)),
+	scoreText(sf::Text(game.getAssets().getFont(), "", Config::UI::BODY_TEXT_SIZE)),
+	playAgainButton("PLAY AGAIN", game.getAssets().getFont(), Config::Button::BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", game.getAssets().getFont(), Config::Button::BUTTON_SIZE, { 0, 0 })
 {
 	game.getRenderer().showCursor(true);
 	
-	initGameOverText();
-	initFinalSurvivalTimeText(finalSurvivalTime);
+	initText(finalSurvivalTime, score);
 	updateButtonPosition();
 }
 
-void GameOverScreen::handleEvent(const Event& event) 
+void GameOverScreen::handleEvent(const sf::Event& event)
 {
-	if (event.is<Event::MouseButtonPressed>() &&
-		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
+	if (event.is<sf::Event::MouseButtonPressed>() &&
+		event.getIf<sf::Event::MouseButtonPressed>()->button == 
+		sf::Mouse::Button::Left)
 	{
 		if (playAgainButton.isClicked())
 		{
@@ -40,10 +41,10 @@ void GameOverScreen::handleEvent(const Event& event)
 }
 
 void GameOverScreen::update(float deltaTime,
-	const InputState& inputState)
+	const Input& Input)
 {
-	playAgainButton.update(inputState.mousePosition);
-	mainMenuButton.update(inputState.mousePosition);
+	playAgainButton.update(Input.mousePosition);
+	mainMenuButton.update(Input.mousePosition);
 }
 
 void GameOverScreen::render()
@@ -52,27 +53,47 @@ void GameOverScreen::render()
 	
 	renderer.draw(gameOverText);
 	renderer.draw(finalSurvivalTimeText);
+	renderer.draw(scoreText);
 	playAgainButton.draw(renderer);
 	mainMenuButton.draw(renderer);
 }
 
-void GameOverScreen::initGameOverText()
-{
-	centerText(gameOverText, game.getRenderer().getWindowSize());
-}
-
-void GameOverScreen::initFinalSurvivalTimeText(float finalSurvivalTime)
+void GameOverScreen::initText(float finalSurvivalTime, int score)
 {
 	finalSurvivalTimeText.setString("Survived: " + 
-		to_string(finalSurvivalTime) + "s");
-	centerText(finalSurvivalTimeText, 
+		std::to_string(finalSurvivalTime) + "s");
+
+	scoreText.setString("Score: " + std::to_string(score));
+
+	UIUtils::centerText(
+		gameOverText,
+		game.getRenderer().getWindowSize()
+	);
+
+	UIUtils::centerText(
+		finalSurvivalTimeText, 
 		game.getRenderer().getWindowSize(),
-		TITLE_BODY_SPACING);
+		Config::UI::TITLE_BODY_SPACING
+	);
+
+	UIUtils::centerText(
+		scoreText, 
+		game.getRenderer().getWindowSize(),
+		Config::UI::TITLE_BODY_SPACING + 
+		Config::UI::BODY_TEXT_SPACING
+	);
 }
 
 void GameOverScreen::updateButtonPosition()
 {
-	vector<TextButton*> buttons = { &playAgainButton, &mainMenuButton };
-	positionButtons(gameOverText, buttons, 
-		game.getRenderer().getWindowSize());
+	std::vector<TextButton*> buttons = { 
+		&playAgainButton, 
+		&mainMenuButton 
+	};
+
+	UIUtils::positionButtons(
+		gameOverText, 
+		buttons, 
+		game.getRenderer().getWindowSize()
+	);
 } 

@@ -3,34 +3,38 @@
 #include "Entities/Enemies/BallManager.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
-using namespace sf;
-using namespace PhysicsUtils;
-
-BoundarySystem::BoundarySystem(const WorldBounds& worldBounds) 
-    : worldBounds(worldBounds) {}
-
-void BoundarySystem::apply(Player& player) const
+void BoundarySystem::apply(
+    Player& player,
+    const WorldBounds& worldBounds) const
 {
-    Vector2f spritePosition = player.getPosition();
-    FloatRect spriteBounds = player.getCollisionBounds();
-    Vector2f spriteHalfSize(
+    sf::Vector2f spritePosition = player.getPosition();
+    sf::FloatRect spriteBounds = player.getCollisionBounds();
+    sf::Vector2f spriteHalfSize(
         spriteBounds.size.x / 2.f,
-        spriteBounds.size.y / 2.f);
+        spriteBounds.size.y / 2.f
+    );
 
-    clampSpriteToWorldBounds(spritePosition, spriteHalfSize, worldBounds);
+    PhysicsUtils::clampSpriteToWorldBounds(
+        spritePosition, 
+        spriteHalfSize, 
+        worldBounds
+    );
 
     player.setPosition(spritePosition);
 }
 
-void BoundarySystem::apply(BallManager& ballManager) const
+void BoundarySystem::apply(
+    BallManager& ballManager,
+    const WorldBounds& worldBounds) const
 {
 	auto& balls = ballManager.getBalls();
     for (auto& ball : balls)
     {
-        bounceCircleOffWorldBounds(
+        PhysicsUtils::bounceCircleOffWorldBounds(
             ball.getPosition(),
             ball.getVelocity(),
             ball.getRadius(),
-            worldBounds);
+            worldBounds
+        );
     }
 }

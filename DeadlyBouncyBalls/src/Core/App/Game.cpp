@@ -1,11 +1,9 @@
 #include "Core/App/Game.h"
+#include "Core/Input/Input.h"
 #include "Screens/GameStart/GameStartScreen.h"
 #include "Screens/Tutorial/TutorialScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
-
-using namespace sf;
-using namespace std;
 
 Game::Game()
 {
@@ -15,22 +13,22 @@ Game::Game()
 
 void Game::run()
 {
-	Clock clock;
+	sf::Clock clock;
 
 	while (renderer.isOpen())
 	{
 		float deltaTime = clock.restart().asSeconds();
 
-		while (const optional event = renderer.pollEvent())
+		while (const std::optional event = renderer.pollEvent())
 		{
-			if (event->is<Event::Closed>())
+			if (event->is<sf::Event::Closed>())
 				renderer.close();
 			
 			currentScreen->handleEvent(*event);
 		}
 
-		InputState inputState = inputSystem.collect(renderer);
-		currentScreen->update(deltaTime, inputState);
+		Input input = inputCollector.collect(renderer);
+		currentScreen->update(deltaTime, input);
 
 		renderer.clear();
 		currentScreen->render();
@@ -48,7 +46,7 @@ Renderer& Game::getRenderer()
 	return renderer;
 }
 
-const InputSystem& Game::getInputSystem() const 
+const InputCollector& Game::getInputCollector() const
 {
-	return inputSystem;
+	return inputCollector;
 }

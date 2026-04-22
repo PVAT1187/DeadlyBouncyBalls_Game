@@ -1,5 +1,5 @@
-#ifndef  COLLISION_DETECTION_SYSTEM_H
-#define  COLLISION_DETECTION_SYSTEM_H
+#ifndef COLLISION_DETECTION_SYSTEM_H
+#define COLLISION_DETECTION_SYSTEM_H
 
 #include <vector>
 
@@ -10,8 +10,6 @@ class Bullet;
 class CollisionDetectionSystem
 {
 	public:
-		CollisionDetectionSystem() = default;
-		
 		bool detectPlayerBallCollisions(const Player& player,
 			const std::vector<Ball>& balls);
 

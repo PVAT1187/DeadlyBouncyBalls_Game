@@ -1,55 +1,29 @@
-#include "Config/Constants/GameConstants.h"
+#include "Config/GameConfig.h"
+#include "Core/Input/Input.h"
 #include "Core/Systems/Shooting/ShootingSystem.h"
+#include "Components/ShootingComponent.h"
+#include "Entities/Player/Player.h"
+#include "Entities/Projectiles/BulletManager.h"
 
-using namespace sf;
-using namespace std;
-
-ShootingSystem::ShootingSystem(const sf::Texture& bulletTexture) :
-	bulletTexture(bulletTexture), 
-	fireCooldown(0.f) {}
-
-void ShootingSystem::update(float deltaTime)
+void ShootingSystem::apply(
+	Player& player,
+	BulletManager& bulletManager,
+	const Input& input,
+	float deltaTime)
 {
-	fireCooldown -= deltaTime;
-	updateBullets(deltaTime);
-	removeExpiredBullets();
-}
+	ShootingComponent& shooting = player.shooting;
+	shooting.cooldown -= deltaTime;
 
-void ShootingSystem::draw(Renderer& renderer) const
-{
-	for (const auto& bullet : bullets)
+	if (input.shoot && shooting.cooldown <= 0.f)
 	{
-		renderer.draw(bullet.getSprite());
+		bulletManager.spawn(
+			player.getPosition(),
+			player.aiming.direction,
+			Config::Bullet::SPEED,
+			Config::Bullet::LIFESPAN
+		);
+
+		shooting.cooldown = shooting.fireRate;
+		player.aiming.resetAnimation = true;
 	}
-}
-
-vector<Bullet>& ShootingSystem::getBullets()
-{
-	return bullets;
-}
-
-void ShootingSystem::shoot(const sf::Vector2f& position,
-	const sf::Vector2f& direction)
-{
-	if (fireCooldown > 0.f)
-		return;
-
-	bullets.emplace_back(bulletTexture, position, direction, BULLET_SPEED, BULLET_LIFESPAN);
-
-	fireCooldown = FIRE_COOLDOWN;
-}
-
-void ShootingSystem::updateBullets(float deltaTime)
-{
-	for (auto& bullet : bullets)
-	{
-		bullet.update(deltaTime);
-	}
-}
-
-void ShootingSystem::removeExpiredBullets()
-{
-	bullets.erase(remove_if(bullets.begin(), bullets.end(),
-		[](const Bullet& bullet) { return bullet.isExpired(); }),
-		bullets.end());
 }

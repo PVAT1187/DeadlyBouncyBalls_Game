@@ -1,9 +1,11 @@
 #include "Utilities/Animation/AnimatedSprite.h"
 
-using namespace sf;
-
-AnimatedSprite::AnimatedSprite(const Texture& texture, int rowIndex,
-	const Vector2i& frameSize, int frameCount, float frameDuration) :
+AnimatedSprite::AnimatedSprite(
+	const sf::Texture& texture, 
+	int rowIndex,
+	const sf::Vector2i& frameSize, 
+	int frameCount, 
+	float frameDuration) :
 	sprite(texture),
 	rowIndex(rowIndex),
 	frameSize(frameSize),
@@ -37,32 +39,27 @@ void AnimatedSprite::update(float deltaTime)
 	}
 }
 
-void AnimatedSprite::setPosition(const Vector2f& position)
+void AnimatedSprite::setPosition(const sf::Vector2f& position)
 {
 	sprite.setPosition(position);
 }
 
-void AnimatedSprite::setRotation(float angle)
-{
-	sprite.setRotation(degrees(angle));
-}
-
-void AnimatedSprite::setScale(const Vector2f& scale)
+void AnimatedSprite::setScale(const sf::Vector2f& scale)
 {
 	sprite.setScale(scale);
 }
 
-void AnimatedSprite::setOrigin(const Vector2f& origin)
+void AnimatedSprite::setOrigin(const sf::Vector2f& origin)
 {
 	sprite.setOrigin(origin);
 }
 
-const Vector2f& AnimatedSprite::getPosition() const
+const sf::Vector2f& AnimatedSprite::getPosition() const
 {
 	return sprite.getPosition();
 }
 
-FloatRect AnimatedSprite::getLocalBounds() const
+sf::FloatRect AnimatedSprite::getLocalBounds() const
 {
 	return sprite.getLocalBounds();
 }
@@ -77,15 +74,16 @@ void AnimatedSprite::reset()
 
 void AnimatedSprite::updateTextureRect()
 {
-	sprite.setTextureRect(IntRect(
+	sprite.setTextureRect(sf::IntRect(
 		{ static_cast<int>(currentFrame * frameSize.x), 
 		  static_cast<int>(rowIndex * frameSize.y) },
 		{ frameSize.x, frameSize.y }
 	));
 }
 
-void AnimatedSprite::draw(RenderTarget& target,
-	RenderStates states) const
+void AnimatedSprite::draw(
+	sf::RenderTarget& target,
+	sf::RenderStates states) const
 {
 	target.draw(sprite, states);
 }

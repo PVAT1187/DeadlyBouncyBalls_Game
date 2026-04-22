@@ -1,16 +1,13 @@
-#include "Config/Constants/GameConstants.h"
+#include "Config/GameConfig.h"
 #include "Core/App/Game.h"
+#include "Core/Input/Input.h"
 #include "Overlays/Tutorial/TutorialOverlay.h"
 #include "Utilities/UI/UIUtils.h"
 
-using namespace sf;
-using namespace std;
-using namespace UIUtils;
-
 TutorialOverlay::TutorialOverlay(Game& game) :
 	Overlay(game),
-	tutorialOverlayTitle(Text(game.getAssets().getFont(), "TUTORIAL", TITLE_TEXT_SIZE)),
-	continueButton("CONTINUE", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
+	tutorialOverlayTitle(sf::Text(game.getAssets().getFont(), "TUTORIAL", Config::UI::TITLE_TEXT_SIZE)),
+	continueButton("CONTINUE", game.getAssets().getFont(), Config::Button::BUTTON_SIZE, { 0, 0 }),
 	finished(false)
 {
 	initDimBackground();
@@ -19,10 +16,11 @@ TutorialOverlay::TutorialOverlay(Game& game) :
 	updateButtonPosition();
 }
 
-void TutorialOverlay::handleEvent(const Event& event)
+void TutorialOverlay::handleEvent(const sf::Event& event)
 {
-	if (event.is<Event::MouseButtonPressed>() &&
-		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
+	if (event.is<sf::Event::MouseButtonPressed>() &&
+		event.getIf<sf::Event::MouseButtonPressed>()->button == 
+		sf::Mouse::Button::Left)
 	{
 		if (continueButton.isClicked())
 		{
@@ -31,10 +29,11 @@ void TutorialOverlay::handleEvent(const Event& event)
 	}
 }
 
-void TutorialOverlay::update(float deltaTime,
-	const InputState& inputState)
+void TutorialOverlay::update(
+	float deltaTime,
+	const Input& Input)
 {
-	continueButton.update(inputState.mousePosition);
+	continueButton.update(Input.mousePosition);
 }
 
 void TutorialOverlay::render()
@@ -59,14 +58,16 @@ bool TutorialOverlay::isFinished() const
 
 void TutorialOverlay::initTutorialOverlayTitle()
 {
-	centerText(tutorialOverlayTitle, 
+	UIUtils::centerText(
+		tutorialOverlayTitle, 
 		game.getRenderer().getWindowSize(),
-		-TITLE_BODY_SPACING);
+		-Config::UI::TITLE_BODY_SPACING
+	);
 }
 
 void TutorialOverlay::initInstructions()
 {
-	vector<string> instructionLines = {
+	std::vector<std::string> instructionLines = {
 		"Your goal is to dodge the balls and try to survive as long as possible!",
 		"Learn the basic control:",
 		"Move: WASD",
@@ -74,24 +75,36 @@ void TutorialOverlay::initInstructions()
 		"Shoot : Left mouse button"
 	};
 	
-	float verticalOffset = -TITLE_INSTRUCTION_SPACING *
-		(static_cast<float>(instructionLines.size() / 2));
+	float verticalOffset = -Config::UI::TITLE_INSTRUCTION_SPACING *
+		(static_cast<float>(instructionLines.size()) / 2);
 
 	for (const auto& line : instructionLines)
 	{
-		Text instruction(game.getAssets().getFont(), line, BODY_TEXT_SIZE);
-		centerText(instruction, game.getRenderer().getWindowSize(),
-			verticalOffset);
-		verticalOffset += INSTRUCTION_SPACING;
+		sf::Text instruction(
+			game.getAssets().getFont(),
+			line,
+			Config::UI::BODY_TEXT_SIZE
+		);
+
+		UIUtils::centerText(
+			instruction,
+			game.getRenderer().getWindowSize(),
+			verticalOffset
+		);
+
+		verticalOffset += Config::UI::BODY_TEXT_SPACING;
 		instructions.push_back(instruction);
 	}
 }
 
 void TutorialOverlay::updateButtonPosition()
 {
-	vector<TextButton*> buttons = { &continueButton };
+	std::vector<TextButton*> buttons = { &continueButton };
 
-	const Text& lastInstruction = instructions.back();
-	positionButtons(lastInstruction, buttons, 
-		game.getRenderer().getWindowSize());
+	const sf::Text& lastInstruction = instructions.back();
+	UIUtils::positionButtons(
+		lastInstruction,
+		buttons, 
+		game.getRenderer().getWindowSize()
+	);
 }

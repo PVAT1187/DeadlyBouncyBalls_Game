@@ -1,11 +1,11 @@
 #include "Core/Rendering/Renderer.h"
 
-using namespace sf;
-using namespace std;
-
 Renderer::Renderer() : 
-	window(VideoMode::getDesktopMode(), "Deadly Bouncy Balls",
-			Style::None) {}
+	window(
+		sf::VideoMode::getDesktopMode(),
+		"Deadly Bouncy Balls",
+		sf::Style::None
+	) {}
 
 void Renderer::clear()
 {
@@ -22,7 +22,7 @@ void Renderer::close()
 	window.close();
 }
 
-void Renderer::draw(const Drawable& drawable)
+void Renderer::draw(const sf::Drawable& drawable)
 {
 	window.draw(drawable);
 }
@@ -32,17 +32,17 @@ void Renderer::showCursor(bool show)
 	window.setMouseCursorVisible(show);
 }
 
-Vector2u Renderer::getWindowSize() const
+sf::Vector2u Renderer::getWindowSize() const
 {
 	return window.getSize();
 }
 
-Vector2f Renderer::getMousePosition() const
+sf::Vector2f Renderer::getMousePosition() const
 {
-	return window.mapPixelToCoords(Mouse::getPosition(window));
+	return window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
-optional<Event> Renderer::pollEvent()
+std::optional<sf::Event> Renderer::pollEvent()
 {
 	return window.pollEvent();
 }

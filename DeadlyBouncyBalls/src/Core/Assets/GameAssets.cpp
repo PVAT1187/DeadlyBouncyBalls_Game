@@ -1,39 +1,37 @@
 #include "Core/Assets/GameAssets.h"
 
-using namespace sf;
-using namespace std;
-
 void GameAssets::load()
 {
 	if (!font.openFromFile("assets/fonts/arial.ttf"))
-		throw runtime_error("Failed to load font!");
+		throw std::runtime_error("Failed to load font!");
 	
-	if (!playerTexture.loadFromFile("assets/PNG/Player/player_sprite.png"))
-		throw runtime_error("Failed to load player texture!");
+	if (!playerTexture.loadFromFile(
+		"assets/PNG/Player/player_sprite.png"))
+		throw std::runtime_error("Failed to load player texture!");
 
-	if (!aimingIconTexture.loadFromFile("assets/PNG/Icons/crosshair_spritesheet.png"))
-		throw runtime_error("Failed to load aiming icon texture!");
+	if (!crosshairTexture.loadFromFile(
+		"assets/PNG/Icons/crosshair_spritesheet.png"))
+		throw std::runtime_error("Failed to load aiming icon texture!");
 
-	if (!bulletTexture.loadFromFile("assets/PNG/Icons/bullet_sprite.png"))
-		throw runtime_error("Failed to load bullet icon texture!");
+	if (!bulletTexture.loadFromFile(
+		"assets/PNG/Icons/bullet_sprite.png"))
+		throw std::runtime_error("Failed to load bullet icon texture!");
 }
 
-const Font& GameAssets::getFont() const
+const sf::Font& GameAssets::getFont() const
 {
 	return font;
 }
 
-const Texture& GameAssets::getPlayerTexture() const
+const sf::Texture& GameAssets::getTexture(TextureId textureId) const
 {
-	return playerTexture;
-}
-
-const Texture& GameAssets::getAimingIconTexture() const
-{
-	return aimingIconTexture;
-}
-
-const Texture& GameAssets::getBulletTexture() const
-{
-	return bulletTexture;
+	switch (textureId)
+	{
+		case TextureId::PLAYER_TEXTURE:
+			return playerTexture;
+		case TextureId::CROSSHAIR_TEXTURE:
+			return crosshairTexture;
+		case TextureId::BULLET_TEXTURE:
+			return bulletTexture;
+	}
 }

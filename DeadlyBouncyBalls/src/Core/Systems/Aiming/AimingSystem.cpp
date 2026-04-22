@@ -1,60 +1,66 @@
-#include "Config/Constants/GameConstants.h"
+#include "Config/GameConfig.h"
+#include "Core/Input/Input.h"
 #include "Core/Systems/Aiming/AimingSystem.h"
+#include "Components/AimingComponent.h"
+#include "Entities/Player/Player.h"
 #include "Utilities/Math/MathUtils.h"
 
-using namespace sf;
-using namespace MathUtils;
-
-AimingSystem::AimingSystem(const Texture& crosshairTexture) :
-	crosshairSprite(crosshairTexture,
-		CROSSHAIR_ROW_INDEX,
-		CROSSHAIR_FRAME_SIZE,
-		CROSSHAIR_FRAME_COUNT,
-		CROSSHAIR_FRAME_DURATION),
-	aimingLine(PrimitiveType::Lines, 2)
+void AimingSystem::apply(
+	Player& player, 
+	const Input& input,
+	float deltaTime)
 {
-	crosshairSprite.setScale({ CROSSHAIR_SCALE, CROSSHAIR_SCALE });
-	FloatRect aimingIconBounds = crosshairSprite.getLocalBounds();
-	crosshairSprite.setOrigin(Vector2f(
-		aimingIconBounds.size.x / 2.f,
-		aimingIconBounds.size.y / 2.f));
+	AimingComponent& aiming = player.aiming;
+	
+	if (aiming.resetAnimation)
+	{
+		aiming.crosshair.reset();
+		aiming.resetAnimation = false;
+	}
 
-	aimingLine[0].color = Color::Red;
-	aimingLine[1].color = Color::Red;
+	aiming.target = input.mousePosition;
+
+	sf::Vector2f raw = aiming.target - player.getPosition();
+	aiming.direction = MathUtils::computeNormalized(raw);
+
+	float currentAngle = player.getRotation();
+	float targetAngle = atan2(
+		aiming.direction.y,
+		aiming.direction.x
+	) * Config::Math::RADIAN_TO_DEGREE 
+		+ Config::Player::ROTATION_OFFSET;
+
+	float angleDifference = targetAngle - currentAngle;
+
+	while (angleDifference > Config::Math::HALF_CIRCLE_DEGREE)
+		angleDifference -= Config::Math::FULL_CIRCLE_DEGREE;
+	while (angleDifference < -Config::Math::HALF_CIRCLE_DEGREE)
+		angleDifference += Config::Math::FULL_CIRCLE_DEGREE;
+
+	float maxStep = Config::Player::ROTATION_SPEED * deltaTime;
+	float step = MathUtils::computeClamp(
+		angleDifference,
+		-maxStep,
+		maxStep
+	);
+
+	player.setRotation(currentAngle + step);
+
+	update(player, deltaTime);
 }
 
-void AimingSystem::update(float deltaTime,
-	const Vector2f& playerPosition, 
-	const Vector2f& aimingTarget)
+void AimingSystem::update(Player& player, float deltaTime)
 {
-	updateAimingVisuals(playerPosition, aimingTarget);
-	crosshairSprite.update(deltaTime);
-}
+	AimingComponent& aiming = player.aiming;
+	
+	sf::Vector2f tipPosition = player.getPosition() 
+		+ aiming.direction
+		* Config::Aiming::DISTANCE_FROM_PLAYER_TIP;
+	sf::Vector2f aimingIconPosition = aiming.target 
+		- aiming.direction
+		* Config::Aiming::DISTANCE_TO_CROSSHAIR;
 
-void AimingSystem::draw(Renderer& renderer) const
-{
-	//renderer.draw(aimingLine);
-	renderer.draw(crosshairSprite);
-}
+	aiming.crosshair.setPosition(aimingIconPosition);
 
-void AimingSystem::resetAnimation()
-{
-	crosshairSprite.reset();
-}
-
-void AimingSystem::updateAimingVisuals(const Vector2f& playerPosition, 
-	const Vector2f& aimingTarget)
-{
-	Vector2f direction = normalize(
-		computeDifference(aimingTarget, playerPosition));
-
-	Vector2f tipPosition = playerPosition + direction
-		* DISTANCE_FROM_PLAYER_TIP;
-	Vector2f aimingIconPosition = aimingTarget - direction
-		* DISTANCE_TO_CROSSHAIR;
-
-	aimingLine[0].position = tipPosition;
-	aimingLine[1].position = aimingIconPosition;
-
-	crosshairSprite.setPosition(aimingIconPosition);
+	aiming.crosshair.update(deltaTime);
 }

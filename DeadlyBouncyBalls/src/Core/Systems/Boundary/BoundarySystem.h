@@ -1,24 +1,20 @@
 #ifndef  BOUNDARY_SYSTEM_H
 #define  BOUNDARY_SYSTEM_H
 
-#include "Core/World/WorldBounds.h"
-
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
 class Player;
 class BallManager;
+struct WorldBounds;
 
 class BoundarySystem
 {
-	public:
-		BoundarySystem(const WorldBounds& worldBounds);
-		
-		void apply(Player& player) const;
-		void apply(BallManager& ballManager) const;
-
-	private:
-		WorldBounds worldBounds;
+	public:		
+		void apply(Player& player,
+			const WorldBounds& worldBounds) const;
+		void apply(BallManager& ballManager,
+			const WorldBounds& worldBounds) const;
 };
 
 #endif // ! BOUNDARY_SYSTEM_H

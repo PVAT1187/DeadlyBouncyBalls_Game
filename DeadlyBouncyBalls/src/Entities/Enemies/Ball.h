@@ -10,7 +10,9 @@ class Renderer;
 class Ball
 {
 	public:
-		Ball(float radius, sf::Vector2f position, sf::Vector2f velocity);
+		Ball(float radius, 
+			sf::Vector2f position, 
+			sf::Vector2f velocity);
 
 		void update(float deltaTime);
 		void draw(Renderer& renderer) const;

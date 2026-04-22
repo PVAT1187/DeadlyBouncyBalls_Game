@@ -1,17 +1,14 @@
-#include "Config/Constants/GameConstants.h"
+#include "Config/GameConfig.h"
 #include "Core/App/Game.h"
+#include "Core/Input/Input.h"
 #include "Overlays/PauseMenu/PauseMenuOverlay.h"
 #include "Utilities/UI/UIUtils.h"
 
-using namespace sf;
-using namespace std;
-using namespace UIUtils;
-
 PauseMenuOverlay::PauseMenuOverlay( Game& game) :
 	Overlay(game),
-	pauseMenuTitle(Text(game.getAssets().getFont(), "GAME PAUSED", TITLE_TEXT_SIZE)),
-	resumeButton("RESUME", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
-	mainMenuButton("MAIN MENU", game.getAssets().getFont(), BUTTON_SIZE, { 0, 0 }),
+	pauseMenuTitle(sf::Text(game.getAssets().getFont(), "GAME PAUSED", Config::UI::TITLE_TEXT_SIZE)),
+	resumeButton("RESUME", game.getAssets().getFont(), Config::Button::BUTTON_SIZE, { 0, 0 }),
+	mainMenuButton("MAIN MENU", game.getAssets().getFont(), Config::Button::BUTTON_SIZE, { 0, 0 }),
 	selectedOption(PauseMenuOption::NONE)
 {
 	initDimBackground();
@@ -19,10 +16,11 @@ PauseMenuOverlay::PauseMenuOverlay( Game& game) :
 	updateButtonPosition();
 }
 
-void PauseMenuOverlay::handleEvent(const Event& event) 
+void PauseMenuOverlay::handleEvent(const sf::Event& event)
 {
-	if (event.is<Event::MouseButtonPressed>() &&
-		event.getIf<Event::MouseButtonPressed>()->button == Mouse::Button::Left)
+	if (event.is<sf::Event::MouseButtonPressed>() &&
+		event.getIf<sf::Event::MouseButtonPressed>()->button == 
+		sf::Mouse::Button::Left)
 	{
 		if (resumeButton.isClicked())
 		{
@@ -35,11 +33,12 @@ void PauseMenuOverlay::handleEvent(const Event& event)
 	}
 }
 
-void PauseMenuOverlay::update(float deltaTime,
-	const InputState& inputState)
+void PauseMenuOverlay::update(
+	float deltaTime,
+	const Input& Input)
 {
-	resumeButton.update(inputState.mousePosition);
-	mainMenuButton.update(inputState.mousePosition);
+	resumeButton.update(Input.mousePosition);
+	mainMenuButton.update(Input.mousePosition);
 }
 
 void PauseMenuOverlay::render()
@@ -64,12 +63,22 @@ PauseMenuOption PauseMenuOverlay::getSelectedOption() const
 
 void PauseMenuOverlay::initPauseTitle()
 {
-	centerText(pauseMenuTitle, game.getRenderer().getWindowSize());
+	UIUtils::centerText(
+		pauseMenuTitle, 
+		game.getRenderer().getWindowSize()
+	);
 }
 
 void PauseMenuOverlay::updateButtonPosition()
 {
-	vector<TextButton*> buttons = { &resumeButton, &mainMenuButton };
-	positionButtons(pauseMenuTitle, buttons, 
-		game.getRenderer().getWindowSize());
+	std::vector<TextButton*> buttons = { 
+		&resumeButton, 
+		&mainMenuButton 
+	};
+
+	UIUtils::positionButtons(
+		pauseMenuTitle, 
+		buttons,
+		game.getRenderer().getWindowSize()
+	);
 }

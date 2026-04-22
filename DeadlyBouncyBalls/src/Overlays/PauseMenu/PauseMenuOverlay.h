@@ -18,7 +18,7 @@ class PauseMenuOverlay : public Overlay
 		
 		void handleEvent(const sf::Event& event) override;
 		void update(float deltaTime,
-			const InputState& inputState) override;
+			const Input& Input) override;
 		void render() override;
 
 		bool hasSelectedOption() const;

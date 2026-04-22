@@ -1,30 +1,18 @@
-#ifndef  AIMING_SYSTEM_H
-#define  AIMING_SYSTEM_H
+#ifndef AIMING_SYSTEM_H
+#define AIMING_SYSTEM_H
 
-#include "Core/Rendering/Renderer.h"
-#include "Utilities/Animation/AnimatedSprite.h"
-
-#include <SFML/Graphics.hpp>
+class Player;
+struct Input;
 
 class AimingSystem
 {
 	public:
-		AimingSystem(const sf::Texture& crosshairTexture);
-
-		void update(float deltaTime,
-			const sf::Vector2f& playerPosition, 
-			const sf::Vector2f& aimingTarget);
-		void draw(Renderer& renderer) const;
-
-		void resetAnimation();
+		void apply(Player& player,
+			const Input& input,
+			float deltaTime);
 
 	private:
-		AnimatedSprite crosshairSprite;
-		sf::VertexArray aimingLine;
-
-		void updateAimingVisuals(const sf::Vector2f& playerPosition, 
-			const sf::Vector2f& aimingTarget);
+		void update(Player& player, float deltaTime);
 };
 
 #endif // !AIMING_SYSTEM_H
-

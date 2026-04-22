@@ -1,32 +1,30 @@
-#include "Config/Constants/GameConstants.h"
+#include "Config/GameConfig.h"
 #include "Core/App/Game.h"
 #include "Screens/GameStart/GameStartScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 #include "Screens/GameOver/GameOverScreen.h"
 
-using namespace sf;
-using namespace std;
-
 GamePlayScreen::GamePlayScreen(Game& game) :
 	Screen(game),
 	gameWorld(game.getAssets(), game.getRenderer().getWindowSize()),
-	survivalTimeText(Text(game.getAssets().getFont(), "", BODY_TEXT_SIZE)),
+	survivalTimeText(sf::Text(game.getAssets().getFont(), "", Config::UI::BODY_TEXT_SIZE)),
+	scoreText(sf::Text(game.getAssets().getFont(), "", Config::UI::BODY_TEXT_SIZE)),
 	survivalClock()
 {
 	game.getRenderer().showCursor(false);
-	initSurvivalTimeText();
+	initText();
 	survivalClock.restart();
 }
 
-void GamePlayScreen::handleEvent(const Event& event)
+void GamePlayScreen::handleEvent(const sf::Event& event)
 {
-	if (event.is<Event::KeyPressed>() &&
-		event.getIf<Event::KeyPressed>()->code == 
-		Keyboard::Key::Escape)
+	if (event.is<sf::Event::KeyPressed>() &&
+		event.getIf<sf::Event::KeyPressed>()->code ==
+		sf::Keyboard::Key::Escape)
 	{
 		if (!pauseOverlay)
 		{
-			pauseOverlay = make_unique<PauseMenuOverlay>(game);
+			pauseOverlay = std::make_unique<PauseMenuOverlay>(game);
 			game.getRenderer().showCursor(true);
 		}
 		else
@@ -56,22 +54,25 @@ void GamePlayScreen::handleEvent(const Event& event)
 	}
 }
 
-void GamePlayScreen::update(float deltaTime,
-	const InputState& inputState)
+void GamePlayScreen::update(
+	float deltaTime,
+	const Input& Input)
 {	
 	if (pauseOverlay)
 	{
-		pauseOverlay->update(deltaTime, inputState);
+		pauseOverlay->update(deltaTime, Input);
 		return;
 	}
 	
 	float survivalTime = survivalClock.getElapsedTime().asSeconds();
-	updateSurvivalTimeText(survivalTime);
+	int score = gameWorld.getScore();
+
+	updateText(survivalTime, score);
 	
-	gameWorld.update(deltaTime, inputState);
+	gameWorld.update(deltaTime, Input);
 	if (gameWorld.isGameOver())
 	{
-		game.switchScreen<GameOverScreen>(survivalTime);
+		game.switchScreen<GameOverScreen>(survivalTime, score);
 		return;
 	}
 }
@@ -82,22 +83,30 @@ void GamePlayScreen::render()
 	
 	gameWorld.render(renderer);
 	renderer.draw(survivalTimeText);
+	renderer.draw(scoreText);
 
 	if (pauseOverlay)
 		pauseOverlay->render();
 }
 
-void GamePlayScreen::initSurvivalTimeText()
+void GamePlayScreen::initText()
 {
-	survivalTimeText.setFillColor(Color::White);
-
-	FloatRect survivalTimeTextBounds = survivalTimeText.getLocalBounds();
-	survivalTimeText.setOrigin(survivalTimeTextBounds.size / 2.f);
-	survivalTimeText.setPosition(Vector2f(0, 0));
+	sf::Vector2u windowSize = game.getRenderer().getWindowSize();
+	
+	survivalTimeText.setFillColor(sf::Color::White);
+	survivalTimeText.setPosition(sf::Vector2f(0, 0));
+	
+	scoreText.setFillColor(sf::Color::White);
+	// TODO: Avoid magic numbers
+	scoreText.setPosition(sf::Vector2f(windowSize.x - 5, 0));
 }
 
-void GamePlayScreen::updateSurvivalTimeText(float survivalTime)
+void GamePlayScreen::updateText(float survivalTime, int score)
 {
 	survivalTimeText.setString("Survival Time: " +
-		to_string(survivalTime) + "s");
+		std::to_string(survivalTime) + "s");
+
+	scoreText.setString("Score: " + std::to_string(score));
+	sf::FloatRect scoreTextBounds = scoreText.getLocalBounds();
+	scoreText.setOrigin(sf::Vector2f(scoreTextBounds.size.x, 0));
 }

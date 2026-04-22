@@ -2,19 +2,13 @@
 #include "Screens/Tutorial/TutorialScreen.h"
 #include "Screens/GamePlay/GamePlayScreen.h"
 
-using namespace sf;
-using namespace std;
-
 TutorialScreen::TutorialScreen(Game& game) :
-	Screen(game),
-	worldBounds(game.getRenderer().getWindowSize()),
-	boundarySystem(worldBounds),
-	ballManager(worldBounds)
+	Screen(game)
 {
-	tutorialOverlay = make_unique<TutorialOverlay>(game);
+	tutorialOverlay = std::make_unique<TutorialOverlay>(game);
 }
 
-void TutorialScreen::handleEvent(const Event& event) 
+void TutorialScreen::handleEvent(const sf::Event& event)
 {
 	if (tutorialOverlay)
 	{
@@ -30,21 +24,17 @@ void TutorialScreen::handleEvent(const Event& event)
 	}
 }
 
-void TutorialScreen::update(float deltaTime,
-	const InputState& inputState)
+void TutorialScreen::update(
+	float deltaTime,
+	const Input& Input)
 {
 	if (tutorialOverlay)
-		tutorialOverlay->update(deltaTime, inputState);
-
-	ballManager.update(deltaTime);
-	boundarySystem.apply(ballManager);
+		tutorialOverlay->update(deltaTime, Input);
 }
 
 void TutorialScreen::render()
 {
 	auto& renderer = game.getRenderer();
-	
-	ballManager.draw(renderer);
 
 	if (tutorialOverlay)
 		tutorialOverlay->render();

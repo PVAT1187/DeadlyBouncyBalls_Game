@@ -22,9 +22,6 @@
     <Filter Include="Config">
       <UniqueIdentifier>{1c5c72ee-e134-4764-b4fe-7344fe1286a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Config\Constants">
-      <UniqueIdentifier>{d8a85168-9edc-4cde-9f9c-bcf1a599d793}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Player">
       <UniqueIdentifier>{43a7f531-345b-42f7-b276-915956a03d80}</UniqueIdentifier>
     </Filter>
@@ -97,14 +94,29 @@
     <Filter Include="Core\World\GameWorld">
       <UniqueIdentifier>{a4c23d92-fb6f-4e10-a683-feb313ad27b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Systems\Input">
-      <UniqueIdentifier>{da0b0bff-1551-4119-846d-2d5de68a9819}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Rendering">
       <UniqueIdentifier>{14c0eb04-5be4-4b08-8a8c-538f136f26d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Utilities\Random">
       <UniqueIdentifier>{301e4c2a-fe27-4356-a19c-e06d25393fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{5405c672-a1e3-46e5-9462-3f3b1d06e4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Systems\Movement">
+      <UniqueIdentifier>{7e00b962-8242-448b-8a12-556d3a93a413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input">
+      <UniqueIdentifier>{da0b0bff-1551-4119-846d-2d5de68a9819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input\InputCollector">
+      <UniqueIdentifier>{5537a947-0028-4af2-a14d-24e7ba59d4b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events">
+      <UniqueIdentifier>{208cd7e2-a4bf-4eef-bcae-9001e933a8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events\EventBus">
+      <UniqueIdentifier>{724c3460-2595-4dfd-b400-2584cc8cf5f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -186,14 +198,20 @@
     <ClCompile Include="src\Utilities\Random\RandomUtils.cpp">
       <Filter>Utilities\Random</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Systems\Input\InputSystem.cpp">
-      <Filter>Core\Systems\Input</Filter>
+    <ClCompile Include="src\Entities\Projectiles\BulletManager.cpp">
+      <Filter>Entities\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Systems\Movement\MovementSystem.cpp">
+      <Filter>Core\Systems\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\InputCollector\InputCollector.cpp">
+      <Filter>Core\Input\InputCollector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Events\EventBus\EventBus.cpp">
+      <Filter>Core\Events\EventBus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Config\Constants\GameConstants.h">
-      <Filter>Config\Constants</Filter>
-    </ClInclude>
     <ClInclude Include="src\Entities\Player\Player.h">
       <Filter>Entities\Player</Filter>
     </ClInclude>
@@ -275,16 +293,49 @@
     <ClInclude Include="src\Core\World\WorldBounds.h">
       <Filter>Core\World</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Systems\Input\InputSystem.h">
-      <Filter>Core\Systems\Input</Filter>
-    </ClInclude>
     <ClInclude Include="src\Utilities\Random\RandomUtils.h">
       <Filter>Utilities\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config\GameConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\AimingComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\MovementComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\ShootingComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Projectiles\BulletManager.h">
+      <Filter>Entities\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Systems\Movement\MovementSystem.h">
+      <Filter>Core\Systems\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Input\InputCollector\InputCollector.h">
+      <Filter>Core\Input\InputCollector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Input\Input.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Events\GameEvents.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Events\EventBus\EventBus.h">
+      <Filter>Core\Events\EventBus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Events\EventBus\QueuedEvent.h">
+      <Filter>Core\Events\EventBus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Core\App\Game.inl">
       <Filter>Core\App</Filter>
+    </None>
+    <None Include="src\Core\Events\EventBus\EventBus.inl">
+      <Filter>Core\Events\EventBus</Filter>
     </None>
   </ItemGroup>
 </Project>

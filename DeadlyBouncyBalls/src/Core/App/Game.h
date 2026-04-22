@@ -3,7 +3,7 @@
 
 #include "Core/Assets/GameAssets.h"  
 #include "Core/Rendering/Renderer.h"
-#include "Core/Systems/Input/InputSystem.h"
+#include "Core/Input/InputCollector/InputCollector.h"
 #include "Screens/Screen.h"
 
 class Game
@@ -18,12 +18,12 @@ class Game
 
 		const GameAssets& getAssets() const;
 		Renderer& getRenderer();
-		const InputSystem& getInputSystem() const;
+		const InputCollector& getInputCollector() const;
 
 	private:
 		Renderer renderer;
 		GameAssets assets;
-		InputSystem inputSystem;
+		InputCollector inputCollector;
 
 		std::unique_ptr<Screen> currentScreen;
 };

@@ -4,7 +4,6 @@
 #include "Core/World/WorldBounds.h" 
 #include "Entities/Enemies/Ball.h"
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 
 class BallManager
@@ -15,10 +14,13 @@ class BallManager
 		void update(float deltaTime);
 		void draw(Renderer& renderer) const;
 
-		const std::vector<Ball>& getBalls() const;
 		std::vector<Ball>& getBalls();
 
-		void splitBallOnHit(size_t index);
+		void resolveBallCollisions(
+			const std::vector<
+				std::pair<size_t, size_t>>& collisionPairs);
+
+		bool splitBallOnHit(size_t index);
 
 	private:
 		std::vector<Ball> balls;
@@ -31,8 +33,6 @@ class BallManager
 		void updateBlinking();
 		void updateSplitting();
 
-		void resolveBallCollisions();
-		
 		void splitBallOnTimer();
 };
 

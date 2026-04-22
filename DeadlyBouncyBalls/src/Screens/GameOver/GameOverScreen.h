@@ -7,22 +7,24 @@
 class GameOverScreen : public Screen
 {
 	public:
-		GameOverScreen(Game& game, float finalSurvivalTime);
+		GameOverScreen(Game& game,
+			float finalSurvivalTime,
+			int score);
 
 		void handleEvent(const sf::Event& event) override;
 		void update(float deltaTime,
-			const InputState& inputState) override;
+			const Input& Input) override;
 		void render() override;
 
 	private:
 		sf::Text gameOverText;
 		sf::Text finalSurvivalTimeText;
+		sf::Text scoreText;
 
 		TextButton playAgainButton;
 		TextButton mainMenuButton;
 
-		void initGameOverText();
-		void initFinalSurvivalTimeText(float finalSurvivalTime);
+		void initText(float finalSurvivalTime, int score);
 		void updateButtonPosition();
 };
 

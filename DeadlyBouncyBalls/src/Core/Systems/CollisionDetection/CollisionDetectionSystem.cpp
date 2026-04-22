@@ -4,16 +4,13 @@
 #include "Entities/Projectiles/Bullet.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
-using namespace std;
-using namespace PhysicsUtils;
-
 bool CollisionDetectionSystem::detectPlayerBallCollisions(
 	const Player& player,
-	const vector<Ball>& balls)
+	const std::vector<Ball>& balls)
 {
 	for (const auto& ball : balls)
 	{
-		if (isCircleCollidingWithSprite(
+		if (PhysicsUtils::isCircleCollidingWithSprite(
 			ball.getPosition(),
 			ball.getRadius(),
 			player.getCollisionBounds()))
@@ -25,12 +22,12 @@ bool CollisionDetectionSystem::detectPlayerBallCollisions(
 	return false;
 }
 
-vector<pair<size_t, size_t>> 
+std::vector<std::pair<size_t, size_t>> 
 	CollisionDetectionSystem::detectBulletBallCollisions(
-		const vector<Bullet>& bullets,
-		const vector<Ball>& balls) const
+		const std::vector<Bullet>& bullets,
+		const std::vector<Ball>& balls) const
 {
-	vector<pair<size_t, size_t>> collisionPairs;
+	std::vector<std::pair<size_t, size_t>> collisionPairs;
 
 	size_t bulletSize = bullets.size();
 	size_t ballSize = balls.size();
@@ -39,8 +36,9 @@ vector<pair<size_t, size_t>>
 	{
 		for (size_t j = 0; j < ballSize; ++j)
 		{
-			if (isCircleCollidingWithSprite(
-				balls[j].getPosition(), balls[j].getRadius(),
+			if (PhysicsUtils::isCircleCollidingWithSprite(
+				balls[j].getPosition(), 
+				balls[j].getRadius(),
 				bullets[i].getCollisionBounds()))
 			{
 				collisionPairs.emplace_back(i, j);
@@ -48,14 +46,40 @@ vector<pair<size_t, size_t>>
 		}
 	}
 
+	// Sort bullet indices in descending order 
+	// so CombatSystem removes from the back first 
+	// earlier indices stay valid
+	std::sort(
+		collisionPairs.begin(),
+		collisionPairs.end(),
+		[](const auto& first, const auto& second)
+		{
+			return first.second > second.second;
+		}
+	);
+
+	// Remove duplicate bullet indices, 
+	// one bullet can only hit one ball per frame
+	collisionPairs.erase(
+		std::unique(
+			collisionPairs.begin(),
+			collisionPairs.end(),
+			[](const auto& first, const auto& second)
+			{
+				return first.second == second.second;
+			}
+		),
+		collisionPairs.end()
+	);
+
 	return collisionPairs;
 }
 
-vector<pair<size_t, size_t>> 
+std::vector<std::pair<size_t, size_t>> 
 	CollisionDetectionSystem::detectBallCollisions(
-		const vector<Ball>& balls) const
+		const std::vector<Ball>& balls) const
 {
-	vector<pair<size_t, size_t>> collisionPairs;
+	std::vector<std::pair<size_t, size_t>> collisionPairs;
 
 	size_t ballSize = balls.size();
 
@@ -63,9 +87,11 @@ vector<pair<size_t, size_t>>
 	{
 		for (size_t j = i + 1; j < ballSize; ++j)
 		{
-			if (isCircleCollidingWithCircle(
-				balls[i].getPosition(), balls[i].getRadius(),
-				balls[j].getPosition(), balls[j].getRadius()))
+			if (PhysicsUtils::isCircleCollidingWithCircle(
+				balls[i].getPosition(), 
+				balls[i].getRadius(),
+				balls[j].getPosition(),
+				balls[j].getRadius()))
 			{
 				collisionPairs.emplace_back(i, j);
 			}

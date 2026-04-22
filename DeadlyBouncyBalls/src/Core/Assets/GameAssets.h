@@ -4,22 +4,27 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+enum class TextureId
+{
+	PLAYER_TEXTURE,
+	CROSSHAIR_TEXTURE,
+	BULLET_TEXTURE
+};
+
 class GameAssets 
 {
 	public:
 		void load();
 
 		const sf::Font& getFont() const;
-
-		const sf::Texture& getPlayerTexture() const;
-		const sf::Texture& getAimingIconTexture() const;
-		const sf::Texture& getBulletTexture() const;
+		
+		const sf::Texture& getTexture(TextureId textureId) const;
 
 	private:
 		sf::Font font;
 		
 		sf::Texture playerTexture;
-		sf::Texture aimingIconTexture;
+		sf::Texture crosshairTexture;
 		sf::Texture bulletTexture;
 };
 

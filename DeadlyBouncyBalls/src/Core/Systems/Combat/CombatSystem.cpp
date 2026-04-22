@@ -1,34 +1,39 @@
 #include "Core/Systems/Combat/CombatSystem.h"
+#include "Core/Events/GameEvents.h"
 #include "Entities/Player/Player.h"
 #include "Entities/Enemies/BallManager.h"
+#include "Entities/Projectiles/BulletManager.h"
 
+CombatSystem::CombatSystem(EventBus& eventBus) 
+	: eventBus(eventBus) {}
 
-CombatSystem::CombatSystem() :
-	playerHit(false) {}
-
-void CombatSystem::update(Player& player,
-	BallManager& ballManager)
+void CombatSystem::update(
+	Player& player,
+	BallManager& ballManager,
+	BulletManager& bulletManager)
 {
-	auto& bullets = player.getBullets();
 	auto& balls = ballManager.getBalls();
+	auto& bullets = bulletManager.getBullets();
 
-	playerHit = collisionDetector.detectPlayerBallCollisions(player, balls);
-	
-	auto collisions = collisionDetector.detectBulletBallCollisions(
-		bullets, balls);
+	bool playerBallCollision = 
+		collisionDetector.detectPlayerBallCollisions(player, balls);
 
-	auto iterEnd = collisions.rend();
-	for (auto iterator = collisions.rbegin(); iterator != iterEnd; ++iterator)
+	auto bulletBallcollision =
+		collisionDetector.detectBulletBallCollisions(bullets, balls);
+
+	auto ballsCollision = 
+		collisionDetector.detectBallCollisions(balls);
+
+	if (playerBallCollision)
 	{
-		size_t bulletIndex = iterator->first;
-		size_t ballIndex = iterator->second;
-
-		ballManager.splitBallOnHit(ballIndex);
-		bullets.erase(bullets.begin() + bulletIndex);
+		eventBus.emit(PlayerHit{});
 	}
-}
+	
+	for (const auto& [bulletIndex, ballIndex] : bulletBallcollision)
+	{
+		eventBus.emit(BulletHit{ bulletIndex });
+		eventBus.emit(BallHit{ ballIndex });
+	}
 
-bool CombatSystem::isPlayerHit() const
-{
-	return playerHit;
+	ballManager.resolveBallCollisions(ballsCollision);
 }
