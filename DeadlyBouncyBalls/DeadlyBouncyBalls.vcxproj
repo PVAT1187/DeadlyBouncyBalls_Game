@@ -32,6 +32,8 @@
     <ClCompile Include="src\Core\Systems\Movement\MovementSystem.cpp" />
     <ClCompile Include="src\Core\Systems\Shooting\ShootingSystem.cpp" />
     <ClCompile Include="src\Core\World\GameWorld\GameWorld.cpp" />
+    <ClCompile Include="src\Entities\Collectibles\Star.cpp" />
+    <ClCompile Include="src\Entities\Collectibles\StarManager.cpp" />
     <ClCompile Include="src\Entities\Enemies\Ball.cpp" />
     <ClCompile Include="src\Entities\Enemies\BallManager.cpp" />
     <ClCompile Include="src\Entities\Player\Player.cpp" />
@@ -71,6 +73,8 @@
     <ClInclude Include="src\Core\Systems\Shooting\ShootingSystem.h" />
     <ClInclude Include="src\Core\World\GameWorld\GameWorld.h" />
     <ClInclude Include="src\Core\World\WorldBounds.h" />
+    <ClInclude Include="src\Entities\Collectibles\Star.h" />
+    <ClInclude Include="src\Entities\Collectibles\StarManager.h" />
     <ClInclude Include="src\Entities\Enemies\Ball.h" />
     <ClInclude Include="src\Entities\Enemies\BallManager.h" />
     <ClInclude Include="src\Entities\Player\Player.h" />
@@ -106,26 +110,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

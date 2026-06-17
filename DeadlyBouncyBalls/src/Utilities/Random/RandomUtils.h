@@ -6,6 +6,7 @@
 
 namespace RandomUtils
 {
+	int randomInt(int min, int max);
 	float randomFloat(float min, float max);
 	sf::Vector2f randomDirection();
 	sf::Color randomColor();

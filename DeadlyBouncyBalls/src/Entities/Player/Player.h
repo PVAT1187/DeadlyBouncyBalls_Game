@@ -4,8 +4,6 @@
 #include "Components/MovementComponent.h"
 #include "Components/AimingComponent.h"
 #include "Components/ShootingComponent.h"
-#include "Core/Input/InputCollector/InputCollector.h"
-#include "Core/World/WorldBounds.h"
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -13,6 +11,7 @@
 
 class GameAssets;
 class Renderer;
+class WorldBounds;
 
 class Player
 {

@@ -7,6 +7,7 @@
 class Player;
 class BallManager;
 class BulletManager;
+class StarManager;
 
 class CombatSystem
 {
@@ -15,7 +16,8 @@ class CombatSystem
 		
 		void update(Player& player,
 			BallManager& ballManager,
-			BulletManager& bulletManager);
+			BulletManager& bulletManager,
+			StarManager& starManager);
 
 	private:
 		EventBus& eventBus;

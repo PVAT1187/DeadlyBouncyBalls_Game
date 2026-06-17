@@ -2,6 +2,7 @@
 #include "Entities/Player/Player.h"
 #include "Entities/Enemies/Ball.h"
 #include "Entities/Projectiles/Bullet.h"
+#include "Entities/Collectibles/Star.h"
 #include "Utilities/Physics/PhysicsUtils.h"
 
 bool CollisionDetectionSystem::detectPlayerBallCollisions(
@@ -29,12 +30,12 @@ std::vector<std::pair<size_t, size_t>>
 {
 	std::vector<std::pair<size_t, size_t>> collisionPairs;
 
-	size_t bulletSize = bullets.size();
-	size_t ballSize = balls.size();
+	size_t bulletsSize = bullets.size();
+	size_t ballsSize = balls.size();
 
-	for (size_t i = 0; i < bulletSize; ++i)
+	for (size_t i = 0; i < bulletsSize; ++i)
 	{
-		for (size_t j = 0; j < ballSize; ++j)
+		for (size_t j = 0; j < ballsSize; ++j)
 		{
 			if (PhysicsUtils::isCircleCollidingWithSprite(
 				balls[j].getPosition(), 
@@ -81,11 +82,11 @@ std::vector<std::pair<size_t, size_t>>
 {
 	std::vector<std::pair<size_t, size_t>> collisionPairs;
 
-	size_t ballSize = balls.size();
+	size_t ballsSize = balls.size();
 
-	for (size_t i = 0; i < ballSize; ++i)
+	for (size_t i = 0; i < ballsSize; ++i)
 	{
-		for (size_t j = i + 1; j < ballSize; ++j)
+		for (size_t j = i + 1; j < ballsSize; ++j)
 		{
 			if (PhysicsUtils::isCircleCollidingWithCircle(
 				balls[i].getPosition(), 
@@ -95,6 +96,26 @@ std::vector<std::pair<size_t, size_t>>
 			{
 				collisionPairs.emplace_back(i, j);
 			}
+		}
+	}
+
+	return collisionPairs;
+}
+
+std::vector<size_t> 
+	CollisionDetectionSystem::detectPlayerStarCollisions(
+		const Player& player,
+		const std::vector<Star>& stars) const
+{
+	std::vector<size_t> collisionPairs;
+
+	for (size_t i = 0; i < stars.size(); ++i)
+	{
+		if (PhysicsUtils::isRectCollidingWithRect(
+			player.getCollisionBounds(),
+			stars[i].getCollisionBounds()))
+		{
+			collisionPairs.push_back(i);
 		}
 	}
 

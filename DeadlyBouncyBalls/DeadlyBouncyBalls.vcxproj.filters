@@ -118,6 +118,9 @@
     <Filter Include="Core\Events\EventBus">
       <UniqueIdentifier>{724c3460-2595-4dfd-b400-2584cc8cf5f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Collectibles">
+      <UniqueIdentifier>{dcf58ce1-7bf4-4e1c-8649-fcd2747adb15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\main.cpp">
@@ -209,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="src\Core\Events\EventBus\EventBus.cpp">
       <Filter>Core\Events\EventBus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Collectibles\Star.cpp">
+      <Filter>Entities\Collectibles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Collectibles\StarManager.cpp">
+      <Filter>Entities\Collectibles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +337,12 @@
     </ClInclude>
     <ClInclude Include="src\Core\Events\EventBus\QueuedEvent.h">
       <Filter>Core\Events\EventBus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Collectibles\Star.h">
+      <Filter>Entities\Collectibles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Collectibles\StarManager.h">
+      <Filter>Entities\Collectibles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

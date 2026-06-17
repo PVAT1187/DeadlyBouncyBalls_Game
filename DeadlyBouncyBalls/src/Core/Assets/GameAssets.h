@@ -8,7 +8,8 @@ enum class TextureId
 {
 	PLAYER_TEXTURE,
 	CROSSHAIR_TEXTURE,
-	BULLET_TEXTURE
+	BULLET_TEXTURE,
+	STAR_TEXTURE
 };
 
 class GameAssets 
@@ -26,6 +27,7 @@ class GameAssets
 		sf::Texture playerTexture;
 		sf::Texture crosshairTexture;
 		sf::Texture bulletTexture;
+		sf::Texture starTexture;
 };
 
 #endif // !GAME_ASSETS_H

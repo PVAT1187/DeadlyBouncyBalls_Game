@@ -21,6 +21,19 @@ Ball::Ball(
 
 	mass = MathUtils::computeMass(radius);
 	color = ball.getFillColor();
+	points = static_cast<int>(
+		Config::Ball::MIN_RADIUS / radius * Config::Ball::BASE_POINTS);
+}
+
+void Ball::update(float deltaTime)
+{
+	move(deltaTime);
+	updateFlashing(deltaTime);
+}
+
+void Ball::draw(Renderer& renderer) const
+{
+	renderer.draw(ball);
 }
 
 float Ball::getRadius() const
@@ -53,15 +66,9 @@ sf::Vector2f& Ball::getPosition()
 	return position;
 }
 
-void Ball::update(float deltaTime)
+int Ball::getPoints() const
 {
-	move(deltaTime);
-	updateFlashing(deltaTime);
-}
-
-void Ball::draw(Renderer& renderer) const 
-{
-	renderer.draw(ball);
+	return points;
 }
 
 void Ball::startBlink()

@@ -23,6 +23,8 @@ namespace PhysicsUtils
 		float radiusA, 
 		const sf::Vector2f& positionB, 
 		float radiusB);
+	bool isRectCollidingWithRect(const sf::FloatRect& rectangleA,
+		const sf::FloatRect& rectangleB);
 
 	sf::Vector2f resolveStaticCircleCollision(sf::Vector2f& positionA,
 		float radiusA, 

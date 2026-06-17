@@ -5,7 +5,8 @@ AnimatedSprite::AnimatedSprite(
 	int rowIndex,
 	const sf::Vector2i& frameSize, 
 	int frameCount, 
-	float frameDuration) :
+	float frameDuration,
+	bool isLooping) :
 	sprite(texture),
 	rowIndex(rowIndex),
 	frameSize(frameSize),
@@ -13,7 +14,8 @@ AnimatedSprite::AnimatedSprite(
 	currentFrame(0),
 	frameDuration(frameDuration),
 	elapsedTime(0.f),
-	isPlaying(false)
+	isPlaying(true),
+	isLooping(isLooping)
 {
 	updateTextureRect();
 }
@@ -32,7 +34,8 @@ void AnimatedSprite::update(float deltaTime)
 		if (currentFrame >= frameCount)
 		{
 			currentFrame = 0;
-			isPlaying = false;
+			if (!isLooping)
+				isPlaying = false;
 		}
 
 		updateTextureRect();

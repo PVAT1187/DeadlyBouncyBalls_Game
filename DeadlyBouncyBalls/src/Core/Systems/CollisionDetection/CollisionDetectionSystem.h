@@ -6,6 +6,7 @@
 class Player;
 class Ball;
 class Bullet;
+class Star;
 
 class CollisionDetectionSystem
 {
@@ -19,6 +20,9 @@ class CollisionDetectionSystem
 
 		std::vector<std::pair<size_t, size_t>> detectBallCollisions(
 			const std::vector<Ball>& balls) const;
+
+		std::vector<size_t> detectPlayerStarCollisions(const Player& player,
+			const std::vector<Star>& stars) const;
 };
 
 #endif // !COLLISION_DETECTION_SYSTEM_H

@@ -20,7 +20,7 @@ class BallManager
 			const std::vector<
 				std::pair<size_t, size_t>>& collisionPairs);
 
-		bool splitBallOnHit(size_t index);
+		int splitBallOnHit(size_t index);
 
 	private:
 		std::vector<Ball> balls;

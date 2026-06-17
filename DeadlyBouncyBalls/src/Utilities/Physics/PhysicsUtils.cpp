@@ -103,6 +103,18 @@ bool PhysicsUtils::isCircleCollidingWithCircle(
     return (distanceSquared <= radiusSum * radiusSum);
 }
 
+bool PhysicsUtils::isRectCollidingWithRect(
+    const sf::FloatRect& rectangleA,
+    const sf::FloatRect& rectangleB)
+{
+	// return rectangleA.findIntersection(rectangleB).has_value();
+
+    return rectangleA.position.x < rectangleB.position.x + rectangleB.size.x 
+        && rectangleB.position.x < rectangleA.position.x + rectangleA.size.x
+		&& rectangleA.position.y < rectangleB.position.y + rectangleB.size.y
+		&& rectangleB.position.y < rectangleA.position.y + rectangleA.size.y;
+}
+
 sf::Vector2f PhysicsUtils::resolveStaticCircleCollision(
     sf::Vector2f& positionA, 
     float radiusA,

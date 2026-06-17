@@ -18,14 +18,15 @@ struct AimingComponent
 		: crosshair(
 			crosshairTexture,
 			Config::Aiming::CROSSHAIR_ROW,
-			Config::Aiming::FRAME_SIZE,
-			Config::Aiming::FRAME_COUNT,
-			Config::Aiming::FRAME_DURATION
+			Config::Aiming::CROSSHAIR_FRAME_SIZE,
+			Config::Aiming::CROSSHAIR_FRAME_COUNT,
+			Config::Aiming::CROSSHAIR_FRAME_DURATION,
+			false
 		)
 	{
 		crosshair.setScale({
-			Config::Aiming::SCALE,
-			Config::Aiming::SCALE
+			Config::Aiming::CROSSHAIR_SCALE,
+			Config::Aiming::CROSSHAIR_SCALE
 		});
 
 		sf::FloatRect aimingIconBounds = crosshair.getLocalBounds();

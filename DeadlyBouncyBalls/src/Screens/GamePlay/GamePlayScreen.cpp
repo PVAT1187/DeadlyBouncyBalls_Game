@@ -97,8 +97,10 @@ void GamePlayScreen::initText()
 	survivalTimeText.setPosition(sf::Vector2f(0, 0));
 	
 	scoreText.setFillColor(sf::Color::White);
-	// TODO: Avoid magic numbers
-	scoreText.setPosition(sf::Vector2f(windowSize.x - 5, 0));
+	scoreText.setPosition(sf::Vector2f(
+		windowSize.x - Config::UI::SCORE_TEXT_OFFSET,
+		0
+	));
 }
 
 void GamePlayScreen::updateText(float survivalTime, int score)

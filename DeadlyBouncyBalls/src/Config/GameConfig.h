@@ -37,6 +37,8 @@ namespace Config
 
 		constexpr float BLINKING_SPEED = 10.f;
 		constexpr float	BLINKING_DURATION = 0.5f;
+
+		constexpr float BASE_POINTS = 10.f;
 	}
 
 	namespace Bullet
@@ -47,19 +49,42 @@ namespace Config
 		constexpr float SHRINK_FACTOR = 0.2f;
 	}
 
+	namespace Star
+	{
+		constexpr float MIN_SCALE = 1.0f;
+		constexpr float MAX_SCALE = 2.0f;
+
+		constexpr float MIN_SPAWN_TIME = 7.f;
+		constexpr float MAX_SPAWN_TIME = 20.f;
+
+		constexpr float MULTI_SPAWN_TIME = 20.f;
+
+		constexpr float SHRINK_FACTOR = 0.25f;
+		constexpr float LIFESPAN = 7.f;
+
+		constexpr float BASE_POINTS = 10.f;
+	
+		constexpr int ROW = 0;
+
+		constexpr sf::Vector2i FRAME_SIZE = { 32, 32 };
+		constexpr int FRAME_COUNT = 4;
+
+		constexpr float FRAME_DURATION = 0.25f;
+	}
+
 	namespace Aiming
 	{
-		constexpr float SCALE = 1.f;
+		constexpr float CROSSHAIR_SCALE = 1.f;
 
 		constexpr float DISTANCE_FROM_PLAYER_TIP = 20.f;
 		constexpr float DISTANCE_TO_CROSSHAIR = 20.f;
 
 		constexpr int CROSSHAIR_ROW = 6;
 
-		constexpr sf::Vector2i FRAME_SIZE = { 64, 64 };
-		constexpr int FRAME_COUNT = 4;
+		constexpr sf::Vector2i CROSSHAIR_FRAME_SIZE = { 64, 64 };
+		constexpr int CROSSHAIR_FRAME_COUNT = 4;
 
-		constexpr float FRAME_DURATION = 0.015f;
+		constexpr float CROSSHAIR_FRAME_DURATION = 0.015f;
 	}
 	
 	namespace Shooting
@@ -81,6 +106,8 @@ namespace Config
 		constexpr float BUTTON_SPACING = 80.f;
 
 		constexpr uint8_t DIM_ALPHA = 150;
+
+		constexpr float	SCORE_TEXT_OFFSET = 5.f;
 	}
 	
 	namespace Button
@@ -91,7 +118,6 @@ namespace Config
 		constexpr float SMOOTH_SCALING_MULTIPLIER = 0.2f;
 
 		constexpr unsigned BUTTON_SIZE = 50;
-
 	}
 	
 	namespace Math
@@ -119,4 +145,3 @@ namespace Config
 }
 
 #endif // !GAME_CONFIG_H
-

@@ -1,6 +1,7 @@
 #ifndef GAME_WORLD_H
 #define GAME_WORLD_H
 
+#include "Core/Assets/GameAssets.h"
 #include "Core/World/WorldBounds.h"
 #include "Core/Events/EventBus/EventBus.h"
 #include "Core/Systems/Boundary/BoundarySystem.h"
@@ -11,9 +12,9 @@
 #include "Entities/Player/Player.h"
 #include "Entities/Enemies/BallManager.h"
 #include "Entities/Projectiles/BulletManager.h"
+#include "Entities/Collectibles/StarManager.h"
 
 class Renderer;
-class GameAssets;
 
 class GameWorld
 {
@@ -30,6 +31,7 @@ class GameWorld
 		bool isGameOver() const;
 
 	private:
+		GameAssets assets;
 		WorldBounds worldBounds;
 		EventBus eventBus;
 
@@ -38,6 +40,7 @@ class GameWorld
 		Player player;
 		BallManager ballManager;
 		BulletManager bulletManager;
+		StarManager starManager;
 
 		MovementSystem movementSystem;
 		AimingSystem aimingSystem;
@@ -45,10 +48,13 @@ class GameWorld
 		CombatSystem combatSystem;
 
 		int score;
-		std::vector<size_t> pendingBallHits;
 		bool gameOver;
 
+		std::vector<size_t> pendingBallHits;
+		std::vector<size_t> pendingStarHits;
+
 		void processPendingBallHits();
+		void processPendingStarHits();
 };
 
 #endif // !GAME_PLAY_H

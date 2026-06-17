@@ -77,7 +77,7 @@ void BallManager::resolveBallCollisions(
 	}
 }
 
-bool BallManager::splitBallOnHit(size_t index)
+int BallManager::splitBallOnHit(size_t index)
 {
 	Ball& hitBall = balls[index];
 
@@ -85,8 +85,9 @@ bool BallManager::splitBallOnHit(size_t index)
 		hitBall.getRadius() - Config::Ball::RADIUS_DECREASE;
 	if (newRadius <= Config::Ball::MIN_RADIUS)
 	{
+		int points = hitBall.getPoints();
 		balls.erase(balls.begin() + index);
-		return true;
+		return points;
 	}
 
 	std::vector<Ball> newBalls;
@@ -123,7 +124,7 @@ bool BallManager::splitBallOnHit(size_t index)
 		balls.push_back(ball);
 	}
 
-	return false;
+	return -1;
 }
 
 void BallManager::updateBalls(float deltaTime)

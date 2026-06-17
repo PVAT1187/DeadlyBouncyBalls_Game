@@ -15,5 +15,10 @@ struct BulletHit
 	std::size_t bulletIndex;
 };
 
+struct StarCollected
+{
+	std::size_t starIndex;
+};
+
 #endif // !GAME_EVENTS_h
 

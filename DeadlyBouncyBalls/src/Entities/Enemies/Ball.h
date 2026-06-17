@@ -26,6 +26,8 @@ class Ball
 		const sf::Vector2f& getVelocity() const;
 		sf::Vector2f& getVelocity();
 
+		int getPoints() const;
+
 		void startBlink();
 
 	private:
@@ -39,6 +41,7 @@ class Ball
 		bool isFlashing;
 		float flashingTime;
 		sf::Color color;
+		int points;
 
 		void move(float deltaTime);
 		void updateFlashing(float deltaTime);

@@ -4,6 +4,13 @@
 
 #include <random>
 
+int RandomUtils::randomInt(int min, int max)
+{
+	static std::mt19937 randomNumberGenerator(std::random_device{}());
+	std::uniform_int_distribution<int> dist(min, max);
+	return dist(randomNumberGenerator);
+}
+
 float RandomUtils::randomFloat(float min, float max)
 {
 	static std::mt19937 randomNumberGenerator(std::random_device{}());

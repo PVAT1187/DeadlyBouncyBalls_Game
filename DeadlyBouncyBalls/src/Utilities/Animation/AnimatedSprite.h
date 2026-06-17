@@ -16,7 +16,8 @@ class AnimatedSprite : public sf::Drawable
 			int rowIndex,
 			const sf::Vector2i& frameSize, 
 			int frameCount, 
-			float frameDuration);
+			float frameDuration,
+			bool isLooping = true);
 
 		void update(float deltaTime);
 
@@ -42,6 +43,7 @@ class AnimatedSprite : public sf::Drawable
 		float elapsedTime;
 
 		bool isPlaying;
+		bool isLooping;
 
 		void updateTextureRect();
 

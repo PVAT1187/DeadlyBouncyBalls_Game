@@ -1,15 +1,20 @@
+#include "Config/GameConfig.h"
 #include "Core/Assets/GameAssets.h"
 #include "Core/World/GameWorld/GameWorld.h"
 #include "Core/Events/GameEvents.h"
 #include "Core/Rendering/Renderer.h"
 
+#include <algorithm>
+
 GameWorld::GameWorld(
 	const GameAssets& assets,
 	const sf::Vector2u& windowSize) :
+	assets(assets),
 	worldBounds(windowSize),
 	player(assets, worldBounds),
 	ballManager(worldBounds),
 	bulletManager(assets),
+	starManager(),
 	combatSystem(eventBus),
 	score(0),
 	gameOver(false) 
@@ -30,6 +35,12 @@ GameWorld::GameWorld(
 		[this](const BulletHit& event)
 		{
 			bulletManager.remove(event.bulletIndex);
+		});
+
+	eventBus.subscribe<StarCollected>(
+		[this](const StarCollected& event)
+		{
+			pendingStarHits.push_back(event.starIndex);
 		});
 }
 
@@ -52,19 +63,24 @@ void GameWorld::update(
 	ballManager.update(deltaTime);
 	boundarySystem.apply(ballManager, worldBounds);
 
+	starManager.update(deltaTime, assets, worldBounds);
+
 	combatSystem.update(
 		player,
 		ballManager,
-		bulletManager
+		bulletManager,
+		starManager
 	);
 
 	eventBus.dispatch();
 	processPendingBallHits();
+	processPendingStarHits();
 }
 
 void GameWorld::render(Renderer& renderer) const
 {
 	player.draw(renderer);
+	starManager.draw(renderer);
 	ballManager.draw(renderer);
 	bulletManager.draw(renderer);
 }
@@ -93,10 +109,27 @@ void GameWorld::processPendingBallHits()
 
 	for (size_t index : pendingBallHits)
 	{
-		if (ballManager.splitBallOnHit(index))
-		{
-			score += 1;
-		}
+		int points = ballManager.splitBallOnHit(index);
+		if (points > 0)
+			score += points;
 	}
 	pendingBallHits.clear();
+}
+
+void GameWorld::processPendingStarHits()
+{
+	std::sort(pendingStarHits.begin(), pendingStarHits.end());
+
+	pendingStarHits.erase(
+		std::unique(
+			pendingStarHits.begin(),
+			pendingStarHits.end()
+		),
+		pendingStarHits.end()
+	);
+	for (size_t index : pendingStarHits)
+	{
+		score += starManager.collectStar(index);
+	}
+	pendingStarHits.clear();
 }
